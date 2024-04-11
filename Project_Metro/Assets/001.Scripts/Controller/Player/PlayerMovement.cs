@@ -1,57 +1,182 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
-public class PlayerMovement
+namespace PlayerMovement
 {
-    public PlayerController controller;
-    public Dictionary<Define.PlayerMovementType, int> movementLevels = new Dictionary<Define.PlayerMovementType, int>();
-    public float moveAxis;
-
-    public PlayerMovement(PlayerController _controller)
+    public abstract class PlayerMove
     {
-        controller = _controller;
-        movementLevels.Add(Define.PlayerMovementType.Walk, 1);
-
-        Managers.Input.jumpAction += Jump;
+        public PlayerController controller;
+        public int level;
+        public abstract bool CheckMove();
+        public abstract void Move();
+        public abstract bool CheckStop();
+        public abstract bool CheckStopInJump();
     }
 
-
-    public void Update()
+    namespace Moves
     {
-        Move();
-    }
-    
-    public bool CheckMove()
-    {
-        if (Managers.Input.MoveAxis.x != 0f)
+        public class One : PlayerMove
         {
-            controller.ChangeState(Define.PlayerState.Move);
-            return true;
+            public One(PlayerController _controller)
+            {
+                controller = _controller;
+                level = 1;
+            }
+
+            public override bool CheckMove()
+            {
+                if (Managers.Input.MoveAxis.x != 0f)
+                {
+                    controller.ChangeState(Define.PlayerState.Move);
+                    return true;
+                }
+
+                return false;
+            }
+
+
+            public override void Move()
+            {
+                controller.rb.velocity = new Vector2(controller.status.CurrentSpeed * Managers.Input.MoveAxis.x, controller.rb.velocity.y);
+            }
+
+            public override bool CheckStop()
+            {
+                if (Managers.Input.MoveAxis.x == 0f)
+                {
+                    controller.ChangeState(Define.PlayerState.Idle);
+                    controller.rb.velocity = new Vector2(0, controller.rb.velocity.y);
+                    return true;
+                }
+
+                return false;
+            }
+
+            public override bool CheckStopInJump()
+            {
+                if (Managers.Input.MoveAxis.x == 0f)
+                {
+                    controller.rb.velocity = new Vector2(0, controller.rb.velocity.y);
+                    return true;
+                }
+
+                return false;
+            }
         }
-
-        return false;
     }
 
-    public void Move()
+    public abstract class PlayerJump
     {
-        if (movementLevels[Define.PlayerMovementType.Walk] == 1)
-            controller.rb.MovePosition(new Vector3(controller.transform.position.x + Managers.Input.MoveAxis.x * controller.status.CurrentSpeed * Time.deltaTime, controller.transform.position.y, controller.transform.position.z));
-    }
+        public PlayerController controller;
+        public int level;
 
-    public bool CheckStop()
-    {
-        if (Managers.Input.MoveAxis.x == 0f)
+        public Coroutine checkEndJumpCoroutine = null;
+        public float canJumpTime;
+
+        public abstract bool CheckJump();
+        public abstract void StartJump();
+        public abstract void Jump();
+        public abstract bool CheckEndJump();
+        public abstract void EndJump();
+        public IEnumerator CheckEndJumpRoutine()
         {
+            yield return new WaitForSeconds(canJumpTime);
             controller.ChangeState(Define.PlayerState.Idle);
-            return true;
         }
-
-        return false;
     }
 
-    public void Jump()
+    namespace Jumps
     {
-        Debug.Log("มกวม");
+        public class One : PlayerJump
+        {
+            public One(PlayerController _controller)
+            {
+                controller = _controller;
+                canJumpTime = 0.25f;
+                level = 1;
+            }
+
+
+            public override bool CheckJump()
+            {
+                if (controller.IsGround && Managers.Input.actions.Player.Jump.triggered)
+                {
+                    controller.ChangeState(Define.PlayerState.Jump);
+                    return true;
+                }
+
+                return false;
+            }
+
+            public override void StartJump()
+            {
+                checkEndJumpCoroutine = controller.StartCoroutine(CheckEndJumpRoutine());
+            }
+
+            public override void Jump()
+            {
+                controller.rb.velocity = new Vector2(controller.rb.velocity.x, controller.status.CurrentJumpForce);
+            }
+
+            public override bool CheckEndJump()
+            {
+                if (Managers.Input.actions.Player.Jump.ReadValue<float>() == 0f)
+                {
+                    controller.ChangeState(Define.PlayerState.Idle);
+                    return true;
+                }
+
+                return false;
+            }
+
+            public override void EndJump()
+            {
+                if(checkEndJumpCoroutine != null) controller.StopCoroutine(checkEndJumpCoroutine);
+                checkEndJumpCoroutine = null;
+                controller.rb.velocity = new Vector2(controller.rb.velocity.x, 0f);
+            }
+        }
+    }
+    public abstract class PlayerFall
+    {
+        public PlayerController controller;
+        public int level;
+
+        public abstract bool CheckFall();
+        public abstract bool CheckEndFall();
+    }
+
+    namespace Falls
+    {
+        public class One : PlayerFall
+        {
+            public One(PlayerController _controller)
+            {
+                controller = _controller;
+                level = 1;
+            }
+
+            public override bool CheckFall()
+            {
+                if(controller.rb.velocity.y < -0.01f)
+                {
+                    controller.ChangeState(Define.PlayerState.Fall);
+                    return true;
+                }
+                return false;
+            }
+
+            public override bool CheckEndFall()
+            {
+                if(controller.IsGround)
+                {
+                    controller.ChangeState(Define.PlayerState.Idle);
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 }

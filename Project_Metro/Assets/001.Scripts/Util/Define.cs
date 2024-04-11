@@ -35,7 +35,11 @@ public class Define
     public enum PlayerState
     {
         Idle = 0,
-        Move = 1
+        Move = 1,
+        Jump = 2,
+        JumpMove,
+        Fall,
+        FallMove,
     }
 
     public enum PlayerMovementType

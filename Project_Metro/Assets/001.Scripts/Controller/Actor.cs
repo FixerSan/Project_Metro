@@ -54,8 +54,20 @@ public class ActorStatus
         }
     }
 
+    public float defaultJumpForce;
+    public float plusJumpForce;
+
+    public float CurrentJumpForce
+    {
+        get
+        {
+            return defaultJumpForce + plusJumpForce;
+        }
+    }
+
     public ActorStatus()
     {
         defaultSpeed = 3;
+        defaultJumpForce = 3;
     }
 }
