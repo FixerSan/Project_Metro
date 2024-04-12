@@ -27,6 +27,7 @@ namespace PlayerState
             if (_entity.fall.CheckFall()) return;
             if (_entity.move.CheckMove()) return;
             if (_entity.jump.CheckJump()) return;
+            _entity.attack.CheckAttack();
         }
     }
 
@@ -52,6 +53,7 @@ namespace PlayerState
             if (_entity.fall.CheckFall()) return;
             if (_entity.move.CheckStop()) return;
             if (_entity.jump.CheckJump()) return;
+            _entity.attack.CheckAttack();
         }
     }
 
@@ -78,34 +80,7 @@ namespace PlayerState
         {
             if (_entity.jump.CheckEndJump()) return;
             if (_entity.move.CheckStopInJump()) return;
-            if (_entity.IsGround) return;
-        }
-    }
-
-    public class JumpMove : State<PlayerController>
-    {
-        public override void Enter(PlayerController _entity)
-        {
-
-        }
-
-        public override void Exit(PlayerController _entity)
-        {
-
-        }
-
-        public override void FixedUpdate(PlayerController _entity)
-        {
-            _entity.move.Move();
-            _entity.jump.Jump();
-        }
-
-        public override void Update(PlayerController _entity)
-        {
-            if (_entity.fall.CheckFall()) return;
-            if (_entity.jump.CheckEndJump()) return;
-            if (_entity.move.CheckStop()) return;
-            if (_entity.IsGround) return;
+            _entity.attack.CheckAttack();
         }
     }
 
@@ -129,6 +104,7 @@ namespace PlayerState
         public override void Update(PlayerController _entity)
         {
             if (_entity.fall.CheckEndFall()) return;
+            _entity.attack.CheckAttack();
         }
     }
 }

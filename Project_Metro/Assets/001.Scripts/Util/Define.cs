@@ -42,6 +42,11 @@ public class Define
         FallMove,
     }
 
+    public enum PlayerAttack
+    {
+        NormalAttack
+    }
+
     public enum PlayerMovementType
     {
         Walk, Dash

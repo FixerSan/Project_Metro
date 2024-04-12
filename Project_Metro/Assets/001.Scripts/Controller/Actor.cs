@@ -65,6 +65,16 @@ public class ActorStatus
         }
     }
 
+    public int defaultDamageForce;
+    public int plusDamageForce;
+
+    public int CurrentDamageForce
+    {
+        get
+        {
+            return defaultDamageForce + plusDamageForce;
+        }
+    }
     public ActorStatus()
     {
         defaultSpeed = 3;

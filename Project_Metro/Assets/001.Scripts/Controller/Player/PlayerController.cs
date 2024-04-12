@@ -13,6 +13,7 @@ public class PlayerController : Actor
     public PlayerMove move;
     public PlayerJump jump;
     public PlayerFall fall;
+    public PlayerAttack attack;
 
     public Dictionary<Define.PlayerState, State<PlayerController>> states = new Dictionary<Define.PlayerState, State<PlayerController>>();
     public StateMachine<PlayerController> fsm;
@@ -22,21 +23,18 @@ public class PlayerController : Actor
 
     public Rigidbody2D rb;
 
-    public Transform groundCheck;
+    public Transform groundCheckTrans;
+    public Transform attackTrans;
 
-    public bool IsGround
-    {
-        get
-        {
-            return CheckIsGround();
-        }
-    }
+    public bool IsGround { get { return CheckIsGround(); } }
 
     public void Init()
     {
         move = new PlayerMovement.Moves.One(this);
         jump = new PlayerMovement.Jumps.One(this);
         fall = new PlayerMovement.Falls.One(this);
+        attack = new PlayerAttacks.One(this);
+
         states.Add(Define.PlayerState.Idle, new PlayerState.Idle());
         states.Add(Define.PlayerState.Move, new PlayerState.Move());
         states.Add(Define.PlayerState.Jump, new PlayerState.Jump());
@@ -45,6 +43,8 @@ public class PlayerController : Actor
         currentState = Define.PlayerState.Idle;
         CurrentState = Define.PlayerState.Idle;
         rb = GetComponent<Rigidbody2D>();
+        groundCheckTrans = Util.FindChild<Transform>(gameObject, "GroundCheckTrans", true);
+        attackTrans = Util.FindChild<Transform>(gameObject, "AttackTrans", true);
 
         init = true;
     }
@@ -66,7 +66,7 @@ public class PlayerController : Actor
 
     private bool CheckIsGround()
     {
-        Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(groundCheck.position, groundCheck.localScale.x);
+        Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(groundCheckTrans.position, groundCheckTrans.localScale.x);
         for (int i = 0; i < collider2Ds.Length; i++)
         {
             if (collider2Ds[i].CompareTag("Ground"))
@@ -106,6 +106,6 @@ public class PlayerController : Actor
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheck.localScale.x);
+        Gizmos.DrawWireSphere(groundCheckTrans.position, groundCheckTrans.localScale.x);
     }
 }

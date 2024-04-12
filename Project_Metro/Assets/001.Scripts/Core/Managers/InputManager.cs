@@ -17,6 +17,7 @@ public class InputManager
         actions = new PlayerAction();
         actions.Player.Move.Enable();
         actions.Player.Jump.Enable();
+        actions.Player.Attack.Enable();
         actions.Player.Move.started += val => { moveAction?.Invoke(MoveAxis); };
         actions.Player.Jump.started += val => { jumpAction?.Invoke(); };
     }
