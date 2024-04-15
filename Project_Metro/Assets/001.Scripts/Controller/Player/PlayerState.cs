@@ -35,12 +35,12 @@ namespace PlayerState
     {
         public override void Enter(PlayerController _entity)
         {
-
+            _entity.anim.SetBool("IsRun", true);
         }
 
         public override void Exit(PlayerController _entity)
         {
-
+            _entity.anim.SetBool("IsRun", false);
         }
 
         public override void FixedUpdate(PlayerController _entity)
@@ -62,12 +62,13 @@ namespace PlayerState
         public override void Enter(PlayerController _entity)
         {
             _entity.jump.StartJump();
+            _entity.anim.SetBool("IsJump", true);
         }
 
         public override void Exit(PlayerController _entity)
         {
-            
             _entity.jump.EndJump();
+            _entity.anim.SetBool("IsJump", false);
         }
 
         public override void FixedUpdate(PlayerController _entity)
@@ -78,9 +79,9 @@ namespace PlayerState
 
         public override void Update(PlayerController _entity)
         {
+            _entity.attack.CheckAttack();
             if (_entity.jump.CheckEndJump()) return;
             if (_entity.move.CheckStopInJump()) return;
-            _entity.attack.CheckAttack();
         }
     }
 
@@ -88,11 +89,13 @@ namespace PlayerState
     {
         public override void Enter(PlayerController _entity)
         {
+            _entity.anim.SetBool("IsFall", true);
 
         }
 
         public override void Exit(PlayerController _entity)
         {
+            _entity.anim.SetBool("IsFall", false);
 
         }
 

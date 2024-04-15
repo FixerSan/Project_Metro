@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : Actor
 {
@@ -22,9 +23,13 @@ public class PlayerController : Actor
     public Define.PlayerState CurrentState;
 
     public Rigidbody2D rb;
+    public Animator anim;
 
     public Transform groundCheckTrans;
-    public Transform attackTrans;
+    public Transform leftAttackTrans;
+    public Transform rightAttackTrans;
+    public Transform upAttackTrans;
+    public Transform downAttackTrans;
 
     public bool IsGround { get { return CheckIsGround(); } }
 
@@ -43,8 +48,15 @@ public class PlayerController : Actor
         currentState = Define.PlayerState.Idle;
         CurrentState = Define.PlayerState.Idle;
         rb = GetComponent<Rigidbody2D>();
+
+        anim = Util.FindChild<Animator>(gameObject, "Sprite", true);
         groundCheckTrans = Util.FindChild<Transform>(gameObject, "GroundCheckTrans", true);
-        attackTrans = Util.FindChild<Transform>(gameObject, "AttackTrans", true);
+        leftAttackTrans = Util.FindChild<Transform>(gameObject, "LeftAttackTrans", true);
+        rightAttackTrans = Util.FindChild<Transform>(gameObject, "RightAttackTrans", true);
+        upAttackTrans = Util.FindChild<Transform>(gameObject, "UpAttackTrans", true);
+        downAttackTrans = Util.FindChild<Transform>(gameObject, "DownAttackTrans", true);
+
+        ChangeDirection(Define.Direction.Left);
 
         init = true;
     }
@@ -56,6 +68,14 @@ public class PlayerController : Actor
         fsm.ChangeState(states[_state]);
         currentState = _state;
         CurrentState = _state;
+    }
+
+    public void ChangeDirection(Define.Direction _direction)
+    {
+        if (currentDirection == _direction) return;
+        if(_direction == Define.Direction.Left) anim.transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
+        else if (_direction == Define.Direction.Right) anim.transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z);
+        currentDirection = _direction;
     }
 
     private void CheckChangeStateInInspector()
@@ -70,8 +90,12 @@ public class PlayerController : Actor
         for (int i = 0; i < collider2Ds.Length; i++)
         {
             if (collider2Ds[i].CompareTag("Ground"))
+            {
+                anim.SetBool("IsGround", true);
                 return true;
+            }
         }
+        anim.SetBool("IsGround", false);
         return false;
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Actor : MonoBehaviour, IHitable
 {
     public ActorStatus status;
+    public Define.Direction currentDirection;
     public bool init = false;
     public virtual int HP 
     {
@@ -17,6 +18,8 @@ public abstract class Actor : MonoBehaviour, IHitable
             status.nowHP = value;
         }
     }
+
+    public string Tag { get { return gameObject.tag; } }
 
     public virtual void Hit(int _damage)
     {

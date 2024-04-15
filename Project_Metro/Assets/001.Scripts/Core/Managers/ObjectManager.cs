@@ -34,13 +34,11 @@ public class ObjectManager
         return _player;
     }
 
-    public NormalAttack SpawnAttack(Actor _attacker, Vector2 _position ,Transform _parent = null)
+    public NormalAttack SpawnAttack(Actor _attacker, Transform _attackPos, Define.PlayerAttackDirection _attackDirection)
     {
-        GameObject go = Managers.Resource.Instantiate($"{Define.PlayerAttack.NormalAttack}_{Managers.Game.attackLevel}", _pooling:true);
-        go.transform.position = _position;
-        go.transform.SetParent(_parent);
+        GameObject go = Managers.Resource.Instantiate($"{_attackDirection}Attack_{Managers.Game.attackLevel}", _pooling:true);
         NormalAttack attack = go.GetOrAddComponent<NormalAttack>();
-        attack.Init(_attacker);
+        attack.Init(_attacker, _attackPos);
 
         return attack;
     }

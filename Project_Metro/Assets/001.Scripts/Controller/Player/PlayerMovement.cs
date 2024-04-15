@@ -39,6 +39,8 @@ namespace PlayerMovement
 
             public override void Move()
             {
+                if (Managers.Input.MoveAxis.x == 0f) return;
+                controller.ChangeDirection((Define.Direction)(int)Managers.Input.MoveAxis.x);
                 controller.rb.velocity = new Vector2(controller.status.CurrentSpeed * Managers.Input.MoveAxis.x, controller.rb.velocity.y);
             }
 
@@ -94,7 +96,7 @@ namespace PlayerMovement
             public One(PlayerController _controller)
             {
                 controller = _controller;
-                canJumpTime = 0.25f;
+                canJumpTime = 0.35f;
                 level = 1;
             }
 

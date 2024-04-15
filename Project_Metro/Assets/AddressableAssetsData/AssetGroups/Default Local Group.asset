@@ -18,7 +18,25 @@ MonoBehaviour:
   m_GUID: c6ea1775ace06694abbc5791a6ae6e52
   m_SerializeEntries:
   - m_GUID: 04336a13b496c2147834050f207f0768
-    m_Address: NormalAttack_1.prefab
+    m_Address: LeftAttack_1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab35735bbd632cb45b21f638083125a3
+    m_Address: RightAttack_1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93ce469f908872447a9b916be05b0fd2
+    m_Address: DownAttack_1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af55fd3353eb6f14fad671e3b7b27848
+    m_Address: UpAttack_1.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - default

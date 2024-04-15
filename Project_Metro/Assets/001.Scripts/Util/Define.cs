@@ -51,4 +51,14 @@ public class Define
     {
         Walk, Dash
     }
+
+    public enum Direction
+    {
+        Left = -1, Right = 1
+    }
+
+    public enum PlayerAttackDirection
+    {
+        Left, Right, Up, Down
+    }
 }
