@@ -25,11 +25,11 @@ public abstract class Actor : MonoBehaviour, IHitable
     {
         status.nowHP -= _damage;
         if (status.nowHP <= 0)
-            Die();
+            Death();
             
     }
 
-    public abstract void Die();
+    public abstract void Death();
 }
 
 [System.Serializable]
@@ -78,6 +78,19 @@ public class ActorStatus
             return defaultDamageForce + plusDamageForce;
         }
     }
+
+    public float defaultAttackSpeed;
+    public float plusAttackSpeed;
+    public float CurrentAttackSpeed
+    {
+        get
+        {
+            return defaultAttackSpeed + plusAttackSpeed;
+        }
+    }
+
+    public float attackCooltime;
+
     public ActorStatus()
     {
         defaultSpeed = 3;

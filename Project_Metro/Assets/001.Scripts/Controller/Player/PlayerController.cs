@@ -122,7 +122,7 @@ public class PlayerController : Actor
         base.Hit(_damage);
     }
 
-    public override void Die()
+    public override void Death()
     {
 
     }

@@ -29,3 +29,10 @@ public class PlayerData
 {
     public int index;
 }
+
+[System.Serializable]
+public class MonsterData
+{
+    public int index;
+    public float canAttackDistance;
+}

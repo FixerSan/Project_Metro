@@ -1,0 +1,699 @@
+fileFormatVersion: 2
+guid: 5c614860dedcc8444865a17fb7bcdbf2
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 588
+        width: 165
+        height: 179
+      alignment: 9
+      pivot: {x: 0.4631444, y: 0.035702497}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdeac0bf448e3ad4ba64be1f81af7d68
+      internalID: 1408948120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_1
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 587
+        width: 162
+        height: 180
+      alignment: 9
+      pivot: {x: 0.46419787, y: 0.042448934}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86937461c954ec74088d0f396f48024f
+      internalID: 1678700674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_2
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 587
+        width: 162
+        height: 179
+      alignment: 9
+      pivot: {x: 0.47493848, y: 0.03989278}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cc3c505f7387144ab05a5bd09e7867a
+      internalID: 1759347142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_3
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 587
+        width: 162
+        height: 178
+      alignment: 9
+      pivot: {x: 0.47851864, y: 0.030791208}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d192f2d126ca9c94199f144731a6db19
+      internalID: 1673221477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_4
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 587
+        width: 162
+        height: 179
+      alignment: 9
+      pivot: {x: 0.48567897, y: 0.026931848}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14ed27495d611e14ca440dd84b907f1e
+      internalID: 972676912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_5
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 389
+        width: 388
+        height: 175
+      alignment: 9
+      pivot: {x: 0.29028645, y: 0.054175153}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fe2a5495394d374ea32f0de3671f27f
+      internalID: 1917302874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_6
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1194
+        width: 126
+        height: 172
+      alignment: 9
+      pivot: {x: 0.3727612, y: 0.029290488}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ca603adddc36304abd8b9552c3175ee
+      internalID: 637192367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_7
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 1194
+        width: 125
+        height: 171
+      alignment: 9
+      pivot: {x: 0.39098182, y: 0.04060087}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e669d5bfbda2fe042bb7561d91a1ce08
+      internalID: 877186950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_8
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 1194
+        width: 123
+        height: 172
+      alignment: 9
+      pivot: {x: 0.38269216, y: 0.038611125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b64251b6bbe000458779214f952e55e
+      internalID: -942940071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_9
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 1194
+        width: 129
+        height: 172
+      alignment: 9
+      pivot: {x: 0.39436257, y: 0.043271795}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da8c7db9e55c77343bfccca0355358b8
+      internalID: 1968061803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_10
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 1193
+        width: 125
+        height: 173
+      alignment: 9
+      pivot: {x: 0.37815624, y: 0.041278113}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d87a605e76dc3ea408ea8b5297978d09
+      internalID: -1193116921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_11
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 1193
+        width: 128
+        height: 173
+      alignment: 9
+      pivot: {x: 0.39353704, y: 0.036645085}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65b36b28a8e606a42a540193fcada37d
+      internalID: -239821855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_12
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 1194
+        width: 126
+        height: 172
+      alignment: 9
+      pivot: {x: 0.38548544, y: 0.043271795}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4462e05445e95d448898f3791ee4f6a9
+      internalID: 792670185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_13
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 1194
+        width: 124
+        height: 171
+      alignment: 9
+      pivot: {x: 0.38363844, y: 0.04060087}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49369f46f10cbd54793d03fbf3412d68
+      internalID: 1132150039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_14
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 1195
+        width: 123
+        height: 170
+      alignment: 9
+      pivot: {x: 0.38269243, y: 0.03318302}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a52f05c6818975498943e0b9ea828b3
+      internalID: 1614912174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_15
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 996
+        width: 145
+        height: 172
+      alignment: 9
+      pivot: {x: 0.37907436, y: 0.041992188}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a4cfac52c751cd40b8bf540a449389d
+      internalID: -552387115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_16
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 996
+        width: 145
+        height: 173
+      alignment: 9
+      pivot: {x: 0.35151115, y: 0.05004389}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f902947f28874a9428962a28e4a15f79
+      internalID: -1605876579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_17
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 997
+        width: 147
+        height: 173
+      alignment: 9
+      pivot: {x: 0.3760648, y: 0.02610964}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e562d068e2287e340b57efd740487e87
+      internalID: -689377508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_18
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 997
+        width: 147
+        height: 171
+      alignment: 9
+      pivot: {x: 0.3647984, y: 0.03993841}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9d21bf248665b24bbe74e1806839661
+      internalID: 578472474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_19
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 996
+        width: 145
+        height: 174
+      alignment: 9
+      pivot: {x: 0.38006675, y: 0.05738883}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa2f59658308b6a48b9cb1bbd4d167d9
+      internalID: 512933046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_20
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 996
+        width: 146
+        height: 173
+      alignment: 9
+      pivot: {x: 0.35820028, y: 0.04047019}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e4e091679478364d8ef96021597f6ed
+      internalID: -1588159117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_21
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 994
+        width: 145
+        height: 175
+      alignment: 9
+      pivot: {x: 0.38006675, y: 0.05991804}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a025ef07c9352944aaee2c5f26a8db2c
+      internalID: -1150214050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_22
+      rect:
+        serializedVersion: 2
+        x: 1069
+        y: 997
+        width: 145
+        height: 171
+      alignment: 9
+      pivot: {x: 0.36864394, y: 0.05446656}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 268ad5e8efa6e7149bc5ffa1b40f0b61
+      internalID: -1468696094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_23
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 54
+        width: 156
+        height: 115
+      alignment: 9
+      pivot: {x: 0.49375486, y: 0.06794881}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 875ce0d73eac1c44fbc553c74f606a1f
+      internalID: 87181940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_24
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 53
+        width: 156
+        height: 117
+      alignment: 9
+      pivot: {x: 0.49375486, y: 0.067007504}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5a6d49df302ee74a81fb644f8744630
+      internalID: 1629259181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - Hollow Knight - Husk Miner_25
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 54
+        width: 155
+        height: 115
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0764204}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5879b396c32df5b42aa280927fc4bbed
+      internalID: -1355146168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PC Computer - Hollow Knight - Husk Miner_0: 1408948120
+      PC Computer - Hollow Knight - Husk Miner_1: 1678700674
+      PC Computer - Hollow Knight - Husk Miner_10: -1193116921
+      PC Computer - Hollow Knight - Husk Miner_11: -239821855
+      PC Computer - Hollow Knight - Husk Miner_12: 792670185
+      PC Computer - Hollow Knight - Husk Miner_13: 1132150039
+      PC Computer - Hollow Knight - Husk Miner_14: 1614912174
+      PC Computer - Hollow Knight - Husk Miner_15: -552387115
+      PC Computer - Hollow Knight - Husk Miner_16: -1605876579
+      PC Computer - Hollow Knight - Husk Miner_17: -689377508
+      PC Computer - Hollow Knight - Husk Miner_18: 578472474
+      PC Computer - Hollow Knight - Husk Miner_19: 512933046
+      PC Computer - Hollow Knight - Husk Miner_2: 1759347142
+      PC Computer - Hollow Knight - Husk Miner_20: -1588159117
+      PC Computer - Hollow Knight - Husk Miner_21: -1150214050
+      PC Computer - Hollow Knight - Husk Miner_22: -1468696094
+      PC Computer - Hollow Knight - Husk Miner_23: 87181940
+      PC Computer - Hollow Knight - Husk Miner_24: 1629259181
+      PC Computer - Hollow Knight - Husk Miner_25: -1355146168
+      PC Computer - Hollow Knight - Husk Miner_3: 1673221477
+      PC Computer - Hollow Knight - Husk Miner_4: 972676912
+      PC Computer - Hollow Knight - Husk Miner_5: 1917302874
+      PC Computer - Hollow Knight - Husk Miner_6: 637192367
+      PC Computer - Hollow Knight - Husk Miner_7: 877186950
+      PC Computer - Hollow Knight - Husk Miner_8: -942940071
+      PC Computer - Hollow Knight - Husk Miner_9: 1968061803
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

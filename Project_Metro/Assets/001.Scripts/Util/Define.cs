@@ -61,4 +61,13 @@ public class Define
     {
         Left, Right, Up, Down
     }
+
+    public enum MonsterState
+    {
+        Idle,
+        Move,
+        Follow,
+        Attack,
+        Death
+    }
 }
