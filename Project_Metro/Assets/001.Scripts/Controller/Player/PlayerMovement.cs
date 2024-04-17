@@ -13,6 +13,10 @@ namespace PlayerMovement
         public abstract void Move();
         public abstract bool CheckStop();
         public abstract bool CheckStopInJump();
+        public void Stop()
+        {
+            controller.rb.velocity = new Vector2(0, controller.rb.velocity.y);
+        }
     }
 
     namespace Moves
@@ -27,6 +31,7 @@ namespace PlayerMovement
 
             public override bool CheckMove()
             {
+                Debug.Log(Managers.Input.MoveAxis);
                 if (Managers.Input.MoveAxis.x != 0f)
                 {
                     controller.ChangeState(Define.PlayerState.Move);
@@ -49,7 +54,7 @@ namespace PlayerMovement
                 if (Managers.Input.MoveAxis.x == 0f)
                 {
                     controller.ChangeState(Define.PlayerState.Idle);
-                    controller.rb.velocity = new Vector2(0, controller.rb.velocity.y);
+                    Stop();
                     return true;
                 }
 

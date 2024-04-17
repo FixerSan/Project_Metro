@@ -96,6 +96,7 @@ namespace PlayerState
         public override void Exit(PlayerController _entity)
         {
             _entity.anim.SetBool("IsFall", false);
+            _entity.move.Stop();
 
         }
 

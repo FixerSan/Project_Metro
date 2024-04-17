@@ -71,3 +71,5 @@ public class NormalAttack : MonoBehaviour
         Gizmos.DrawWireCube(attackRangeTrans.position, attackRangeTrans.localScale);
     }
 }
+
+

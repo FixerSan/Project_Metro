@@ -7,22 +7,60 @@ using UnityEngine.SceneManagement;
 public class ObjectManager
 {
     #region 오브젝트 참조
-    private PlayerController _player;
-    private HashSet<MonsterController> _monsters = new HashSet<MonsterController>();
+    public PlayerController _player;
+    public HashSet<MonsterController> _monsters = new HashSet<MonsterController>();
+    public Dictionary<int, Obstacle> obstacles = new Dictionary<int, Obstacle>();
+    public Dictionary<int, Trigger> triggers = new Dictionary<int, Trigger>();
+
     #endregion
     #region Trans
-    private Transform _monsterTrans;
+    private Transform monsterTrans;
     public Transform MonsterTrans
     {
         get
         {
-            if(_monsterTrans == null)
+            if(monsterTrans == null)
             {
-                _monsterTrans = GameObject.Find("@Monster").transform;
-                if (_monsterTrans == null)
-                    _monsterTrans = new GameObject { name = "@Monster" }.transform;
+                GameObject go = GameObject.Find("@Monster");
+                if (go == null)
+                    go = new GameObject { name = "@Monster" };
+                monsterTrans = go.transform;
             }
-            return _monsterTrans;
+            return monsterTrans;
+        }
+
+    }
+
+    private Transform obstacleTrans;
+    public Transform ObstacleTrans
+    {
+        get
+        {
+            if (obstacleTrans == null)
+            {
+                GameObject go = GameObject.Find("@Obstacle");
+                if (go == null)
+                    go = new GameObject { name = "@Obstacle" };
+                obstacleTrans = go.transform;
+            }
+            return obstacleTrans;
+        }
+
+    }
+
+    private Transform triggerTrans;
+    public Transform TriggerTrans
+    {
+        get
+        {
+            if (triggerTrans == null)
+            {
+                GameObject go = GameObject.Find("@Trigger");
+                if (go == null)
+                    go = new GameObject { name = "@Trigger" };
+                triggerTrans = go.transform;
+            }
+            return triggerTrans;
         }
 
     }
@@ -30,7 +68,6 @@ public class ObjectManager
 
     public PlayerController SpawnPlayerController(Vector2 _position)
     {
-        
         return _player;
     }
 
@@ -41,5 +78,27 @@ public class ObjectManager
         attack.Init(_attacker, _attackPos);
 
         return attack;
+    }
+
+    public Obstacle SpawnObstacle(int _index, Vector2 _position)
+    {
+        GameObject go = Managers.Resource.Instantiate($"Obstacle_{_index}");
+        go.transform.SetParent(ObstacleTrans);
+        go.transform.position = _position;
+        Obstacle obstacle = go.GetComponent<Obstacle>();
+        obstacles.Add(obstacle.index, obstacle);
+
+        return obstacle;
+    }
+
+    public Trigger SpawnTrigger(int _index, Vector2 _position)
+    {
+        GameObject go = Managers.Resource.Instantiate($"Trigger_{_index}");
+        go.transform.SetParent(TriggerTrans);
+        go.transform.position = _position;
+        Trigger trigger = go.GetComponent<Trigger>();
+        triggers.Add(trigger.index, trigger);
+
+        return trigger;
     }
 }

@@ -14,6 +14,9 @@ public class GameManager : Singleton<GameManager>
 
     public void GameStart()
     {
-        Managers.Resource.LoadAllAsync<Object>("default");
+        Managers.Resource.LoadAllAsync<Object>("default", _completeCallback: () => 
+        {
+            GameObject.Find("@TestController").GetComponent<TestController>().Init();
+        });
     }
 }

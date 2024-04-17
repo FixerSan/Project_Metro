@@ -9,7 +9,8 @@ public class Managers : Singleton<Managers>
     private UIManager _ui;
     private PoolManager _pool;
     private InputManager _input;
-
+    private ObstacleManager _obstacle;
+    private TriggerManager _trigger;
 
     private GameManager _game;
 
@@ -19,6 +20,8 @@ public class Managers : Singleton<Managers>
     public static UIManager UI { get { return Instance?._ui; } }
     public static PoolManager Pool { get { return Instance?._pool; } }
     public static InputManager Input { get { return Instance?._input; } }
+    public static ObstacleManager Obstacle { get { return Instance?._obstacle; } }
+    public static TriggerManager Trigger { get { return Instance?._trigger; } }
 
 
 
@@ -30,6 +33,8 @@ public class Managers : Singleton<Managers>
         Instance._ui = new UIManager();
         Instance._pool = new PoolManager();
         Instance._input = new InputManager();
+        Instance._obstacle = new ObstacleManager();
+        Instance._trigger = new TriggerManager();
         Instance._game = GameManager.Instance;
     }
 }

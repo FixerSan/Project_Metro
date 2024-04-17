@@ -41,6 +41,30 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14a9bb5b627eb5c4c9f31d9d8ad03eca
+    m_Address: Obstacle_0.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88755705ced488944acccf2ede074137
+    m_Address: Trigger_0.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3aec15aa2d3a3b4f80fa05c139dbdc5
+    m_Address: Obstacle_1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a03caa34ece0504f816f1223b45ac9c
+    m_Address: Trigger_1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: bf06be692eca4c14fade11dc8ee82bec, type: 2}
   m_SchemaSet:
