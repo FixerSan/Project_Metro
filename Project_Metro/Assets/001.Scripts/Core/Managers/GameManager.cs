@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    public Player player;
     public Dictionary<Define.PlayerMovementType, int> movementLevels = new Dictionary<Define.PlayerMovementType, int>();
     public int attackLevel = 1;
 
@@ -19,4 +20,9 @@ public class GameManager : Singleton<GameManager>
             GameObject.Find("@TestController").GetComponent<TestController>().Init();
         });
     }
+}
+
+public class Player
+{
+
 }
