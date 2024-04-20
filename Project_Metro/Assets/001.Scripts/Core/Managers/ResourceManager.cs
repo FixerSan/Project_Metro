@@ -116,7 +116,7 @@ public class ResourceManager
     private string ChangeKey<T>(string _key) where T : Object
     {
         if (typeof(T) == typeof(GameObject)) _key = _key + ".prefab";
-        else if (typeof(T) == typeof(TextAsset)) _key = _key + ".Data";
+        else if (typeof(T) == typeof(TextAsset)) _key = _key + ".json";
         else if (typeof(T) == typeof(AudioClip)) _key = _key + ".AudioClip";
         else if (typeof(T) == typeof(Sprite)) _key = _key + ".sprite";
         else if (typeof(T) == typeof(RuntimeAnimatorController)) _key = _key + ".controller";

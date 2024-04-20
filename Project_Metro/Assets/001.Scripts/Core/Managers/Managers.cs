@@ -11,6 +11,7 @@ public class Managers : Singleton<Managers>
     private InputManager _input;
     private ObstacleManager _obstacle;
     private TriggerManager _trigger;
+    private DataManager _data;
 
     private GameManager _game;
 
@@ -22,6 +23,7 @@ public class Managers : Singleton<Managers>
     public static InputManager Input { get { return Instance?._input; } }
     public static ObstacleManager Obstacle { get { return Instance?._obstacle; } }
     public static TriggerManager Trigger { get { return Instance?._trigger; } }
+    public static DataManager Data { get { return Instance?._data; } }
 
 
 
@@ -35,6 +37,7 @@ public class Managers : Singleton<Managers>
         Instance._input = new InputManager();
         Instance._obstacle = new ObstacleManager();
         Instance._trigger = new TriggerManager();
+        Instance._data = new DataManager();
         Instance._game = GameManager.Instance;
     }
 }

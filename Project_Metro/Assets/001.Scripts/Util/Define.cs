@@ -37,9 +37,8 @@ public class Define
         Idle = 0,
         Move = 1,
         Jump = 2,
-        JumpMove,
-        Fall,
-        FallMove,
+        Fall = 3,
+        Dash = 4,
     }
 
     public enum PlayerAttack

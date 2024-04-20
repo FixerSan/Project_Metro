@@ -1,32 +1,53 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class DataManager 
 {
-    public Dictionary<int, PlayerData> playerDatas = new Dictionary<int, PlayerData>();
+    public PlayerData playerData;
+
+    public void SavePlayerData()
+    {
+        PlayerData data = new PlayerData();
+        data.statusJson = JsonUtility.ToJson(Managers.Game.player.status, true);
+        data.levelJson = JsonUtility.ToJson(Managers.Game.player.level, true);
+
+        string dataJson = JsonUtility.ToJson(data, true);
+        string path = Path.Combine(Application.dataPath, "006.Datas/PlayerData.json");
+
+        File.WriteAllText(path, dataJson);
+    }
 
     public void LoadPlayerData()
     {
-
+        string playerDataJson = Managers.Resource.Load<TextAsset>("PlayerData").text;
+        playerData = JsonUtility.FromJson<PlayerData>(playerDataJson);
     }
 
-    public PlayerData GetPlayerData(int _index)
+    public PlayerData GetPlayerData()
     {
-        if(playerDatas.TryGetValue(_index, out PlayerData data)) return data;
-        return null;
+        return playerData;
     }
 
     public void SaveData()
     {
+        SavePlayerData();
+    }
 
+    public void LoadData(Action _callback)
+    {
+        LoadPlayerData();
+        _callback?.Invoke();
     }
 }
 
 [System.Serializable]
 public class PlayerData
 {
-    public int index;
+    public string statusJson;
+    public string levelJson;
 }
 
 [System.Serializable]

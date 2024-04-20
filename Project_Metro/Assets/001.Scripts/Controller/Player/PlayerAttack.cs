@@ -27,7 +27,7 @@ namespace PlayerAttacks
         public override bool CheckAttack()
         {
             if (!isCanAttack) return false ;
-            if (Managers.Input.actions.Player.Attack.ReadValue<float>() != 0)
+            if (Managers.Input.GetAttackKey)
             {
                 if(!controller.IsGround)
                 {

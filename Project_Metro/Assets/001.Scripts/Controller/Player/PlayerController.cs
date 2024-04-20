@@ -1,7 +1,7 @@
 using JetBrains.Annotations;
-using PlayerMovement;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,6 +15,8 @@ public class PlayerController : Actor
     public PlayerJump jump;
     public PlayerFall fall;
     public PlayerAttack attack;
+    public PlayerDash dash;
+    public PlayerDefense defense;
 
     public Dictionary<Define.PlayerState, State<PlayerController>> states = new Dictionary<Define.PlayerState, State<PlayerController>>();
     public StateMachine<PlayerController> fsm;
@@ -35,26 +37,24 @@ public class PlayerController : Actor
 
     public void Init()
     {
-        move = new PlayerMovement.Moves.One(this);
-        jump = new PlayerMovement.Jumps.One(this);
-        fall = new PlayerMovement.Falls.One(this);
-        attack = new PlayerAttacks.One(this);
-
         states.Add(Define.PlayerState.Idle, new PlayerState.Idle());
         states.Add(Define.PlayerState.Move, new PlayerState.Move());
         states.Add(Define.PlayerState.Jump, new PlayerState.Jump());
         states.Add(Define.PlayerState.Fall, new PlayerState.Fall());
+        states.Add(Define.PlayerState.Dash, new PlayerState.Dash());
+
         fsm = new StateMachine<PlayerController>(this, states[Define.PlayerState.Idle]);
         currentState = Define.PlayerState.Idle;
         CurrentState = Define.PlayerState.Idle;
         rb = GetComponent<Rigidbody2D>();
-
+            
         anim = Util.FindChild<Animator>(gameObject, "Sprite", true);
         groundCheckTrans = Util.FindChild<Transform>(gameObject, "GroundCheckTrans", true);
         leftAttackTrans = Util.FindChild<Transform>(gameObject, "LeftAttackTrans", true);
         rightAttackTrans = Util.FindChild<Transform>(gameObject, "RightAttackTrans", true);
         upAttackTrans = Util.FindChild<Transform>(gameObject, "UpAttackTrans", true);
         downAttackTrans = Util.FindChild<Transform>(gameObject, "DownAttackTrans", true);
+        status = Managers.Game.player.status;
 
         ChangeDirection(Define.Direction.Left);
 
@@ -97,11 +97,6 @@ public class PlayerController : Actor
         }
         anim.SetBool("IsGround", false);
         return false;
-    }
-
-    public void Awake()
-    {
-        Init();
     }
 
     public void Update()

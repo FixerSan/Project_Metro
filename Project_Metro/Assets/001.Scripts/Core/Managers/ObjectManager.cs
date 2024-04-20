@@ -1,14 +1,16 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ObjectManager
 {
     #region 오브젝트 참조
-    public PlayerController _player;
-    public HashSet<MonsterController> _monsters = new HashSet<MonsterController>();
+    public PlayerController player;
+    public CameraController camera;
+    public HashSet<MonsterController> monsters = new HashSet<MonsterController>();
     public Dictionary<int, Obstacle> obstacles = new Dictionary<int, Obstacle>();
     public Dictionary<int, Trigger> triggers = new Dictionary<int, Trigger>();
 
@@ -68,12 +70,30 @@ public class ObjectManager
 
     public PlayerController SpawnPlayerController(Vector2 _position)
     {
-        return _player;
+        if (player != null)
+            Managers.Resource.Destroy(player.gameObject);
+        player = Managers.Resource.Instantiate("PlayerController").GetOrAddComponent<PlayerController>();
+        player.transform.position = _position;
+
+        if (Managers.Game.player.level.moveLevel == 1) player.move = new PlayerMoves.One(player); 
+
+        if (Managers.Game.player.level.jumpLevel == 1) player.jump = new PlayerJumps.One(player); 
+
+        if (Managers.Game.player.level.attackLevel == 1) player.attack = new PlayerAttacks.One(player); 
+
+        if (Managers.Game.player.level.fallLevel == 1) player.fall = new PlayerFalls.One(player); 
+
+        if (Managers.Game.player.level.dashLevel == 1) player.dash = new PlayerDashes.One(player); 
+
+        if (Managers.Game.player.level.defenseLevel == 1) player.defense = new PlayerDefenses.One(player);
+
+        player.Init();
+        return player;
     }
 
     public NormalAttack SpawnAttack(Actor _attacker, Transform _attackPos, Define.PlayerAttackDirection _attackDirection)
     {
-        GameObject go = Managers.Resource.Instantiate($"{_attackDirection}Attack_{Managers.Game.attackLevel}", _pooling:true);
+        GameObject go = Managers.Resource.Instantiate($"{_attackDirection}Attack_{Managers.Game.player.level.attackLevel}", _pooling:true);
         NormalAttack attack = go.GetOrAddComponent<NormalAttack>();
         attack.Init(_attacker, _attackPos);
 
