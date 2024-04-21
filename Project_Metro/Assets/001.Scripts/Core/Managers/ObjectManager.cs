@@ -70,25 +70,28 @@ public class ObjectManager
 
     public PlayerController SpawnPlayerController(Vector2 _position)
     {
-        if (player != null)
-            Managers.Resource.Destroy(player.gameObject);
-        player = Managers.Resource.Instantiate("PlayerController").GetOrAddComponent<PlayerController>();
+        if (player == null)
+            player = Managers.Resource.Instantiate("PlayerController").GetOrAddComponent<PlayerController>();
+
         player.transform.position = _position;
-
-        if (Managers.Game.player.level.moveLevel == 1) player.move = new PlayerMoves.One(player); 
-
-        if (Managers.Game.player.level.jumpLevel == 1) player.jump = new PlayerJumps.One(player); 
-
-        if (Managers.Game.player.level.attackLevel == 1) player.attack = new PlayerAttacks.One(player); 
-
-        if (Managers.Game.player.level.fallLevel == 1) player.fall = new PlayerFalls.One(player); 
-
-        if (Managers.Game.player.level.dashLevel == 1) player.dash = new PlayerDashes.One(player); 
-
-        if (Managers.Game.player.level.defenseLevel == 1) player.defense = new PlayerDefenses.One(player);
-
+        InitPlayerAction();
         player.Init();
         return player;
+    }
+
+    public void InitPlayerAction()
+    {
+        if (Managers.Game.player.level.moveLevel == 1) player.move = new PlayerMoves.One(player);
+
+        if (Managers.Game.player.level.jumpLevel == 1) player.jump = new PlayerJumps.One(player);
+
+        if (Managers.Game.player.level.attackLevel == 1) player.attack = new PlayerAttacks.One(player);
+
+        if (Managers.Game.player.level.fallLevel == 1) player.fall = new PlayerFalls.One(player);
+
+        if (Managers.Game.player.level.dashLevel == 1) player.dash = new PlayerDashes.One(player);
+
+        if (Managers.Game.player.level.defenseLevel == 1) player.defence = new PlayerDefenses.One(player);
     }
 
     public NormalAttack SpawnAttack(Actor _attacker, Transform _attackPos, Define.PlayerAttackDirection _attackDirection)

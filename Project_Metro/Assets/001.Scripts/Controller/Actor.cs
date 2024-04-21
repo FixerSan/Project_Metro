@@ -26,7 +26,6 @@ public abstract class Actor : MonoBehaviour, IHitable
         status.nowHP -= _damage;
         if (status.nowHP <= 0)
             Death();
-            
     }
 
     public abstract void Death();

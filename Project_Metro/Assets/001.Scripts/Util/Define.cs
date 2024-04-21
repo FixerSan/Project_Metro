@@ -39,6 +39,7 @@ public class Define
         Jump = 2,
         Fall = 3,
         Dash = 4,
+        Defence = 5,
     }
 
     public enum PlayerAttack

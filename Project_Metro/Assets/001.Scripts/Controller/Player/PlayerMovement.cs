@@ -28,7 +28,6 @@ namespace PlayerMoves
 
         public override bool CheckMove()
         {
-            Debug.Log(Managers.Input.MoveAxis);
             if (Managers.Input.MoveAxis.x != 0f)
             {
                 controller.ChangeState(Define.PlayerState.Move);

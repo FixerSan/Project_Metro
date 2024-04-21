@@ -6,7 +6,7 @@ using UnityEngine;
 public class MonsterController : Actor
 {
     public MonsterData data;
-    public MonsterMovement move;
+    public MonsterMove move;
     public MonsterAttack attack;
 
     public Dictionary<Define.MonsterState, State<MonsterController>> states;

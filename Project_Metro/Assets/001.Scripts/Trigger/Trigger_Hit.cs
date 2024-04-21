@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitTrigger : Trigger, IHitable
+public class Trigger_Hit : Trigger, IHitable
 {
     public string Tag { get { return gameObject.tag; } }
     public int HP { get { return hp; } set { hp = value; } }

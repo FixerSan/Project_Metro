@@ -16,7 +16,7 @@ public class PlayerController : Actor
     public PlayerFall fall;
     public PlayerAttack attack;
     public PlayerDash dash;
-    public PlayerDefense defense;
+    public PlayerDefence defence;
 
     public Dictionary<Define.PlayerState, State<PlayerController>> states = new Dictionary<Define.PlayerState, State<PlayerController>>();
     public StateMachine<PlayerController> fsm;
@@ -37,17 +37,18 @@ public class PlayerController : Actor
 
     public void Init()
     {
+        #region 생성 참조
         states.Add(Define.PlayerState.Idle, new PlayerState.Idle());
         states.Add(Define.PlayerState.Move, new PlayerState.Move());
         states.Add(Define.PlayerState.Jump, new PlayerState.Jump());
         states.Add(Define.PlayerState.Fall, new PlayerState.Fall());
         states.Add(Define.PlayerState.Dash, new PlayerState.Dash());
-
+        states.Add(Define.PlayerState.Defence, new PlayerState.Defence());
         fsm = new StateMachine<PlayerController>(this, states[Define.PlayerState.Idle]);
-        currentState = Define.PlayerState.Idle;
-        CurrentState = Define.PlayerState.Idle;
+        #endregion
+
+        #region 외부 참조
         rb = GetComponent<Rigidbody2D>();
-            
         anim = Util.FindChild<Animator>(gameObject, "Sprite", true);
         groundCheckTrans = Util.FindChild<Transform>(gameObject, "GroundCheckTrans", true);
         leftAttackTrans = Util.FindChild<Transform>(gameObject, "LeftAttackTrans", true);
@@ -55,8 +56,13 @@ public class PlayerController : Actor
         upAttackTrans = Util.FindChild<Transform>(gameObject, "UpAttackTrans", true);
         downAttackTrans = Util.FindChild<Transform>(gameObject, "DownAttackTrans", true);
         status = Managers.Game.player.status;
+        #endregion
 
+        #region 기타 처리
+        currentState = Define.PlayerState.Idle;
+        CurrentState = Define.PlayerState.Idle;
         ChangeDirection(Define.Direction.Left);
+        #endregion
 
         init = true;
     }
@@ -114,6 +120,11 @@ public class PlayerController : Actor
 
     public override void Hit(int _damage)
     {
+        if(CurrentState == Define.PlayerState.Defence)
+        {
+            base.Hit(_damage - defence.defenceForce);
+            return;
+        }
         base.Hit(_damage);
     }
 

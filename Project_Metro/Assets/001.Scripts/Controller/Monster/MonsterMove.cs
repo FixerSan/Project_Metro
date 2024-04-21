@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MonsterMovement
+public abstract class MonsterMove
 {
     public MonsterController controller;
     public abstract bool CheckMove();
@@ -18,7 +18,7 @@ public abstract class MonsterMovement
 
 namespace MonsterMovemets
 {
-    public class Test : MonsterMovement
+    public class Test : MonsterMove
     {
         public Test(MonsterController _controller)
         {

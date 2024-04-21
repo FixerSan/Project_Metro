@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public Player player;
+    public Transform respawnTrans;
+    
 
     public void Awake()
     {
@@ -48,6 +50,16 @@ public class Player
 {
     public ActorStatus status;
     public PlayerLevel level;
+
+    public void RespawnPlayer()
+    {
+        Managers.Object.player.transform.position = Managers.Game.respawnTrans.position;
+    }
+
+    public void LevelUpPlayer()
+    {
+        Managers.Object.InitPlayerAction();
+    }
 }
 
 [SerializeField]

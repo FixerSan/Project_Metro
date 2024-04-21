@@ -12,6 +12,7 @@ public class InputManager
     public bool GetJumpKey { get { return actions.Player.Jump.ReadValue<float>() != 0f; } }
     public bool GetAttackKey { get { return actions.Player.Attack.ReadValue<float>() != 0f; } }
     public bool GetDashKey { get { return actions.Player.Dash.ReadValue<float>() != 0f; } }
+    public bool GetDefenceKey { get { return actions.Player.Defence.ReadValue<float>() != 0f; } }
 
     public InputManager()
     {
@@ -20,6 +21,7 @@ public class InputManager
         actions.Player.Jump.Enable();
         actions.Player.Attack.Enable();
         actions.Player.Dash.Enable();
+        actions.Player.Defence.Enable();
     }
 
     public void SetCanControl(bool _isCanControl)
