@@ -2029,14 +2029,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status:
-    defaultMaxHP: 25
+    defaultMaxHP: 10
     plusMaxHP: 0
-    nowHP: 25
+    nowHP: 10
     defaultSpeed: 2
     plusSpeed: 0
     defaultJumpForce: 3
     plusJumpForce: 0
-    defaultDamageForce: 0
+    defaultDamageForce: 1
     plusDamageForce: 0
     defaultAttackSpeed: 1
     plusAttackSpeed: 0

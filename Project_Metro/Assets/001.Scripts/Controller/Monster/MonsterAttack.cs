@@ -12,7 +12,6 @@ public abstract class MonsterAttack
     public virtual void StartAttack()
     {
         attackCoroutine = controller.StartCoroutine(AttackRoutine());
-        Attack();
     }
 
     public abstract void Attack();

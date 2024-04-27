@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,6 +45,8 @@ public class MonsterController : Actor
 
         rb = GetComponent<Rigidbody2D>();
         anim = Util.FindChild<Animator>(gameObject, "Sprite", true);
+
+        anim.gameObject.AddComponent<AnimationEventHandler>().animationAction += AnimationEvent;
 
         init = true;
     }
@@ -106,6 +107,14 @@ public class MonsterController : Actor
     {
         yield return new WaitForSeconds(deathTime);
         Managers.Resource.Destroy(gameObject);
+    }
+
+    public void AnimationEvent()
+    {
+        if(currentState == Define.MonsterState.Attack)
+        {
+            attack.Attack();
+        }
     }
 
     private void OnDrawGizmos()
