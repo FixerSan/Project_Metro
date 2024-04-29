@@ -2,19 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossController : MonoBehaviour
+public abstract class BossController : Actor
 {
-    public BossMovement move;
-
-    public void Awake()
+    public override void Death()
     {
-        Init();
+        throw new System.NotImplementedException();
     }
 
-    public void Init()
-    {
-        move = new BossMovements.One(this);
-    }
-
-
+    public abstract void Init();
 }
