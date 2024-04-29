@@ -7,6 +7,14 @@ using UnityEngine;
 public class DataManager 
 {
     public PlayerData playerData;
+    public Dictionary<int, MonsterData> monsterDatas = new Dictionary<int, MonsterData>();
+
+
+    #region Save
+    public void SaveData()
+    {
+        SavePlayerData();
+    }
 
     public void SavePlayerData()
     {
@@ -19,6 +27,14 @@ public class DataManager
 
         File.WriteAllText(path, dataJson);
     }
+    #endregion
+    #region Load
+    public void LoadData(Action _callback)
+    {
+        LoadPlayerData();
+        LoadMonsterData();
+        _callback?.Invoke();
+    }
 
     public void LoadPlayerData()
     {
@@ -26,21 +42,27 @@ public class DataManager
         playerData = JsonUtility.FromJson<PlayerData>(playerDataJson);
     }
 
+    public void LoadMonsterData()
+    {
+        string monsterDataJson = Managers.Resource.Load<TextAsset>("MonsterData").text;
+        MonsterDatas monsterDataArray = JsonUtility.FromJson<MonsterDatas>(monsterDataJson);
+        for (int i = 0; i < monsterDataArray.monsterDatas.Length; i++)
+            monsterDatas.Add(monsterDataArray.monsterDatas[i].index, monsterDataArray.monsterDatas[i]);
+    }
+    #endregion
+    #region Get
     public PlayerData GetPlayerData()
     {
         return playerData;
     }
 
-    public void SaveData()
+    public MonsterData GetMonsterData(int _index)
     {
-        SavePlayerData();
+        if (monsterDatas.TryGetValue(_index, out MonsterData data)) return data;
+        Debug.Log($"인덱스: {_index}의 몬스터 데이터가 없습니다.");
+        return null;
     }
-
-    public void LoadData(Action _callback)
-    {
-        LoadPlayerData();
-        _callback?.Invoke();
-    }
+    #endregion
 }
 
 [System.Serializable]
@@ -48,6 +70,12 @@ public class PlayerData
 {
     public string statusJson;
     public string levelJson;
+}
+
+[System.Serializable]
+public class MonsterDatas
+{
+    public MonsterData[] monsterDatas;
 }
 
 [System.Serializable]

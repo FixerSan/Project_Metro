@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterController : Actor
+public abstract class MonsterController : Actor
 {
     public MonsterData data;
     public MonsterMove move;
@@ -25,30 +25,12 @@ public class MonsterController : Actor
 
     private Coroutine deathCoroutine;
 
-    private void Awake()
-    {
-        Init();   
-    }
-
-    public void Init()
+    public virtual bool Init(int _index)
     {
         states = new Dictionary<Define.MonsterState, State<MonsterController>>();
-        states.Add(Define.MonsterState.Idle, new MonsterState.TestMonster.Idle());
-        states.Add(Define.MonsterState.Move, new MonsterState.TestMonster.Move());
-        states.Add(Define.MonsterState.Follow, new MonsterState.TestMonster.Follow());
-        states.Add(Define.MonsterState.Attack, new MonsterState.TestMonster.Attack());
-        states.Add(Define.MonsterState.Death, new MonsterState.TestMonster.Death());
-        fsm = new StateMachine<MonsterController>(this, states[Define.MonsterState.Idle]);
-
-        move = new MonsterMovemets.Test(this);
-        attack = new MonsterAttacks.Test(this);
-
         rb = GetComponent<Rigidbody2D>();
         anim = Util.FindChild<Animator>(gameObject, "Sprite", true);
-
-        anim.gameObject.AddComponent<AnimationEventHandler>().animationAction += AnimationEvent;
-
-        init = true;
+        return true;
     }
 
     public void ChangeState(Define.MonsterState _state , bool _isCanChangeSameState = false)
@@ -107,14 +89,6 @@ public class MonsterController : Actor
     {
         yield return new WaitForSeconds(deathTime);
         Managers.Resource.Destroy(gameObject);
-    }
-
-    public void AnimationEvent()
-    {
-        if(currentState == Define.MonsterState.Attack)
-        {
-            attack.Attack();
-        }
     }
 
     private void OnDrawGizmos()

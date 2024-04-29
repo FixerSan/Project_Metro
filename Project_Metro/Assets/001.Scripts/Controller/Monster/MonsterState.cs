@@ -82,13 +82,11 @@ namespace MonsterState
             public override void Enter(MonsterController _entity)
             {
                 _entity.anim.SetBool("IsAttack", true);
-                _entity.attack.StartAttack();
             }
 
             public override void Exit(MonsterController _entity)
             {
                 _entity.anim.SetBool("IsAttack", false);
-                _entity.attack.EndAttack();
             }
 
             public override void FixedUpdate(MonsterController _entity)

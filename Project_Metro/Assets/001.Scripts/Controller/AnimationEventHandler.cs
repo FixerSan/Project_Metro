@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class AnimationEventHandler : MonoBehaviour
 {
-    public Action animationAction;
+    public Action<int> animationAction;
 
-    public void AnimationEvent()
+    public void AnimationEvent(int i)
     {
-        animationAction?.Invoke();
+        animationAction?.Invoke(i);
     }
 }

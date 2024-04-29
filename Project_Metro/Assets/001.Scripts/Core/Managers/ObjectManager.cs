@@ -124,4 +124,15 @@ public class ObjectManager
 
         return trigger;
     }
+
+    public MonsterController SpawnMonster(int _index, Vector2 _position)
+    {
+        GameObject go = Managers.Resource.Instantiate($"Monster_{_index}", _pooling: true);
+        go.transform.SetParent(MonsterTrans);
+        go.transform.position = _position; 
+        MonsterController monster= go.GetComponent<MonsterController>();
+        monster.Init(_index);
+        monsters.Add(monster);
+        return monster;
+    }
 }

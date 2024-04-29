@@ -77,6 +77,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b56afe90234c41e4b9da18d100542f1c
+    m_Address: Monster_0.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 63e8fcf932ed39a40b5120a224ebebcf
+    m_Address: MonsterData.json
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: bf06be692eca4c14fade11dc8ee82bec, type: 2}
   m_SchemaSet:

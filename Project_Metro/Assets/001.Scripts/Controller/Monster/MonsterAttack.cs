@@ -8,20 +8,8 @@ using UnityEngine.Rendering.Universal;
 public abstract class MonsterAttack
 {
     public MonsterController controller;
-    public Coroutine attackCoroutine;
-    public virtual void StartAttack()
-    {
-        attackCoroutine = controller.StartCoroutine(AttackRoutine());
-    }
 
     public abstract void Attack();
-    public virtual void EndAttack()
-    {
-        if(attackCoroutine != null)
-            controller.StopCoroutine(attackCoroutine);
-        attackCoroutine = null;
-    }
-    public abstract IEnumerator AttackRoutine();
     public abstract bool CheckAttack();
 }
 
@@ -47,12 +35,6 @@ namespace MonsterAttacks
                     player.Hit(controller.status.CurrentDamageForce);
                 }
             }
-        }
-
-        public override IEnumerator AttackRoutine()
-        {
-            yield return new WaitForSeconds(controller.attackTime);
-            controller.ChangeState(Define.MonsterState.Idle);
         }
 
         public override bool CheckAttack()
