@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossSkill 
+public class BossAction 
 {
 
 }
@@ -11,7 +11,7 @@ namespace BossSkills
 {
     namespace First
     {
-        public class One : BossSkill
+        public class One : BossAction
         {
 
         }

@@ -12,11 +12,11 @@ public abstract class PlayerAttack
     public abstract void UpAttack();
     public abstract void DownAttack();
     public abstract IEnumerator AttackRoutine();
+    public abstract IEnumerator AttackKnockbackRoutine();
 }
 
 namespace PlayerAttacks
 {
-
     public class One : PlayerAttack
     {
         public One(PlayerController _controller)
@@ -31,17 +31,18 @@ namespace PlayerAttacks
             {
                 if(!controller.IsGround)
                 {
-                    if(Managers.Input.actions.Player.Move.ReadValue<Vector2>().y == 1f)
-                    {
-                        UpAttack();
-                        return true;
-                    }
 
-                    else if(Managers.Input.actions.Player.Move.ReadValue<Vector2>().y == -1f)
+                    if(Managers.Input.actions.Player.Move.ReadValue<Vector2>().y == -1f)
                     {
                         DownAttack();
                         return true;
                     }
+                }
+
+                if(Managers.Input.actions.Player.Move.ReadValue<Vector2>().y == 1f)
+                {
+                    UpAttack();
+                    return true;
                 }
 
 
@@ -64,12 +65,21 @@ namespace PlayerAttacks
         public override void LeftAttack()
         {
             isCanAttack = false;
+
             controller.anim.SetInteger("AttackDirection", (int)Define.PlayerAttackDirection.Left);
             controller.anim.SetTrigger("Attack");
             NormalAttack attack = Managers.Object.SpawnAttack(controller, controller.leftAttackTrans, Define.PlayerAttackDirection.Left);
             attack.Attack((_isHit) => 
-            { 
+            {
                 //TODO :: 맞으면 뒤로 넉백 처리
+                if (_isHit)
+                {
+                    controller.move.isCanMove = false;
+                    controller.jump.isCanJump = false;
+                    controller.ChangeState(Define.PlayerState.Idle);
+                    controller.rb.velocity = new Vector2(controller.AttackKnockbackForce, controller.rb.velocity.y);
+                    controller.StartCoroutine(AttackKnockbackRoutine());
+                }
             });
             controller.StartCoroutine(AttackRoutine());
         }
@@ -77,12 +87,21 @@ namespace PlayerAttacks
         public override void RightAttack()
         {
             isCanAttack = false;
+
             controller.anim.SetInteger("AttackDirection", (int)Define.PlayerAttackDirection.Right);
             controller.anim.SetTrigger("Attack");
             NormalAttack attack = Managers.Object.SpawnAttack(controller, controller.rightAttackTrans, Define.PlayerAttackDirection.Right);
             attack.Attack((_isHit) =>
             {
                 //TODO :: 맞으면 뒤로 넉백 처리
+                if(_isHit)
+                {
+                    controller.move.isCanMove = false;
+                    controller.jump.isCanJump = false;
+                    controller.ChangeState(Define.PlayerState.Idle);
+                    controller.rb.velocity = new Vector2(-controller.AttackKnockbackForce, controller.rb.velocity.y);
+                    controller.StartCoroutine(AttackKnockbackRoutine());
+                }
             });
             controller.StartCoroutine(AttackRoutine());
         }
@@ -90,12 +109,21 @@ namespace PlayerAttacks
         public override void UpAttack()
         {
             isCanAttack = false;
+
             controller.anim.SetInteger("AttackDirection", (int)Define.PlayerAttackDirection.Up);
             controller.anim.SetTrigger("Attack");
             NormalAttack attack = Managers.Object.SpawnAttack(controller, controller.upAttackTrans, Define.PlayerAttackDirection.Up);
             attack.Attack((_isHit) =>
             {
                 //TODO :: 맞으면 뒤로 넉백 처리
+                if (_isHit)
+                {
+                    controller.move.isCanMove = false;
+                    controller.jump.isCanJump = false;
+                    controller.ChangeState(Define.PlayerState.Idle);
+                    controller.rb.velocity = new Vector2(controller.rb.velocity.x, -controller.AttackKnockbackForce);
+                    controller.StartCoroutine(AttackKnockbackRoutine());
+                }
             });
             controller.StartCoroutine(AttackRoutine());
         }
@@ -103,20 +131,36 @@ namespace PlayerAttacks
         public override void DownAttack()
         {
             isCanAttack = false;
+
             controller.anim.SetInteger("AttackDirection", (int)Define.PlayerAttackDirection.Down);
             controller.anim.SetTrigger("Attack");
             NormalAttack attack = Managers.Object.SpawnAttack(controller, controller.downAttackTrans, Define.PlayerAttackDirection.Down);
             attack.Attack((_isHit) =>
             {
                 //TODO :: 맞으면 뒤로 넉백 처리
+                if (_isHit)
+                {
+                    controller.jump.isCanJump = false;
+                    controller.ChangeState(Define.PlayerState.Idle);
+                    controller.rb.velocity = new Vector2(controller.rb.velocity.x, controller.downAttackKnockbackForce);
+                    controller.StartCoroutine(AttackKnockbackRoutine());
+                }
             });
             controller.StartCoroutine(AttackRoutine());
-        }
+        } 
 
         public override IEnumerator AttackRoutine()
         {
             yield return new WaitForSeconds(0.5f);
             isCanAttack = true;
+        }
+
+        public override IEnumerator AttackKnockbackRoutine()
+        {
+            yield return new WaitForSeconds(0.25f);
+            controller.move.Stop();
+            controller.move.isCanMove = true;
+            controller.jump.isCanJump = true;
         }
     }
 

@@ -31,17 +31,21 @@ public class NormalAttack : MonoBehaviour
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(attackRangeTrans.position, attackRangeTrans.localScale, 0);
 
         IHitable hitter = null;
+        bool isHit = false;
         for (int i = 0; i < collider2Ds.Length; i++) 
         {
             hitter = collider2Ds[i].GetComponent<IHitable>();
             if(hitter != null)
             {
-                if (hitter.Tag == "Player") continue;
+                if (hitter.Tag == "Player")
+                    continue;
+
                 hitter.Hit(controller.status.CurrentDamageForce);
+                isHit = true;
             }
         }
 
-        _callback?.Invoke(hitter != null);
+        _callback?.Invoke(isHit);
     }
 
     public IEnumerator EndRoutine()

@@ -8,6 +8,7 @@ public abstract class PlayerJump
     public int level;
 
     public Coroutine checkEndJumpCoroutine = null;
+    public bool isCanJump;
     public float canJumpTime;
 
     public abstract bool CheckJump();
@@ -30,12 +31,14 @@ namespace PlayerJumps
         {
             controller = _controller;
             canJumpTime = 0.35f;
+            isCanJump = true;
             level = 1;
         }
 
 
         public override bool CheckJump()
         {
+            if (!isCanJump) return false;
             if (controller.IsGround && Managers.Input.GetJumpKey)
             {
                 controller.ChangeState(Define.PlayerState.Jump);
@@ -47,6 +50,7 @@ namespace PlayerJumps
 
         public override void StartJump()
         {
+            isCanJump = false;
             checkEndJumpCoroutine = controller.StartCoroutine(CheckEndJumpRoutine());
         }
 
@@ -71,6 +75,7 @@ namespace PlayerJumps
             if (checkEndJumpCoroutine != null) controller.StopCoroutine(checkEndJumpCoroutine);
             checkEndJumpCoroutine = null;
             controller.rb.velocity = new Vector2(controller.rb.velocity.x, 0f);
+            isCanJump = true;
         }
     }
 }

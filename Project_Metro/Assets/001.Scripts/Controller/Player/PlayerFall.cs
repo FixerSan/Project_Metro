@@ -35,6 +35,7 @@ namespace PlayerFalls
         {
             if (controller.IsGround)
             {
+                controller.jump.isCanJump = true;
                 controller.ChangeState(Define.PlayerState.Idle);
                 return true;
             }

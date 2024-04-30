@@ -54,6 +54,7 @@ namespace PlayerDashes
 
         public override void Dash()
         {
+            controller.ChangeDirection((Define.Direction)((int)Managers.Input.MoveAxis.x));
             controller.rb.velocity = new Vector2 (20f * (int)controller.currentDirection, 0f);
         }
 

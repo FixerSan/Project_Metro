@@ -4,20 +4,9 @@ using UnityEngine;
 
 public class TestMonster : MonsterController
 {
-    public override bool Init(int _index)
+    public override bool Init()
     {
-        if(!base.Init(_index)) return false;
-        states.Add(Define.MonsterState.Idle, new MonsterState.TestMonster.Idle());
-        states.Add(Define.MonsterState.Move, new MonsterState.TestMonster.Move());
-        states.Add(Define.MonsterState.Follow, new MonsterState.TestMonster.Follow());
-        states.Add(Define.MonsterState.Attack, new MonsterState.TestMonster.Attack());
-        states.Add(Define.MonsterState.Death, new MonsterState.TestMonster.Death());
-        fsm = new StateMachine<MonsterController>(this, states[Define.MonsterState.Idle]);
-
-        data = Managers.Data.GetMonsterData(_index);
-        move = new MonsterMovemets.Test(this);
-        attack = new MonsterAttacks.Test(this);
-
+        if(!base.Init()) return false;
         anim.gameObject.GetOrAddComponent<AnimationEventHandler>().animationAction += AnimationEvent;
         init = true;
         return init;

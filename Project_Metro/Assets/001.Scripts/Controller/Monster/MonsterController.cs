@@ -7,6 +7,7 @@ public abstract class MonsterController : Actor
     public MonsterData data;
     public MonsterMove move;
     public MonsterAttack attack;
+    public MonsterAttack attack2;
 
     public Dictionary<Define.MonsterState, State<MonsterController>> states;
     public StateMachine<MonsterController> fsm;
@@ -25,7 +26,7 @@ public abstract class MonsterController : Actor
 
     private Coroutine deathCoroutine;
 
-    public virtual bool Init(int _index)
+    public virtual bool Init()
     {
         states = new Dictionary<Define.MonsterState, State<MonsterController>>();
         rb = GetComponent<Rigidbody2D>();

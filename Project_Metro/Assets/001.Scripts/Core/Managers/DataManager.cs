@@ -84,3 +84,9 @@ public class MonsterData
     public int index;
     public float canAttackDistance;
 }
+
+[System.Serializable]
+public class BossData
+{
+    public int index;
+}

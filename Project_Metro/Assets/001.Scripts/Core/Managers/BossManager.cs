@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForestKnight : BossController
+public class BossManager 
 {
-    public override void Init()
+    public BossManager() 
     {
-
+    
     }
 }

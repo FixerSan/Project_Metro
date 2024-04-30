@@ -9,7 +9,7 @@ namespace PlayerState
     {
         public override void Enter(PlayerController _entity)
         {
-
+            _entity.move.Stop();
         }
 
         public override void Exit(PlayerController _entity)

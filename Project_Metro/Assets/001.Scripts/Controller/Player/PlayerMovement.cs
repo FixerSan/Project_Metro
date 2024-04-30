@@ -6,6 +6,8 @@ public abstract class PlayerMove
 {
     public PlayerController controller;
     public int level;
+    public bool isCanMove;
+
     public abstract bool CheckMove();
     public abstract void Move();
     public abstract bool CheckStop();
@@ -24,10 +26,12 @@ namespace PlayerMoves
         {
             controller = _controller;
             level = 1;
+            isCanMove = true;
         }
 
         public override bool CheckMove()
         {
+            if (!isCanMove) return false;
             if (Managers.Input.MoveAxis.x != 0f)
             {
                 controller.ChangeState(Define.PlayerState.Move);

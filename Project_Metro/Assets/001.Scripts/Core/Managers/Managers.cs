@@ -12,6 +12,8 @@ public class Managers : Singleton<Managers>
     private ObstacleManager _obstacle;
     private TriggerManager _trigger;
     private DataManager _data;
+    private MonsterManager _monster;
+    private BossManager _boss;
 
     private GameManager _game;
 
@@ -24,6 +26,8 @@ public class Managers : Singleton<Managers>
     public static ObstacleManager Obstacle { get { return Instance?._obstacle; } }
     public static TriggerManager Trigger { get { return Instance?._trigger; } }
     public static DataManager Data { get { return Instance?._data; } }
+    public static MonsterManager Monster { get {  return Instance?._monster; } }
+    public static BossManager Boss { get {  return Instance?._boss; } }
 
 
 
@@ -38,6 +42,9 @@ public class Managers : Singleton<Managers>
         Instance._obstacle = new ObstacleManager();
         Instance._trigger = new TriggerManager();
         Instance._data = new DataManager();
+        Instance._monster = new MonsterManager();
+        Instance._boss = new BossManager();
+
         Instance._game = GameManager.Instance;
     }
 }

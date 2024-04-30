@@ -70,4 +70,9 @@ public class Define
         Attack,
         Death
     }
+
+    public enum BossAction
+    {
+        ActionOne, ActionTwo, ActionThree, ActionFour
+    }
 }

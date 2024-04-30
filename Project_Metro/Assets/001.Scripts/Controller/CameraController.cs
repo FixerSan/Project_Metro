@@ -7,6 +7,8 @@ public class CameraController : MonoBehaviour
     public Transform target;
     public Vector3 offset;
 
+    public Vector2 min, max;
+
     public void Awake()
     {
         Managers.Object.camera = this;

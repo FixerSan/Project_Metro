@@ -131,7 +131,8 @@ public class ObjectManager
         go.transform.SetParent(MonsterTrans);
         go.transform.position = _position; 
         MonsterController monster= go.GetComponent<MonsterController>();
-        monster.Init(_index);
+        monster.Init();
+        Managers.Monster.InitMonster(_index, monster);
         monsters.Add(monster);
         return monster;
     }
