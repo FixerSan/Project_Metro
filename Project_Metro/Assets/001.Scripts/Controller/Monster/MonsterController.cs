@@ -28,7 +28,6 @@ public abstract class MonsterController : Actor
 
     public virtual bool Init()
     {
-        states = new Dictionary<Define.MonsterState, State<MonsterController>>();
         rb = GetComponent<Rigidbody2D>();
         anim = Util.FindChild<Animator>(gameObject, "Sprite", true);
         return true;

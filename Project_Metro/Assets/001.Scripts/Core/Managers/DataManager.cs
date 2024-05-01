@@ -8,6 +8,7 @@ public class DataManager
 {
     public PlayerData playerData;
     public Dictionary<int, MonsterData> monsterDatas = new Dictionary<int, MonsterData>();
+    public Dictionary<int, BossData> bossDatas = new Dictionary<int, BossData>();
 
 
     #region Save
@@ -60,6 +61,13 @@ public class DataManager
     {
         if (monsterDatas.TryGetValue(_index, out MonsterData data)) return data;
         Debug.Log($"인덱스: {_index}의 몬스터 데이터가 없습니다.");
+        return null;
+    }
+
+    public BossData GetBossData(int _index)
+    {
+        if (bossDatas.TryGetValue(_index, out BossData data)) return data;
+        Debug.Log($"인덱스: {_index}의 보스 데이터가 없습니다.");
         return null;
     }
     #endregion

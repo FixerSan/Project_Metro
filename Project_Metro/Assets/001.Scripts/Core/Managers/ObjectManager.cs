@@ -14,6 +14,8 @@ public class ObjectManager
     public Dictionary<int, Obstacle> obstacles = new Dictionary<int, Obstacle>();
     public Dictionary<int, Trigger> triggers = new Dictionary<int, Trigger>();
 
+    public BossController boss;
+
     #endregion
     #region Trans
     private Transform monsterTrans;
@@ -29,6 +31,23 @@ public class ObjectManager
                 monsterTrans = go.transform;
             }
             return monsterTrans;
+        }
+
+    }
+
+    private Transform bossTrans;
+    public Transform BossTrans
+    {
+        get
+        {
+            if (bossTrans == null)
+            {
+                GameObject go = GameObject.Find("@Boss");
+                if (go == null)
+                    go = new GameObject { name = "@Boss" };
+                bossTrans = go.transform;
+            }
+            return bossTrans;
         }
 
     }
@@ -135,5 +154,16 @@ public class ObjectManager
         Managers.Monster.InitMonster(_index, monster);
         monsters.Add(monster);
         return monster;
+    }
+
+    public BossController SpawnBoss(int _index, Vector2 _position)
+    {
+        GameObject go = Managers.Resource.Instantiate($"Boss_{_index}");
+        go.transform.SetParent(BossTrans);
+        go.transform.position = _position;
+        boss = go.GetComponent<BossController>();
+        boss.Init();
+        Managers.Boss.InitBoss(_index, boss);
+        return boss;
     }
 }

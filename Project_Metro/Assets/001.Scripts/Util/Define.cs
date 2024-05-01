@@ -71,8 +71,8 @@ public class Define
         Death
     }
 
-    public enum BossAction
+    public enum BossState
     {
-        ActionOne, ActionTwo, ActionThree, ActionFour
+         Create,Idle,ActionOne, ActionTwo, ActionThree, ActionFour, Death
     }
 }
