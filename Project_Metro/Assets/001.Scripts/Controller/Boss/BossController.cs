@@ -38,7 +38,7 @@ public abstract class BossController : Actor
 
     public override void Death()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Update()

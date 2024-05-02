@@ -13,6 +13,12 @@ public abstract class PlayerAttack
     public abstract void DownAttack();
     public abstract IEnumerator AttackRoutine();
     public abstract IEnumerator AttackKnockbackRoutine();
+    public virtual void CancleAttackKnockback()
+    {
+        controller.StopCoroutine(AttackKnockbackRoutine());
+        controller.move.isCanMove = true;
+        controller.jump.isCanJump = true;
+    }
 }
 
 namespace PlayerAttacks

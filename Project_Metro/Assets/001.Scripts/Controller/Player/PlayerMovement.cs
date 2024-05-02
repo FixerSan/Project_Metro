@@ -44,6 +44,7 @@ namespace PlayerMoves
         public override void Move()
         {
             if (Managers.Input.MoveAxis.x == 0f) return;
+            if (!isCanMove) return;
             controller.ChangeDirection((Define.Direction)(int)Managers.Input.MoveAxis.x);
             controller.rb.velocity = new Vector2(controller.status.CurrentSpeed * Managers.Input.MoveAxis.x, controller.rb.velocity.y);
         }

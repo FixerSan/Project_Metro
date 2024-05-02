@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Actor : MonoBehaviour, IHitable
 {
     public ActorStatus status;
+    public Dictionary<System.Type, Coroutine> coroutines = new Dictionary<System.Type, Coroutine>();
     public Define.Direction currentDirection;
     public bool init = false;
     public virtual int HP 
@@ -29,6 +30,23 @@ public abstract class Actor : MonoBehaviour, IHitable
     }
 
     public abstract void Death();
+    public new Coroutine StartCoroutine(IEnumerator _enumerator)
+    {
+        if(coroutines.ContainsKey(_enumerator.GetType()))
+            StopCoroutine(_enumerator);
+
+        coroutines.Add(_enumerator.GetType(), base.StartCoroutine(_enumerator));
+        return coroutines[_enumerator.GetType()];
+    }
+
+    public new void StopCoroutine(IEnumerator _enumerator)
+    {
+        if (coroutines.ContainsKey(_enumerator.GetType()))
+        {
+            base.StopCoroutine(coroutines[_enumerator.GetType()]);
+            coroutines.Remove(_enumerator.GetType());
+        }
+    }
 }
 
 [System.Serializable]

@@ -47,6 +47,8 @@ namespace PlayerDashes
             if(isCanDash && Managers.Input.GetDashKey)
             {
                 controller.ChangeState(Define.PlayerState.Dash);
+                if (Managers.Input.MoveAxis.x != 0)
+                    controller.ChangeDirection((Define.Direction)Managers.Input.MoveAxis.x);
                 return true;
             }
             return false;
@@ -54,7 +56,6 @@ namespace PlayerDashes
 
         public override void Dash()
         {
-            controller.ChangeDirection((Define.Direction)((int)Managers.Input.MoveAxis.x));
             controller.rb.velocity = new Vector2 (20f * (int)controller.currentDirection, 0f);
         }
 
@@ -67,6 +68,7 @@ namespace PlayerDashes
 
         public override void StartDash()
         {
+            controller.attack.CancleAttackKnockback();
             isCanDash = false;
             gravityScale = controller.rb.gravityScale;
             controller.rb.gravityScale = 0;
