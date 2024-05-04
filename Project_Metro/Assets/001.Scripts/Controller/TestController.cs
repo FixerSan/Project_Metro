@@ -6,7 +6,7 @@ public class TestController : MonoBehaviour
 {
     public void Init()
     {
-        Managers.Object.SpawnPlayerController(new Vector3(-2f, 10.5f, 0f));
+        Managers.Object.SpawnPlayerController(new Vector3(41.9700012f, -27.4899998f, -0.0610577241f));
         Managers.Object.SpawnObstacle(0, new Vector3(-3.94f, -3.1f, 0));
         Managers.Object.SpawnObstacle(1, new Vector3(3.1f, -3.11f, 0));
         Managers.Object.SpawnTrigger(0, new Vector3(-10, -3f, 0));

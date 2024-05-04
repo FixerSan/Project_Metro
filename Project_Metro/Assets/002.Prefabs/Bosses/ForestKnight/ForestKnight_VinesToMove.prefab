@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9067738525544406892}
   - component: {fileID: 1578676231028997714}
   m_Layer: 0
-  m_Name: ForestKight_VinesToMove
+  m_Name: ForestKnight_VinesToMove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ForestKight_VinesToMove : MonoBehaviour
+public class ForestKnight_VinesToMove : MonoBehaviour
 {
     public LineRenderer line;
     private Transform startPoint;

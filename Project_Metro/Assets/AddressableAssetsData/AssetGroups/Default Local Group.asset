@@ -90,7 +90,19 @@ MonoBehaviour:
     - default
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f6776144d8f66a44da76756a5708fc6c
-    m_Address: ForestKight_VinesToMove.prefab
+    m_Address: ForestKnight_VinesToMove.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fffc00fa0a304e346b9888ac016d5599
+    m_Address: ForestKnight_DownAttack.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49b0c39facfe6d040b2b7bbd4267d094
+    m_Address: ForestKnight_VinesAttack.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - default

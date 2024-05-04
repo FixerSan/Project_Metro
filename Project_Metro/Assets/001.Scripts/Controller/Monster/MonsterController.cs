@@ -15,9 +15,6 @@ public abstract class MonsterController : Actor
     private Define.MonsterState currentState;
     public Define.MonsterState CurrentState;
 
-    public Rigidbody2D rb;
-    public Animator anim;
-
     public Transform detectRangeTrans;
     public Transform attackTrans;
     public PlayerController attackTarget;

@@ -73,6 +73,11 @@ public class Define
 
     public enum BossState
     {
-         Create,Idle,ActionOne, ActionTwo, ActionThree, ActionFour, Death
+         Create, Idle, ActionOne, ActionTwo, ActionThree, ActionFour, Death
+    }
+
+    public enum BossAction
+    {
+        ActionOne, ActionTwo, ActionThree, ActionFour
     }
 }

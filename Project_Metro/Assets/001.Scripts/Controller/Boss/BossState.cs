@@ -4,73 +4,120 @@ using UnityEngine;
 
 namespace BossState 
 {
-    namespace ForestKnight
+    namespace ForestKnights
     {
-        public class Create : State<BossController>
+        public class Create : State<ForestKnight>
         {
-            public override void Enter(BossController _entity)
+            public override void Enter(ForestKnight _entity)
             {
                 _entity.CreateEffect();
             }
 
-            public override void Exit(BossController _entity)
+            public override void Exit(ForestKnight _entity)
             {
 
             }
 
-            public override void FixedUpdate(BossController _entity)
+            public override void FixedUpdate(ForestKnight _entity)
             {
 
             }
 
-            public override void Update(BossController _entity)
+            public override void Update(ForestKnight _entity)
             {
 
             }
         }
 
-        public class Idle : State<BossController>
+        public class Idle : State<ForestKnight>
         {
-            public override void Enter(BossController _entity)
+            public override void Enter(ForestKnight _entity)
             {
-                
             }
 
-            public override void Exit(BossController _entity)
-            {
-
-            }
-
-            public override void FixedUpdate(BossController _entity)
+            public override void Exit(ForestKnight _entity)
             {
 
             }
 
-
-            public override void Update(BossController _entity)
+            public override void FixedUpdate(ForestKnight _entity)
             {
-                if (_entity.BossAction[Define.BossState.ActionOne].CheckAction()) return;
+                _entity.SelectAction();
+
+            }
+
+
+            public override void Update(ForestKnight _entity)
+            {
+
             }
         }
 
-        public class ActionOne : State<BossController>
+        public class ActionOne : State<ForestKnight>
         {
-            public override void Enter(BossController _entity)
+            public override void Enter(ForestKnight _entity)
             {
-                _entity.BossAction[Define.BossState.ActionOne].Action();
+                _entity.bossActions[Define.BossAction.ActionOne].StartAction();
             }
 
-            public override void Exit(BossController _entity)
+            public override void Exit(ForestKnight _entity)
+            {
+                _entity.bossActions[Define.BossAction.ActionOne].EndAction();
+            }
+
+            public override void FixedUpdate(ForestKnight _entity)
             {
 
             }
 
-            public override void FixedUpdate(BossController _entity)
+
+            public override void Update(ForestKnight _entity)
+            {
+
+            }
+        }
+
+        public class ActionTwo : State<ForestKnight>
+        {
+            public override void Enter(ForestKnight _entity)
+            {
+                _entity.bossActions[Define.BossAction.ActionTwo].StartAction();
+            }
+
+            public override void Exit(ForestKnight _entity)
             {
 
             }
 
-            public override void Update(BossController _entity)
+            public override void FixedUpdate(ForestKnight _entity)
+            {
+
+            }
+
+            public override void Update(ForestKnight _entity)
+            {
+
+            }
+        }
+
+        public class ActionThree : State<ForestKnight>
+        {
+            public override void Enter(ForestKnight _entity)
+            {
+                _entity.bossActions[Define.BossAction.ActionThree].StartAction();
+            }
+
+            public override void Exit(ForestKnight _entity)
+            {
+
+            }
+
+            public override void FixedUpdate(ForestKnight _entity)
+            {
+
+            }
+
+            public override void Update(ForestKnight _entity)
             {
 
             }

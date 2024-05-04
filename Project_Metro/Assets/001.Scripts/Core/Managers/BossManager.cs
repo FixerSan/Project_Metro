@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class BossManager 
@@ -12,20 +13,25 @@ public class BossManager
 
     public void InitBoss(int _index, BossController _boss)
     {
-        _boss.states = new Dictionary<Define.BossState, State<BossController>>();
-        _boss.BossAction = new Dictionary<Define.BossState, BossAction>();
-
         switch(_index)
         {
             case 0:
-                _boss.states.Add(Define.BossState.Create, new BossState.ForestKnight.Create());
-                _boss.states.Add(Define.BossState.Idle, new BossState.ForestKnight.Idle());
-                _boss.states.Add(Define.BossState.ActionOne, new BossState.ForestKnight.ActionOne());
-                _boss.BossAction.Add(Define.BossState.ActionOne, new BossActions.ForestKnight.One(_boss));
+                ForestKnight _forestKight = _boss as ForestKnight;
+                _forestKight.states = new Dictionary<Define.BossState, State<ForestKnight>>();
+                _forestKight.states.Add(Define.BossState.Create, new BossState.ForestKnights.Create());
+                _forestKight.states.Add(Define.BossState.Idle, new BossState.ForestKnights.Idle());
+                _forestKight.states.Add(Define.BossState.ActionOne, new BossState.ForestKnights.ActionOne());
+                _forestKight.states.Add(Define.BossState.ActionTwo, new BossState.ForestKnights.ActionTwo());
+                _forestKight.states.Add(Define.BossState.ActionThree, new BossState.ForestKnights.ActionThree());
+
+                _forestKight.bossActions = new Dictionary<Define.BossAction, BossAction>();
+                _forestKight.bossActions.Add(Define.BossAction.ActionOne, new BossActions.ForestKnights.Climbing(_forestKight, Define.BossState.ActionOne));
+                _forestKight.bossActions.Add(Define.BossAction.ActionTwo, new BossActions.ForestKnights.JumpAndDownAttack(_forestKight, Define.BossState.ActionTwo));
+                _forestKight.bossActions.Add(Define.BossAction.ActionThree, new BossActions.ForestKnights.Three(_forestKight, Define.BossState.ActionThree));
+                _forestKight.fsm = new StateMachine<ForestKnight>(_forestKight, _forestKight.states[Define.BossState.Create]);
                 break;
         }
 
         //_boss.data = Managers.Data.GetBossData(_index);
-        _boss.fsm = new StateMachine<BossController>(_boss, _boss.states[Define.BossState.Create]);
     }
 }

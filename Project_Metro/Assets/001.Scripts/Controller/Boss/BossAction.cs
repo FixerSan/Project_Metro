@@ -1,58 +1,61 @@
+using DG.Tweening;
+using MonsterState.TestMonster;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class BossAction 
 {
     public BossController controller;
+    public Define.BossState stateType;
+    public bool IsCanAction { get { return CheckAction(); } }
+    public bool isCooltime = false;
     public abstract bool CheckAction();
+    public abstract void StartAction();
     public abstract void Action();
+    public abstract void EndAction();
+    public IEnumerator CooltimeCheckRoutine(float _cooltime)
+    {
+        yield return new WaitForSeconds(_cooltime);
+        isCooltime = false;
+    }
 }
 
 namespace BossActions
 {
-    namespace ForestKnight
+    public abstract class ForestKnightAction : BossAction
     {
-        public class One : BossAction
+        public new ForestKnight controller;
+    }
+
+    namespace ForestKnights
+    {
+        public class Climbing : ForestKnightAction
         {
             private Transform startPoint;
-            private Transform leftWallCheckTrans;
-            private Transform rightWallCheckTrans;
-
             private float gravityScale;
             private Vector2 direction;
 
-            private ForestKight_VinesToMove action;
+            private ForestKnight_VinesToMove action;
 
-            public One(BossController _controller)
+
+            public Climbing(ForestKnight _controller, Define.BossState _stateType)
             {
                 controller = _controller;
+                stateType = _stateType;
                 startPoint = Util.FindChild<Transform>(_controller.gameObject, "Trans_ActionOneStartPoint", true);
-                leftWallCheckTrans = Util.FindChild<Transform>(_controller.gameObject, "Trans_LeftWallCheck", true);
-                rightWallCheckTrans = Util.FindChild<Transform>(_controller.gameObject, "Trans_RightWallCheck", true);
             }
 
 
             public override bool CheckAction()
             {
-                controller.ChangeState(Define.BossState.ActionOne);
-                return true;
+                return controller.IsGround;
             }
 
-            public override void Action()
+            public override void StartAction()
             {
-                //bool isHit = false;
-                //RaycastHit2D hit;
-                //Vector2 rayDirection = new Vector2(FindMoveDirection(), 0);
-
-                //while(!isHit)
-                //{
-                //    rayDirection.y = Random.Range(-0.5f, 0.5f);
-                //    hit = Physics2D.Raycast(startPoint.position, rayDirection, 50, LayerMask.GetMask("Wall"));
-                //    isHit = hit;
-                //}
-
-                Vector3 moveDirection = new Vector3(FindMoveDirection(), Random.Range(0, 0.6f));
-                action = Managers.Resource.Instantiate($"{nameof(ForestKight_VinesToMove)}", _pooling:true).GetComponent<ForestKight_VinesToMove>();
+                Vector3 moveDirection = new Vector3(FindMoveDirection(), 0.5f).normalized;
+                action = Managers.Resource.Instantiate($"{nameof(ForestKnight_VinesToMove)}", _pooling:true).GetComponent<ForestKnight_VinesToMove>();
                 action.StartMove(startPoint, moveDirection, (_direction) => 
                 {
                     //TODO :: 움직이는 애니메이션 적용
@@ -65,44 +68,155 @@ namespace BossActions
 
             private IEnumerator ActionRoutine()
             {
-                bool isMove = false;
-                while (!isMove)
+                bool isStop = false;
+                Define.Direction _direction;
+                if (direction.x >= 0) _direction = Define.Direction.Right;
+                else _direction = Define.Direction.Left;
+
+                while (!isStop)
                 {
                     yield return null;
                     controller.rb.velocity = direction * controller.status.CurrentSpeed;
-                    isMove = CheckSide();
+                    isStop = controller.CheckSide(_direction);
                 }
 
                 //TODO :: 도착한 애니메이션 적용
                 controller.rb.velocity = Vector2.zero;
                 Managers.Resource.Destroy(action.gameObject);
-                controller.ChangeState(Define.BossState.Idle);
-            }
 
-            public bool CheckSide()
-            {
-                Collider2D[] collider2Ds;
-                if (direction.x >= 0) 
-                    collider2Ds = Physics2D.OverlapCircleAll(rightWallCheckTrans.position, 0.1f);
-                else
-                    collider2Ds = Physics2D.OverlapCircleAll(leftWallCheckTrans.position, 0.1f);
-                for (int i = 0; i < collider2Ds.Length; i++)
-                {
-                    if (collider2Ds[i].CompareTag("Wall"))
-                        return true;
-                }
-                return false;
+                yield return new WaitForSeconds(0.75f);
+                controller.ChangeState(Define.BossState.Idle);
+                controller.StartCoroutine(CooltimeCheckRoutine(controller.actionOneCooltime));
             }
 
             public int FindMoveDirection()
             {
-                RaycastHit2D leftHit = Physics2D.Raycast(leftWallCheckTrans.position, Vector2.left, LayerMask.GetMask("Wall")); 
-                RaycastHit2D rightHit = Physics2D.Raycast(rightWallCheckTrans.position, Vector3.right, LayerMask.GetMask("Wall"));
+                RaycastHit2D leftHit = Physics2D.Raycast(controller.leftWallCheckTrans.position, Vector2.left, LayerMask.GetMask("Wall")); 
+                RaycastHit2D rightHit = Physics2D.Raycast(controller.rightWallCheckTrans.position, Vector3.right, LayerMask.GetMask("Wall"));
 
                 if (leftHit.distance > rightHit.distance)
                     return -1;
                 else
                     return 1;
+            }
+
+            public override void EndAction()
+            {
+                controller.rb.gravityScale = gravityScale;
+            }
+
+            public override void Action()
+            {
+                throw new System.NotImplementedException();
+            }
+        }
+        public class JumpAndDownAttack : ForestKnightAction
+        {
+            private Transform downAttackTrans;
+            public JumpAndDownAttack(ForestKnight _controller, Define.BossState _stateType)
+            {
+                controller = _controller;
+                stateType = _stateType;
+                downAttackTrans = Util.FindChild<Transform>(controller.gameObject, "Trans_DownAttackPosition", true);
+            }
+
+            public override void StartAction()
+            {
+                Action();
+            }
+
+            //바닥을 향에 돌진
+            private IEnumerator ActionRoutine()
+            {
+                yield return new WaitForSeconds(0.25f);
+                while (!controller.IsGround)
+               {
+                    yield return null;
+                    controller.rb.velocity = new Vector3(0, -20);
+               }
+
+                Debug.Log("스킬 소환");
+                ForestKnight_DownAttack attack = Managers.Resource.Instantiate("ForestKnight_DownAttack", _pooling: true).GetComponent<ForestKnight_DownAttack>();
+                attack.transform.position = downAttackTrans.position;
+                attack.Attack(controller, () => 
+                {
+                    controller.ChangeState(Define.BossState.Idle);
+                    controller.StartCoroutine(CooltimeCheckRoutine(controller.actionTwoCooltime));
+                });
+            }
+
+
+            public override bool CheckAction()
+            {
+                if(controller.isRightSide || controller.isLeftSide)
+                    if (!controller.IsGround)
+                        return true;
+                return false;
+            }
+
+            public override void EndAction()
+            {
+
+            }
+
+            public override void Action()
+            {
+                //TODO :: 점프 애니메이션 적용
+                controller.transform.DOJump(new Vector3(Managers.Object.player.transform.position.x, controller.transform.position.y, 0), 1, 1,
+                    Mathf.Abs(controller.transform.position.x - Managers.Object.player.transform.position.x) * 0.05f).SetEase(Ease.Linear).OnComplete(() =>
+                    {
+                        controller.StartCoroutine(ActionRoutine());
+                    });
+            }
+        }
+        public class Three : ForestKnightAction
+        {
+            public Three(ForestKnight _controller, Define.BossState _stateType)
+            {
+                controller = _controller;
+                stateType = _stateType;
+            }
+
+            public override void StartAction()
+            {
+                Action();
+            }
+
+            public override bool CheckAction()
+            {
+                if (isCooltime) return false;
+                return controller.IsGround;
+            }
+
+            public override void EndAction()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void Action()
+            {
+                isCooltime = true;
+                controller.StartCoroutine(ActionRoutine());
+            }
+
+            private IEnumerator ActionRoutine()
+            {
+                Vector2 spawnPosition = new Vector2(Managers.Object.player.transform.position.x, controller.anim.transform.position.y);
+                ForestKnight_VinesAttack attack;
+                
+                yield return new WaitForSeconds(controller.actionThreeStartDelay);
+                for (int i = 0; i < 3; i++)
+                {
+                    attack = Managers.Resource.Instantiate("ForestKnight_VinesAttack", _pooling: true).GetComponent<ForestKnight_VinesAttack>();
+                    spawnPosition = new Vector2(Managers.Object.player.transform.position.x, controller.anim.transform.position.y);
+                    attack.transform.position = spawnPosition;
+                    attack.Attack(controller);
+                    yield return new WaitForSeconds(controller.actionThreeRepeatDelay);
+                }
+                yield return new WaitForSeconds(controller.actionThreeStartDelay);
+                controller.ChangeState(Define.BossState.Idle);
+
+                controller.StartCoroutine(CooltimeCheckRoutine(controller.actionThreeCooltime));
             }
         }
     }

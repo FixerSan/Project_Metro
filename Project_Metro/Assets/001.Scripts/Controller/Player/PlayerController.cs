@@ -24,10 +24,6 @@ public class PlayerController : Actor
     private Define.PlayerState currentState;
     public Define.PlayerState CurrentState;
 
-    public Rigidbody2D rb;
-    public Animator anim;
-
-    public Transform groundCheckTrans;
     public Transform leftAttackTrans;
     public Transform rightAttackTrans;
     public Transform upAttackTrans;
@@ -36,7 +32,7 @@ public class PlayerController : Actor
     public float AttackKnockbackForce;
     public float downAttackKnockbackForce;
 
-    public bool IsGround { get { return CheckIsGround(); } }
+    public bool isCanHit = true;
 
     public void Init()
     {
@@ -123,6 +119,7 @@ public class PlayerController : Actor
 
     public override void Hit(int _damage)
     {
+        if (!isCanHit) return; 
         if(CurrentState == Define.PlayerState.Defence)
         {
             base.Hit(_damage - defence.defenceForce);
