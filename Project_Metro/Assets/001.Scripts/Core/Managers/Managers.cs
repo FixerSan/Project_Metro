@@ -14,6 +14,9 @@ public class Managers : Singleton<Managers>
     private DataManager _data;
     private MonsterManager _monster;
     private BossManager _boss;
+    private SceneManager _scene;
+    private ScreenManager _screen;
+    private CoroutineManager _coroutine;
 
     private GameManager _game;
 
@@ -30,6 +33,9 @@ public class Managers : Singleton<Managers>
     public static DataManager Data { get { return Instance?._data; } }
     public static MonsterManager Monster { get {  return Instance?._monster; } }
     public static BossManager Boss { get {  return Instance?._boss; } }
+    public static SceneManager Scene { get { return Instance?._scene; } }
+    public static ScreenManager Screen { get { return Instance?._screen; } }
+    public static CoroutineManager Routine { get { return Instance?._coroutine; } }
 
     private void Awake()
     {
@@ -49,7 +55,10 @@ public class Managers : Singleton<Managers>
         Instance._data = new DataManager();
         Instance._monster = new MonsterManager();
         Instance._boss = new BossManager();
+        Instance._scene = new SceneManager();
+        Instance._screen = new ScreenManager();
 
+        Instance._coroutine = CoroutineManager.Instance;
         Instance._game = GameManager.Instance;
         init = true;
     }

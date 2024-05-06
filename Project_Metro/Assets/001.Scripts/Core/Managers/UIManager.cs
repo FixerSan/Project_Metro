@@ -27,10 +27,11 @@ public class UIManager
         {
             if (blackPanel == null)
             {
+                SetEventSystem();
                 GameObject go = GameObject.Find("@BlackPanel");
                 if(go == null)
                 {
-                    go = Managers.Resource.Instantiate("BlackPanel");
+                    go = Managers.Resource.Instantiate("@BlackPanel");
                     go.name = "@BlackPanel";
                     UnityEngine.Object.DontDestroyOnLoad(go);
                     blackPanel = go.GetOrAddComponent<CanvasGroup>();
@@ -60,8 +61,12 @@ public class UIManager
     // 이벤트 시스템 설정
     public void SetEventSystem()
     {
-        GameObject es = Managers.Resource.Instantiate("EventSystem");
-        eventSystem = es.GetOrAddComponent<EventSystem>();
+        if (eventSystem != null) return;
+
+        GameObject go = GameObject.Find("EventSystem");
+        if(go == null)
+            go = Managers.Resource.Instantiate("EventSystem");
+        eventSystem = go.GetOrAddComponent<EventSystem>();
     }
 
     public void SetCanvas(GameObject _go, bool _sort = true, int _sortOrder = 0, bool _isToast = false)

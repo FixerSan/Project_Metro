@@ -20,7 +20,10 @@ public class GameManager : Singleton<GameManager>
             Managers.Data.LoadData(() =>
             {
                 SetPlayerData();
-                GameObject.Find("@TestController").GetComponent<TestController>().Init();
+                Managers.Scene.LoadScene(Define.Scene.Test, _loadCallback:() => 
+                {
+                    GameObject.Find("@TestController").GetComponent<TestController>().Init();   
+                });
             });
         });
     }

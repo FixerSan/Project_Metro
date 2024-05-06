@@ -107,6 +107,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d2336fc56779bb54b88684f512aa3927
+    m_Address: Main Camera.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8dda9f85c424ba44eb2043e4fca8b665
+    m_Address: '@BlackPanel.prefab'
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d8fd76a95121054589f52503b584b56
+    m_Address: EventSystem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: bf06be692eca4c14fade11dc8ee82bec, type: 2}
   m_SchemaSet:
