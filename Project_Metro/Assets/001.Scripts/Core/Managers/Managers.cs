@@ -17,6 +17,8 @@ public class Managers : Singleton<Managers>
 
     private GameManager _game;
 
+    private static bool init = false;
+
     public static ObjectManager Object { get { return Instance?._object; } }
     public static GameManager Game { get { return Instance?._game; } }
     public static ResourceManager Resource { get { return Instance?._resource; } }
@@ -29,11 +31,14 @@ public class Managers : Singleton<Managers>
     public static MonsterManager Monster { get {  return Instance?._monster; } }
     public static BossManager Boss { get {  return Instance?._boss; } }
 
+    private void Awake()
+    {
+        Init();
+    }
 
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
     private static void Init()
     {
+        if (init) return;
         Instance._object = new ObjectManager();
         Instance._resource = new ResourceManager();
         Instance._ui = new UIManager();
@@ -46,5 +51,6 @@ public class Managers : Singleton<Managers>
         Instance._boss = new BossManager();
 
         Instance._game = GameManager.Instance;
+        init = true;
     }
 }

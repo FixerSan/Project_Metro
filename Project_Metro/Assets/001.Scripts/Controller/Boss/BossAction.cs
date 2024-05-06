@@ -62,6 +62,10 @@ namespace BossActions
             public override void StartAction()
             {
                 Vector3 moveDirection = new Vector3(FindMoveDirection(), 0.5f).normalized;
+
+                if (moveDirection.x >= 0) controller.ChangeDirection(Define.Direction.Right);
+                else controller.ChangeDirection(Define.Direction.Left);
+
                 action = Managers.Resource.Instantiate($"{nameof(ForestKnight_VinesToMove)}", _pooling:true).GetComponent<ForestKnight_VinesToMove>();
                 action.StartMove(startPoint, moveDirection, (_direction) => 
                 {
@@ -76,15 +80,12 @@ namespace BossActions
             private IEnumerator ActionRoutine()
             {
                 bool isStop = false;
-                Define.Direction _direction;
-                if (direction.x >= 0) _direction = Define.Direction.Right;
-                else _direction = Define.Direction.Left;
 
                 while (!isStop)
                 {
                     yield return null;
                     controller.rb.velocity = direction * controller.status.CurrentSpeed;
-                    isStop = controller.CheckSide(_direction);
+                    isStop = controller.CheckSide(controller.currentDirection);
                 }
 
                 //TODO :: 도착한 애니메이션 적용
@@ -131,6 +132,16 @@ namespace BossActions
             {
                 Action();
             }
+            public override void Action()
+            {
+                //TODO :: 점프 애니메이션 적용
+                controller.LookAtPlayer();
+                controller.transform.DOJump(new Vector3(Managers.Object.player.transform.position.x, controller.transform.position.y, 0), 1, 1,
+                    Mathf.Abs(controller.transform.position.x - Managers.Object.player.transform.position.x) * 0.05f).SetEase(Ease.Linear).OnComplete(() =>
+                    {
+                        controller.StartCoroutine(ActionRoutine());
+                    });
+            }
 
             //바닥을 향에 돌진
             private IEnumerator ActionRoutine()
@@ -168,15 +179,6 @@ namespace BossActions
 
             }
 
-            public override void Action()
-            {
-                //TODO :: 점프 애니메이션 적용
-                controller.transform.DOJump(new Vector3(Managers.Object.player.transform.position.x, controller.transform.position.y, 0), 1, 1,
-                    Mathf.Abs(controller.transform.position.x - Managers.Object.player.transform.position.x) * 0.05f).SetEase(Ease.Linear).OnComplete(() =>
-                    {
-                        controller.StartCoroutine(ActionRoutine());
-                    });
-            }
         }
         public class Three : ForestKnightAction
         {
@@ -205,12 +207,13 @@ namespace BossActions
             public override void Action()
             {
                 isCooltime = true;
+                controller.LookAtPlayer();
                 controller.StartCoroutine(ActionRoutine());
             }
 
             private IEnumerator ActionRoutine()
             {
-                Vector2 spawnPosition = new Vector2(Managers.Object.player.transform.position.x, controller.anim.transform.position.y);
+                Vector2 spawnPosition;
                 ForestKnight_VinesAttack attack;
                 
                 yield return new WaitForSeconds(controller.actionThreeStartDelay);
