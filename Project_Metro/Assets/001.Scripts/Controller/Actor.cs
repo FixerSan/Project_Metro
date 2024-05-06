@@ -52,23 +52,23 @@ public abstract class Actor : MonoBehaviour, IHitable
         return false;
     }
 
-    public new Coroutine StartCoroutine(IEnumerator _enumerator)
-    {
-        if(coroutines.ContainsKey(_enumerator.GetType()))
-            StopCoroutine(_enumerator);
+    //public new Coroutine StartCoroutine(IEnumerator _enumerator)
+    //{
+    //    if(coroutines.ContainsKey(_enumerator.GetType()))
+    //        StopCoroutine(_enumerator);
 
-        coroutines.Add(_enumerator.GetType(), base.StartCoroutine(_enumerator));
-        return coroutines[_enumerator.GetType()];
-    }
+    //    coroutines.Add(_enumerator.GetType(), base.StartCoroutine(_enumerator));
+    //    return coroutines[_enumerator.GetType()];
+    //}
 
-    public new void StopCoroutine(IEnumerator _enumerator)
-    {
-        if (coroutines.ContainsKey(_enumerator.GetType()))
-        {
-            base.StopCoroutine(coroutines[_enumerator.GetType()]);
-            coroutines.Remove(_enumerator.GetType());
-        }
-    }
+    //public new void StopCoroutine(IEnumerator _enumerator)
+    //{
+    //    if (coroutines.ContainsKey(_enumerator.GetType()))
+    //    {
+    //        base.StopCoroutine(coroutines[_enumerator.GetType()]);
+    //        coroutines.Remove(_enumerator.GetType());
+    //    }
+    //}
 }
 
 [System.Serializable]

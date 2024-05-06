@@ -122,5 +122,28 @@ namespace BossState
 
             }
         }
+
+        public class ActionFour : State<ForestKnight>
+        {
+            public override void Enter(ForestKnight _entity)
+            {
+                _entity.bossActions[Define.BossAction.ActionFour].StartAction();
+            }
+
+            public override void Exit(ForestKnight _entity)
+            {
+
+            }
+
+            public override void FixedUpdate(ForestKnight _entity)
+            {
+
+            }
+
+            public override void Update(ForestKnight _entity)
+            {
+
+            }
+        }
     }
 }

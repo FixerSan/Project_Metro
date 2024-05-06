@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.XR;
 
 public class ForestKnight : BossController
 {
-    public float createTime; 
+    public float createTime;
 
     public Dictionary<Define.BossState, State<ForestKnight>> states;
     public StateMachine<ForestKnight> fsm;
@@ -16,14 +16,23 @@ public class ForestKnight : BossController
     public Transform leftWallCheckTrans;
     public Transform rightWallCheckTrans;
 
+
+    public float defaultGravityScale;
+
+    [Header("ActionThree Data")]
+    public float actionThreeCooltime;
     public float actionThreeStartDelay;
     public float actionThreeRepeatDelay;
 
     [Header("Cooltime")]
     public float actionOneCooltime;
     public float actionTwoCooltime;
-    public float actionThreeCooltime;
+
+    [Header("ActionFour Data")]
     public float actionFourCooltime;
+    public float actionFourDashForce;
+    public float actionFourMoveDistance;
+
 
     public bool isLeftSide { get { return CheckLeftSide(); } }
     public bool isRightSide { get { return CheckRightSide(); } }
@@ -122,6 +131,7 @@ public class ForestKnight : BossController
         }
 
         int randomInt = Random.Range(0, canActions.Count);
+        Debug.Log($"가능한 액션의 수는 {canActions.Count} 입니다.");
         Debug.Log($"현재 선택된 보스의 패턴은 {canActions[randomInt].stateType} 입니다.");
         ChangeState(canActions[randomInt].stateType);
     }

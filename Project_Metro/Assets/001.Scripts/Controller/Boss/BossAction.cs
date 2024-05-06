@@ -3,6 +3,8 @@ using MonsterState.TestMonster;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 
 public abstract class BossAction 
 {
@@ -10,7 +12,11 @@ public abstract class BossAction
     public Define.BossState stateType;
     public bool IsCanAction { get { return CheckAction(); } }
     public bool isCooltime = false;
-    public abstract bool CheckAction();
+    public virtual bool CheckAction()
+    {
+        if (isCooltime) return false;
+        return true;
+    }
     public abstract void StartAction();
     public abstract void Action();
     public abstract void EndAction();
@@ -49,6 +55,7 @@ namespace BossActions
 
             public override bool CheckAction()
             {
+                if (!base.CheckAction()) return false;
                 return controller.IsGround;
             }
 
@@ -148,7 +155,9 @@ namespace BossActions
 
             public override bool CheckAction()
             {
-                if(controller.isRightSide || controller.isLeftSide)
+                if (!base.CheckAction()) return false;
+
+                if (controller.isRightSide || controller.isLeftSide)
                     if (!controller.IsGround)
                         return true;
                 return false;
@@ -184,7 +193,7 @@ namespace BossActions
 
             public override bool CheckAction()
             {
-                if (isCooltime) return false;
+                if (!base.CheckAction()) return false;
                 return controller.IsGround;
             }
 
@@ -219,5 +228,114 @@ namespace BossActions
                 controller.StartCoroutine(CooltimeCheckRoutine(controller.actionThreeCooltime));
             }
         }
+        public class Four : ForestKnightAction
+        {
+            public Four(ForestKnight _controller, Define.BossState _stateType)
+            {
+                controller = _controller;
+                stateType = _stateType;
+            }
+
+            public override void StartAction()
+            {
+                Action();
+            }
+
+            public override bool CheckAction()
+            {
+                if (!base.CheckAction()) return false;
+                return controller.IsGround;
+            }
+
+            public override void EndAction()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void Action()
+            {
+                isCooltime = true;
+                controller.LookAtPlayer();
+                controller.StartCoroutine(ActionRoutine());
+            }
+
+            private IEnumerator ActionRoutine()
+            {
+                bool isStop = false;
+                float movedDistance = 0;
+                controller.defaultGravityScale = controller.rb.gravityScale;
+                controller.rb.gravityScale = 0;
+
+                while (!isStop && movedDistance < controller.actionFourMoveDistance)
+                {
+                    yield return null;
+                    controller.rb.velocity = new Vector2((int)controller.currentDirection * controller.actionFourDashForce, 0);
+                    movedDistance += (Time.deltaTime * controller.actionFourDashForce);
+                    if(controller.currentDirection == Define.Direction.Right && controller.isRightSide)
+                        isStop = true;
+                    if (controller.currentDirection == Define.Direction.Left && controller.isLeftSide)
+                        isStop = true;
+                }
+
+                controller.rb.gravityScale = controller.defaultGravityScale;
+                controller.rb.velocity = Vector2.zero;
+                controller.ChangeState(Define.BossState.Idle);
+
+                controller.StartCoroutine(CooltimeCheckRoutine(controller.actionThreeCooltime));
+            }
+        }
+
+        public class Five : ForestKnightAction
+        {
+            public Five(ForestKnight _controller, Define.BossState _stateType)
+            {
+                controller = _controller;
+                stateType = _stateType;
+            }
+
+            public override void StartAction()
+            {
+                Action();
+            }
+
+            public override bool CheckAction()
+            {
+                if (!base.CheckAction()) return false;
+                return controller.IsGround;
+            }
+
+            public override void EndAction()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void Action()
+            {
+                isCooltime = true;
+                controller.StartCoroutine(ActionRoutine());
+            }
+
+            private IEnumerator ActionRoutine()
+            {
+                Vector2 spawnPosition = new Vector2(Managers.Object.player.transform.position.x, controller.anim.transform.position.y);
+                ForestKnight_VinesAttack attack;
+
+                yield return new WaitForSeconds(controller.actionThreeStartDelay);
+                for (int i = 0; i < 3; i++)
+                {
+                    attack = Managers.Resource.Instantiate("ForestKnight_VinesAttack", _pooling: true).GetComponent<ForestKnight_VinesAttack>();
+                    spawnPosition = new Vector2(Managers.Object.player.transform.position.x, controller.anim.transform.position.y);
+                    attack.transform.position = spawnPosition;
+                    attack.Attack(controller);
+                    yield return new WaitForSeconds(controller.actionThreeRepeatDelay);
+                }
+                yield return new WaitForSeconds(controller.actionThreeStartDelay);
+                controller.ChangeState(Define.BossState.Idle);
+
+                controller.StartCoroutine(CooltimeCheckRoutine(controller.actionThreeCooltime));
+            }
+        }
+
     }
+
 }

@@ -4400,12 +4400,15 @@ MonoBehaviour:
   CurrentState: 0
   leftWallCheckTrans: {fileID: 0}
   rightWallCheckTrans: {fileID: 0}
+  defaultGravityScale: 0
+  actionThreeCooltime: 3
   actionThreeStartDelay: 1
   actionThreeRepeatDelay: 1
-  actionOneCooltime: 1
+  actionOneCooltime: 3
   actionTwoCooltime: 1
-  actionThreeCooltime: 1
   actionFourCooltime: 1
+  actionFourDashForce: 3
+  actionFourMoveDistance: 5
 --- !u!1 &1791267851
 GameObject:
   m_ObjectHideFlags: 0

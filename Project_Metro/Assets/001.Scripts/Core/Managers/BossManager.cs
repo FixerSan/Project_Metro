@@ -23,11 +23,13 @@ public class BossManager
                 _forestKight.states.Add(Define.BossState.ActionOne, new BossState.ForestKnights.ActionOne());
                 _forestKight.states.Add(Define.BossState.ActionTwo, new BossState.ForestKnights.ActionTwo());
                 _forestKight.states.Add(Define.BossState.ActionThree, new BossState.ForestKnights.ActionThree());
+                _forestKight.states.Add(Define.BossState.ActionFour, new BossState.ForestKnights.ActionFour());
 
                 _forestKight.bossActions = new Dictionary<Define.BossAction, BossAction>();
                 _forestKight.bossActions.Add(Define.BossAction.ActionOne, new BossActions.ForestKnights.Climbing(_forestKight, Define.BossState.ActionOne));
                 _forestKight.bossActions.Add(Define.BossAction.ActionTwo, new BossActions.ForestKnights.JumpAndDownAttack(_forestKight, Define.BossState.ActionTwo));
                 _forestKight.bossActions.Add(Define.BossAction.ActionThree, new BossActions.ForestKnights.Three(_forestKight, Define.BossState.ActionThree));
+                _forestKight.bossActions.Add(Define.BossAction.ActionFour, new BossActions.ForestKnights.Four(_forestKight, Define.BossState.ActionFour));
                 _forestKight.fsm = new StateMachine<ForestKnight>(_forestKight, _forestKight.states[Define.BossState.Create]);
                 break;
         }
