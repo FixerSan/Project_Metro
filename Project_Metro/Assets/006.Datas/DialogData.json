@@ -1,0 +1,25 @@
+{
+    "datas": [
+        {
+            "index": 0,
+            "nextIndex": 1,
+            "name": "TestNPC",
+            "sentence": "Do you want to learn dash?",
+            "buttonString": "Yes"
+        },
+        {
+            "index": 1,
+            "nextIndex": -2,
+            "name": "TestNPC",
+            "sentence": "For dash, press the c key.",
+            "buttonString": "Okay"
+        },
+        {
+            "index": 2,
+            "nextIndex": -1,
+            "name": "TestNPC",
+            "sentence": "You've already learned the dash, press the C key",
+            "buttonString": "Okay"
+        }
+    ]
+}

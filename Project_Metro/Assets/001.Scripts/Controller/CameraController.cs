@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
 
     public void Awake()
     {
-        Managers.Object.camera = this;
+        Managers.Screen.SetCamera(this);
     }
 
     void Update()

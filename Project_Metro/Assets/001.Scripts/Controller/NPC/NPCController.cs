@@ -6,6 +6,7 @@ public class NPCController : MonoBehaviour
 {
     public NPC npc;
 
+
     public void Awake()
     {
         Init();
@@ -13,7 +14,7 @@ public class NPCController : MonoBehaviour
 
     public void Init()
     {
-        npc = new NPCs.Test.One();
+        npc = new NPCs.Test.One(this);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

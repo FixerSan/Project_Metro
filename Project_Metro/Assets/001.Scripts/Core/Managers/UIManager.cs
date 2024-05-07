@@ -21,6 +21,8 @@ public class UIManager
     private UIScene sceneUI = null;                             // SceneUI 선언
 
     private CanvasGroup blackPanel;
+
+    private UIPopup_Dialog dialogUI;
     public CanvasGroup BlackPanel
     {
         get
@@ -220,6 +222,24 @@ public class UIManager
     {
         return popupStack.Count;
     }
+
+    public UIPopup_Dialog ShowDialogUI(int _index)
+    {
+        if (dialogUI == null)
+        {
+            GameObject go = Managers.Resource.Instantiate("UIPopup_Dialog", _pooling: true);
+            dialogUI = go.GetOrAddComponent<UIPopup_Dialog>();
+        }
+        dialogUI.Redraw(Managers.Data.GetDialogData(_index));
+        return dialogUI;
+    }
+
+    public void CloseDialogUI()
+    {
+        Managers.Resource.Destroy(dialogUI.gameObject);
+        dialogUI = null;
+    }
+
 
 
     // 초기화

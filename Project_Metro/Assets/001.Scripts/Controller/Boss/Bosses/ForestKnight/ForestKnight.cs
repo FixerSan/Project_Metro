@@ -37,15 +37,9 @@ public class ForestKnight : BossController
     public bool isLeftSide { get { return CheckLeftSide(); } }
     public bool isRightSide { get { return CheckRightSide(); } }
 
-    private void Awake()
-    {
-        Init();
-    }
-
     public override bool Init()
     {
         if (!base.Init()) return false;
-        Managers.Boss.InitBoss(0, this);
         leftWallCheckTrans = Util.FindChild<Transform>(gameObject, "Trans_LeftWallCheck", true);
         rightWallCheckTrans = Util.FindChild<Transform>(gameObject, "Trans_RightWallCheck", true);
         return true;

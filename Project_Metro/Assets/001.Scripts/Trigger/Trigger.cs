@@ -10,7 +10,7 @@ public class Trigger : MonoBehaviour
     
     public void WorkTrigger()
     {
-        Managers.Trigger.WorkTrigger(index);
+        Managers.Event.TriggerEvent(index);
         isWorked = true;
     }
 }

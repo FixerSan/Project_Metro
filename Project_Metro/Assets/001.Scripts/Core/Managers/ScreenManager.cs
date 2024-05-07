@@ -26,6 +26,11 @@ public class ScreenManager
         cameraController = go.GetOrAddComponent<CameraController>();
     }
 
+    public void SetCamera(CameraController _camera)
+    {
+        cameraController = _camera; 
+    }
+
     #region Fade
 
     public void FadeIn(float _fadeTime, Action _callback = null)

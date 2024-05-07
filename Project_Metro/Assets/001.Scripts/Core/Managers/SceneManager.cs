@@ -36,7 +36,7 @@ public class SceneManager
             RemoveScene(currentScene, () =>
             {
                 currentScene = _scene;
-                AsyncOperation async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync($"Scene_{_scene}");
+                AsyncOperation async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync($"{_scene}");
                 async.completed += (_) =>
                 {
                     AddScene(_scene, () => { loadCallback?.Invoke(); });
@@ -57,8 +57,8 @@ public class SceneManager
             RemoveScene(currentScene, () =>
             {
                 currentScene = _scene;
-                AsyncOperation async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync($"Scene_{_scene}");
-                async.completed += (_) =>
+                AsyncOperation async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync($"{_scene}");
+                async.completed += (_) =>                                       
                 {
                     AddScene(_scene, () =>
                     {
@@ -75,8 +75,12 @@ public class SceneManager
         SceneBase bs = null;
         switch (_scene)
         {
-            case Define.Scene.Test:
-                bs = sceneTrans.GetComponent<Scene_Test>();
+            case Define.Scene.Scene_Test:
+                bs = SceneTrans.GetComponent<Scene_Test>();
+                break;
+
+            case Define.Scene.Scene_TestBoss:
+                bs = SceneTrans.GetComponent<Scene_TestBoss>();
                 break;
 
             default:
@@ -103,8 +107,12 @@ public class SceneManager
             //    bs = SceneTrans.gameObject.AddComponent<StageScene>();
             //    break;
 
-            case Define.Scene.Test:
+            case Define.Scene.Scene_Test:
                 bs = SceneTrans.gameObject.AddComponent<Scene_Test>();
+                break;
+
+            case Define.Scene.Scene_TestBoss:
+                bs = SceneTrans.gameObject.AddComponent<Scene_TestBoss>();
                 break;
 
             default:

@@ -9,7 +9,7 @@ public class ObjectManager
 {
     #region 오브젝트 참조
     public PlayerController player;
-    public CameraController camera;
+    public CameraController Camera { get { return Managers.Screen.CameraController; } }
     public HashSet<MonsterController> monsters = new HashSet<MonsterController>();
     public Dictionary<int, Obstacle> obstacles = new Dictionary<int, Obstacle>();
     public Dictionary<int, Trigger> triggers = new Dictionary<int, Trigger>();
@@ -95,6 +95,7 @@ public class ObjectManager
         player.transform.position = _position;
         InitPlayerAction();
         player.Init();
+        GameObject.DontDestroyOnLoad(player);
         return player;
     }
 

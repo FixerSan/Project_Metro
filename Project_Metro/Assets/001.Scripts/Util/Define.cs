@@ -24,7 +24,7 @@ public class Define
 
     public enum Scene
     {
-        Login, Main, Stage, Test
+        Scene_Test, Scene_TestBoss
     }
 
     public enum SoundType
@@ -79,5 +79,15 @@ public class Define
     public enum BossAction
     {
         ActionOne, ActionTwo, ActionThree, ActionFour
+    }
+
+    public enum VoidEventType
+    {
+        
+    }
+
+    public enum IntEventType
+    {
+
     }
 }

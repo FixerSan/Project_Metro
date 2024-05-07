@@ -18,7 +18,7 @@ public class PlayerController : Actor
     public PlayerDash dash;
     public PlayerDefence defence;
 
-    public Dictionary<Define.PlayerState, State<PlayerController>> states = new Dictionary<Define.PlayerState, State<PlayerController>>();
+    public Dictionary<Define.PlayerState, State<PlayerController>> states;
     public StateMachine<PlayerController> fsm;
 
     private Define.PlayerState currentState;
@@ -48,6 +48,7 @@ public class PlayerController : Actor
         #endregion
 
         #region 생성 참조
+        states = new Dictionary<Define.PlayerState, State<PlayerController>>();
         states.Add(Define.PlayerState.Idle, new PlayerState.Idle());
         states.Add(Define.PlayerState.Move, new PlayerState.Move());
         states.Add(Define.PlayerState.Jump, new PlayerState.Jump());

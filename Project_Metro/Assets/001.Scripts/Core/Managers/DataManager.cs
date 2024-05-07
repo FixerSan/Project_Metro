@@ -9,6 +9,7 @@ public class DataManager
     public PlayerData playerData;
     public Dictionary<int, MonsterData> monsterDatas = new Dictionary<int, MonsterData>();
     public Dictionary<int, BossData> bossDatas = new Dictionary<int, BossData>();
+    public Dictionary<int, DialogData> dialogDatas = new Dictionary<int, DialogData>();
 
 
     #region Save
@@ -19,6 +20,7 @@ public class DataManager
 
     public void SavePlayerData()
     {
+        Managers.Game.player.level.dashLevel = 0;
         PlayerData data = new PlayerData();
         data.statusJson = JsonUtility.ToJson(Managers.Game.player.status, true);
         data.levelJson = JsonUtility.ToJson(Managers.Game.player.level, true);
@@ -34,6 +36,7 @@ public class DataManager
     {
         LoadPlayerData();
         LoadMonsterData();
+        LoadDialogData();
         _callback?.Invoke();
     }
 
@@ -49,6 +52,14 @@ public class DataManager
         MonsterDatas monsterDataArray = JsonUtility.FromJson<MonsterDatas>(monsterDataJson);
         for (int i = 0; i < monsterDataArray.monsterDatas.Length; i++)
             monsterDatas.Add(monsterDataArray.monsterDatas[i].index, monsterDataArray.monsterDatas[i]);
+    }
+
+    public void LoadDialogData()
+    {
+        string dialogDataJson = Managers.Resource.Load<TextAsset>("DialogData").text;
+        DialogDatas dialogDataArray = JsonUtility.FromJson<DialogDatas>(dialogDataJson);
+        for (int i = 0; i < dialogDataArray.datas.Length; i++)
+            dialogDatas.Add(dialogDataArray.datas[i].index, dialogDataArray.datas[i]);
     }
     #endregion
     #region Get
@@ -68,6 +79,13 @@ public class DataManager
     {
         if (bossDatas.TryGetValue(_index, out BossData data)) return data;
         Debug.Log($"인덱스: {_index}의 보스 데이터가 없습니다.");
+        return null;
+    }
+
+    public DialogData GetDialogData(int _index)
+    {
+        if (dialogDatas.TryGetValue(_index, out DialogData data)) return data;
+        Debug.Log($"인덱스: {_index}의 다이얼로그 데이터가 없습니다.");
         return null;
     }
     #endregion
@@ -97,4 +115,20 @@ public class MonsterData
 public class BossData
 {
     public int index;
+}
+
+[System.Serializable]
+public class DialogData
+{
+    public int index;
+    public int nextIndex;
+    public string name;
+    public string sentence;
+    public string buttonString;
+}
+
+[System.Serializable]
+public class DialogDatas
+{
+    public DialogData[] datas;
 }
