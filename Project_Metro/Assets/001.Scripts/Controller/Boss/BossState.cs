@@ -15,7 +15,7 @@ namespace BossState
 
             public override void Exit(ForestKnight _entity)
             {
-
+                _entity.Stop();
             }
 
             public override void FixedUpdate(ForestKnight _entity)
@@ -37,7 +37,7 @@ namespace BossState
 
             public override void Exit(ForestKnight _entity)
             {
-
+                _entity.Stop();
             }
 
             public override void FixedUpdate(ForestKnight _entity)
@@ -62,6 +62,7 @@ namespace BossState
 
             public override void Exit(ForestKnight _entity)
             {
+                _entity.Stop();
                 _entity.bossActions[Define.BossAction.ActionOne].EndAction();
             }
 
@@ -86,7 +87,7 @@ namespace BossState
 
             public override void Exit(ForestKnight _entity)
             {
-
+                _entity.Stop();
             }
 
             public override void FixedUpdate(ForestKnight _entity)
@@ -109,7 +110,7 @@ namespace BossState
 
             public override void Exit(ForestKnight _entity)
             {
-
+                _entity.Stop();
             }
 
             public override void FixedUpdate(ForestKnight _entity)
@@ -132,7 +133,7 @@ namespace BossState
 
             public override void Exit(ForestKnight _entity)
             {
-
+                _entity.Stop();
             }
 
             public override void FixedUpdate(ForestKnight _entity)

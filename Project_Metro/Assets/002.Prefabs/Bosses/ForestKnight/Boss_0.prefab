@@ -247,7 +247,7 @@ Transform:
   m_GameObject: {fileID: 6562069285183651598}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7200012, y: -0.41999817, z: 0}
+  m_LocalPosition: {x: 0, y: -0.41999817, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -338,7 +338,7 @@ MonoBehaviour:
   status:
     defaultMaxHP: 0
     plusMaxHP: 0
-    nowHP: 0
+    currentHP: 0
     defaultSpeed: 20
     plusSpeed: 0
     defaultJumpForce: 3
@@ -348,6 +348,11 @@ MonoBehaviour:
     defaultAttackSpeed: 0
     plusAttackSpeed: 0
     attackCooltime: 0
+    currentATB: 0
+    defaultMaxATB: 3
+    plusMaxATB: 0
+    defaultRegenerationATBForce: 0.1
+    plisRegenerationATBForce: 0
   groundCheckTrans: {fileID: 4028608101864515091}
   rb: {fileID: 0}
   anim: {fileID: 0}

@@ -41,8 +41,8 @@ public abstract class BossController : Actor
 
     public abstract void CreateEffect();
 
-    public enum ForestKnightState
+    public void Stop()
     {
-        Idle, Climbing
+
     }
 }

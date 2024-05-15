@@ -23,6 +23,7 @@ MonoBehaviour:
         - GlobalObjectId_V1-2-8c9cfa26abfee488c85f1582747f6a02-103708899-0
         - GlobalObjectId_V1-2-8c9cfa26abfee488c85f1582747f6a02-1917438258-0
         - GlobalObjectId_V1-2-8c9cfa26abfee488c85f1582747f6a02-817183101-0
+        - GlobalObjectId_V1-2-8c9cfa26abfee488c85f1582747f6a02-136562584-0
         values:
         - iColor: 0
           icon: 
@@ -32,10 +33,12 @@ MonoBehaviour:
           icon: Settings Icon
         - iColor: 0
           icon: 
-        - iColor: 9
+        - iColor: 1
+          icon: 
+        - iColor: 2
           icon: 
       goDatasByInstanceId:
-        keys: 70770000ea7700003077000034780000a6770000
+        keys: 8678000000790000467800004a790000bc78000030f5ffff
         values:
         - iColor: 0
           icon: 
@@ -45,5 +48,7 @@ MonoBehaviour:
           icon: Settings Icon
         - iColor: 0
           icon: 
-        - iColor: 9
+        - iColor: 1
+          icon: 
+        - iColor: 2
           icon: 
