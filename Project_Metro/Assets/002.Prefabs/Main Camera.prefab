@@ -152,5 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   offset: {x: 0, y: 6, z: -10}
-  min: {x: 0, y: 0}
-  max: {x: 0, y: 0}
+  maxDistance: {x: 5, y: 2}
+  minRange: {x: -100, y: -100}
+  maxRange: {x: 100, y: 100}
+  followSpeed: 0.5
