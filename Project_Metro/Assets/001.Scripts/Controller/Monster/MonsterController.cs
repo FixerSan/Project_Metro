@@ -23,10 +23,13 @@ public abstract class MonsterController : Actor
 
     private Coroutine deathCoroutine;
 
+    public bool isBattle;
+
     public virtual bool Init()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = Util.FindChild<Animator>(gameObject, "Sprite", true);
+        isBattle = false;
         return true;
     }
 
@@ -76,6 +79,7 @@ public abstract class MonsterController : Actor
     public void DeathEffect()
     {
         if (deathCoroutine != null) return;
+        isBattle = false;
         anim.SetTrigger("Dead");
         move.Stop();
         StopAllCoroutines();
@@ -86,6 +90,12 @@ public abstract class MonsterController : Actor
     {
         yield return new WaitForSeconds(deathTime);
         Managers.Resource.Destroy(gameObject);
+    }
+
+    public void StartBattle()
+    {
+        isBattle = true;
+        Managers.Game.player.StartBattle();
     }
 
     private void OnDrawGizmos()

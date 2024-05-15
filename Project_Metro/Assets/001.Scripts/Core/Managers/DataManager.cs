@@ -21,6 +21,8 @@ public class DataManager
     public void SavePlayerData()
     {
         Managers.Game.player.level.dashLevel = 0;
+        Managers.Game.player.status.currentHP = 5;
+        Managers.Game.player.status.currentATB = 0;
         PlayerData data = new PlayerData();
         data.statusJson = JsonUtility.ToJson(Managers.Game.player.status, true);
         data.levelJson = JsonUtility.ToJson(Managers.Game.player.level, true);

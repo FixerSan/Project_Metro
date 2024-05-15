@@ -18,11 +18,11 @@ public abstract class Actor : MonoBehaviour, IHitable
     {
         get
         {
-            return status.nowHP;
+            return status.currentHP;
         }
         set 
         {
-            status.nowHP = value;
+            status.currentHP = value;
         }
     }
 
@@ -30,8 +30,10 @@ public abstract class Actor : MonoBehaviour, IHitable
 
     public virtual void Hit(int _damage)
     {
-        status.nowHP -= _damage;
-        if (status.nowHP <= 0)
+        if (status.currentHP <= 0) return;
+        status.currentHP -= _damage;
+        Managers.UI.SceneUI.RedrawUI();
+        if (status.currentHP <= 0)
             Death();
     }
 
@@ -84,7 +86,7 @@ public class ActorStatus
         }
     }
 
-    public int nowHP;
+    public int currentHP;
 
     public float defaultSpeed;
     public float plusSpeed;
@@ -130,9 +132,33 @@ public class ActorStatus
 
     public float attackCooltime;
 
+    public float currentATB;
+
+    public float defaultMaxATB;
+    public float plusMaxATB;
+    public float CurrentMaxATB
+    {
+        get
+        {
+            return defaultMaxATB + plusMaxATB;
+        }
+    }
+
+    public float defaultRegenerationATBForce;
+    public float plisRegenerationATBForce;
+    public float CurrentRegenerationATBForce
+    {
+        get
+        {
+            return defaultRegenerationATBForce + plisRegenerationATBForce;
+        }
+    }
+
     public ActorStatus()
     {
         defaultSpeed = 3;
         defaultJumpForce = 3;
+        defaultRegenerationATBForce = 0.1f;
+        defaultMaxATB = 3;
     }
 }

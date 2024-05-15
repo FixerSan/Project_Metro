@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    public bool init = false;
     public Player player;
     public Transform respawnTrans;
     
-
     public void Awake()
     {
         GameStart();
+    }
+
+    public void Update()
+    {
+        if (!init) return;
+        Util.CheckTimers();
+        player.Update();
     }
 
     public void GameStart()
@@ -19,16 +26,17 @@ public class GameManager : Singleton<GameManager>
         {
             Managers.Data.LoadData(() =>
             {
-                SetPlayerData();
+                SetPlayer();
                 Managers.Scene.LoadScene(Define.Scene.Scene_Test, _loadCallback:() => 
                 {
+                    init = true;
                     GameObject.Find("@TestController").GetComponent<TestController>().Init();   
                 });
             });
         });
     }
 
-    public void SetPlayerData()
+    public void SetPlayer()
     {
         player = new Player();
         player.status = JsonUtility.FromJson<ActorStatus>(Managers.Data.playerData.statusJson);
@@ -53,6 +61,15 @@ public class Player
 {
     public ActorStatus status;
     public PlayerLevel level;
+    public bool isBattle = false;
+
+    private WaitForSeconds battleCheckTime = new WaitForSeconds(3);
+    private Coroutine battleCoroutine;
+
+    public void Update()
+    {
+        CheckRegenerationATB();
+    }
 
     public void RespawnPlayer()
     {
@@ -62,6 +79,57 @@ public class Player
     public void LevelUpPlayer()
     {
         Managers.Object.InitPlayerAction();
+    }
+
+    public void StartBattle()
+    {
+        isBattle = true;
+        battleCoroutine = Managers.Routine.StartCoroutine(CheckBattleRoutine());
+    }
+
+    private IEnumerator CheckBattleRoutine()
+    {
+        while (isBattle)
+        {
+            yield return battleCheckTime;
+            isBattle = false;
+            foreach (var monster in Managers.Object.monsters)
+            {
+                if (isBattle) break;
+                isBattle = monster.isBattle;
+            }
+        }
+
+        EndBattle();
+    }
+
+    public void EndBattle()
+    {
+        isBattle = false;
+        if (battleCoroutine == null) Managers.Routine.StopCoroutine(battleCoroutine);
+        Managers.UI.SceneUI.RedrawUI();
+        Managers.Routine.StartCoroutine(EndBattleRoutine());
+    }
+
+    private IEnumerator EndBattleRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        status.currentATB = 0;
+    }
+
+    public void CheckRegenerationATB()
+    {
+        if (isBattle) RegenerationATB();
+    }
+
+    public void RegenerationATB()
+    {
+        if (status.currentATB == status.CurrentMaxATB) return;
+
+        status.currentATB += status.defaultRegenerationATBForce * Time.deltaTime;
+        if (status.currentATB > status.CurrentMaxATB)
+            status.currentATB = status.CurrentMaxATB;
+        Managers.UI.SceneUI.RedrawUI();
     }
 }
 

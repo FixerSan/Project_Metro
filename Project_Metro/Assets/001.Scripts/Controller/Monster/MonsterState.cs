@@ -58,6 +58,7 @@ namespace MonsterState
             public override void Enter(MonsterController _entity)
             {
                 _entity.anim.SetBool("IsFollow", true);
+                _entity.StartBattle();
             }
 
             public override void Exit(MonsterController _entity)

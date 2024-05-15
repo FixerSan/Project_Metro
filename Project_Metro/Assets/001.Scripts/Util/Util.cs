@@ -8,6 +8,8 @@ using Object = UnityEngine.Object;
 
 public static class Util
 {
+    public static List<Timer> timers = new List<Timer>();
+
     public static T GetOrAddComponent<T>(GameObject _go) where T : UnityEngine.Component
     {
         T component = _go.GetComponent<T>();
@@ -69,17 +71,43 @@ public static class Util
         return (T)Enum.Parse(typeof(T), _value, true);
     }
 
-    public static void FadeOutSpriteRenderer(SpriteRenderer _spriteRenderer, float _fadeOutTime)
+    public static void AddTimer(float _time, Action _callback)
     {
-        Managers.Instance.StartCoroutine(FadeOutSpriteRendererRoutine(_spriteRenderer, _fadeOutTime));
+        timers.Add(new Timer(_time, _callback));
     }
 
-    private static IEnumerator FadeOutSpriteRendererRoutine(SpriteRenderer _spriteRenderer, float _fadeOutTime)
+    public static void CheckTimers()
     {
-        while (_spriteRenderer != null || _spriteRenderer.color.a > 0)
+        for (int i = 0; i < timers.Count; i++)
         {
-            yield return null;
-            _spriteRenderer.color -= new Color(0, 0, 0, _spriteRenderer.color.a - Time.deltaTime);
+            timers[i].CheckTimer();
+        }
+    }
+}
+
+public class Timer
+{
+    public float currentTime;
+    public float time;
+    public Action callback;
+
+    public Timer(float _time, Action _callback) 
+    {
+        currentTime = 0;
+        time = _time;
+        callback = _callback;
+    }
+
+    public void CheckTimer()
+    {
+        currentTime += Time.deltaTime;
+        if (currentTime >= time)
+        {
+            Util.timers.Remove(this);
+            callback?.Invoke();
+            callback = null;
+            currentTime = 0;
+            time = 0;
         }
     }
 }
