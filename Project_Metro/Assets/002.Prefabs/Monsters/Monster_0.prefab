@@ -114,7 +114,7 @@ MonoBehaviour:
   status:
     defaultMaxHP: 10
     plusMaxHP: 0
-    nowHP: 10
+    currentHP: 10
     defaultSpeed: 2
     plusSpeed: 0
     defaultJumpForce: 3
@@ -124,19 +124,26 @@ MonoBehaviour:
     defaultAttackSpeed: 1
     plusAttackSpeed: 0
     attackCooltime: 0
+    currentATB: 0
+    defaultMaxATB: 3
+    plusMaxATB: 0
+    defaultRegenerationATBForce: 0.1
+    plisRegenerationATBForce: 0
+  groundCheckTrans: {fileID: 0}
+  rb: {fileID: 0}
+  anim: {fileID: 0}
   currentDirection: 0
   init: 0
   data:
     index: 0
     canAttackDistance: 1
   CurrentState: 0
-  rb: {fileID: 0}
-  anim: {fileID: 0}
   detectRangeTrans: {fileID: 8633721565272177883}
   attackTrans: {fileID: 1473571547308937330}
   attackTarget: {fileID: 0}
   attackTime: 0.5
   deathTime: 1
+  isBattle: 0
 --- !u!70 &7152323217704238775
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

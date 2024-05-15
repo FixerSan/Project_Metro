@@ -1,4 +1,4 @@
 {
-    "statusJson": "{\n    \"defaultMaxHP\": 0,\n    \"plusMaxHP\": 0,\n    \"nowHP\": -120,\n    \"defaultSpeed\": 5.0,\n    \"plusSpeed\": 0.0,\n    \"defaultJumpForce\": 0.0,\n    \"plusJumpForce\": 12.5,\n    \"defaultDamageForce\": 5,\n    \"plusDamageForce\": 0,\n    \"defaultAttackSpeed\": 0.0,\n    \"plusAttackSpeed\": 0.0,\n    \"attackCooltime\": 0.0\n}",
+    "statusJson": "{\n    \"defaultMaxHP\": 5,\n    \"plusMaxHP\": 0,\n    \"currentHP\": 5,\n    \"defaultSpeed\": 5.0,\n    \"plusSpeed\": 0.0,\n    \"defaultJumpForce\": 0.0,\n    \"plusJumpForce\": 12.5,\n    \"defaultDamageForce\": 5,\n    \"plusDamageForce\": 0,\n    \"defaultAttackSpeed\": 0.0,\n    \"plusAttackSpeed\": 0.0,\n    \"attackCooltime\": 0.0,\n    \"currentATB\": 0.0,\n    \"defaultMaxATB\": 3.0,\n    \"plusMaxATB\": 0.0,\n    \"defaultRegenerationATBForce\": 0.10000000149011612,\n    \"plisRegenerationATBForce\": 0.0\n}",
     "levelJson": "{\n    \"moveLevel\": 1,\n    \"jumpLevel\": 1,\n    \"fallLevel\": 1,\n    \"attackLevel\": 1,\n    \"dashLevel\": 0,\n    \"defenseLevel\": 1\n}"
 }

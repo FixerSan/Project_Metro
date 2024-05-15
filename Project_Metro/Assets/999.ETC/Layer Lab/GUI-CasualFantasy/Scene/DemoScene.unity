@@ -995,7 +995,7 @@ GameObject:
   - component: {fileID: 152748364}
   - component: {fileID: 152748365}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Panels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1899,7 +1899,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &306524055
 GameObject:
@@ -14927,7 +14927,7 @@ RectTransform:
   - {fileID: 152748364}
   - {fileID: 7449461171566705242}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -16691,7 +16691,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 774961591358888360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbccb1cd96b364785a16af79f634ec23, type: 3}
+  m_Script: {fileID: 11500000, guid: 99cf42140c3104393ba145bec6abebb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   otherPanels:
@@ -30903,7 +30903,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1656121555960338322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbccb1cd96b364785a16af79f634ec23, type: 3}
+  m_Script: {fileID: 11500000, guid: 99cf42140c3104393ba145bec6abebb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   otherPanels:
@@ -35088,7 +35088,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3035776153822820952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbccb1cd96b364785a16af79f634ec23, type: 3}
+  m_Script: {fileID: 11500000, guid: 99cf42140c3104393ba145bec6abebb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   otherPanels:
@@ -52717,7 +52717,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5979687820259351460}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbccb1cd96b364785a16af79f634ec23, type: 3}
+  m_Script: {fileID: 11500000, guid: 99cf42140c3104393ba145bec6abebb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   otherPanels:
@@ -55230,7 +55230,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6050771340165073035}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbccb1cd96b364785a16af79f634ec23, type: 3}
+  m_Script: {fileID: 11500000, guid: 99cf42140c3104393ba145bec6abebb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   otherPanels:
@@ -57387,7 +57387,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6066642034461588970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbccb1cd96b364785a16af79f634ec23, type: 3}
+  m_Script: {fileID: 11500000, guid: 99cf42140c3104393ba145bec6abebb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   otherPanels:
@@ -72225,7 +72225,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6296404473260327833}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbccb1cd96b364785a16af79f634ec23, type: 3}
+  m_Script: {fileID: 11500000, guid: 99cf42140c3104393ba145bec6abebb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   otherPanels:
@@ -98550,7 +98550,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7120548873097980358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbccb1cd96b364785a16af79f634ec23, type: 3}
+  m_Script: {fileID: 11500000, guid: 99cf42140c3104393ba145bec6abebb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   otherPanels:
@@ -99764,7 +99764,7 @@ RectTransform:
   m_Children:
   - {fileID: 1614141211}
   m_Father: {fileID: 7449461171566705242}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -100006,7 +100006,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7449461171566705242}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -100157,11 +100157,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7449461171566705241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb864fc5e4ef149ffb9093570ad3af4a, type: 3}
+  m_Script: {fileID: 11500000, guid: 654ca932cd6f04a81a68f18a2f51b9ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panels: []
-  panelTransform: {fileID: 152748364}
+  defaultPanels: []
+  otherPanels: []
+  panelTransformDefault: {fileID: 152748364}
+  panelTransformOther: {fileID: 0}
   buttonPrev: {fileID: 7449461170591526174}
   buttonNext: {fileID: 7449461170890562003}
 --- !u!1 &7449461171566705241
@@ -100195,8 +100197,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7449461171354438185}
   - {fileID: 7449461170591526147}
+  - {fileID: 7449461171354438185}
   - {fileID: 7449461170890562000}
   - {fileID: 1145719202}
   m_Father: {fileID: 2024670572}
