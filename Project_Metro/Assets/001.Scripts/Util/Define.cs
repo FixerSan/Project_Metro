@@ -40,6 +40,7 @@ public class Define
         Fall = 3,
         Dash = 4,
         Defence = 5,
+        Heal = 6
     }
 
     public enum PlayerAttack

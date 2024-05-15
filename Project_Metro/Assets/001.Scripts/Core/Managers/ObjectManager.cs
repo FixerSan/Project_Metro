@@ -101,17 +101,19 @@ public class ObjectManager
 
     public void InitPlayerAction()
     {
-        if (Managers.Game.player.level.moveLevel == 1) player.move = new PlayerMoves.One(player);
+        if (Managers.Game.player.level.moveLevel == 1) Managers.Game.player.move = new PlayerMoves.One(player);
 
-        if (Managers.Game.player.level.jumpLevel == 1) player.jump = new PlayerJumps.One(player);
+        if (Managers.Game.player.level.jumpLevel == 1) Managers.Game.player.jump = new PlayerJumps.One(player);
 
-        if (Managers.Game.player.level.attackLevel == 1) player.attack = new PlayerAttacks.One(player);
+        if (Managers.Game.player.level.attackLevel == 1) Managers.Game.player.attack = new PlayerAttacks.One(player);
 
-        if (Managers.Game.player.level.fallLevel == 1) player.fall = new PlayerFalls.One(player);
+        if (Managers.Game.player.level.fallLevel == 1) Managers.Game.player.fall = new PlayerFalls.One(player);
 
-        if (Managers.Game.player.level.dashLevel == 1) player.dash = new PlayerDashes.One(player);
+        if (Managers.Game.player.level.dashLevel == 1) Managers.Game.player.dash = new PlayerDashes.One(player);
 
-        if (Managers.Game.player.level.defenseLevel == 1) player.defence = new PlayerDefenses.One(player);
+        if (Managers.Game.player.level.defenseLevel == 1) Managers.Game.player.defence = new PlayerDefenses.One(player);
+
+        Managers.Game.player.heal = new PlayerHeal(player);
     }
 
     public NormalAttack SpawnAttack(Actor _attacker, Transform _attackPos, Define.PlayerAttackDirection _attackDirection)

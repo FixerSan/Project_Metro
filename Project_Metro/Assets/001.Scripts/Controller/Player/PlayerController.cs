@@ -10,13 +10,15 @@ using UnityEngine.Rendering.Universal;
 
 public class PlayerController : Actor
 {
-    public PlayerData data;
-    public PlayerMove move;
-    public PlayerJump jump;
-    public PlayerFall fall;
-    public PlayerAttack attack;
-    public PlayerDash dash;
-    public PlayerDefence defence;
+    public Player Player { get { return Managers.Game.player; } }
+    public PlayerData Data { get { return Player.data; } }
+    public PlayerMove Move { get { return Player.move; } }
+    public PlayerJump Jump { get { return Player.jump; } }
+    public PlayerFall Fall { get { return Player.fall; } }
+    public PlayerAttack Attack { get { return Player.attack; } }
+    public PlayerDash Dash { get { return Player.dash; } }
+    public PlayerDefence Defence { get { return Player.defence; } }
+    public PlayerHeal heal { get { return Player.heal; } }
 
     public Dictionary<Define.PlayerState, State<PlayerController>> states;
     public StateMachine<PlayerController> fsm;
@@ -55,6 +57,7 @@ public class PlayerController : Actor
         states.Add(Define.PlayerState.Fall, new PlayerState.Fall());
         states.Add(Define.PlayerState.Dash, new PlayerState.Dash());
         states.Add(Define.PlayerState.Defence, new PlayerState.Defence());
+        states.Add(Define.PlayerState.Heal, new PlayerState.Heal()) ;
         fsm = new StateMachine<PlayerController>(this, states[Define.PlayerState.Idle]);
         #endregion
 
@@ -90,21 +93,6 @@ public class PlayerController : Actor
             ChangeState(CurrentState, true);
     }
 
-    private bool CheckIsGround()
-    {
-        Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(groundCheckTrans.position, groundCheckTrans.localScale.x);
-        for (int i = 0; i < collider2Ds.Length; i++)
-        {
-            if (collider2Ds[i].CompareTag("Ground"))
-            {
-                anim.SetBool("IsGround", true);
-                return true;
-            }
-        }
-        anim.SetBool("IsGround", false);
-        return false;
-    }
-
     public void Update()
     {
         if (!init) return;
@@ -123,7 +111,7 @@ public class PlayerController : Actor
         if (!isCanHit) return; 
         if(CurrentState == Define.PlayerState.Defence)
         {
-            base.Hit(_damage - defence.defenceForce);
+            base.Hit(_damage - Defence.defenceForce);
             return;
         }
         base.Hit(_damage);

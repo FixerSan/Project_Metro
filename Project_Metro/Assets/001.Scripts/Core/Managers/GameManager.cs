@@ -61,6 +61,15 @@ public class Player
 {
     public ActorStatus status;
     public PlayerLevel level;
+    public PlayerData data;
+    public PlayerMove move;
+    public PlayerJump jump;
+    public PlayerFall fall;
+    public PlayerAttack attack;
+    public PlayerDash dash;
+    public PlayerDefence defence;
+    public PlayerHeal heal;
+
     public bool isBattle = false;
 
     private WaitForSeconds battleCheckTime = new WaitForSeconds(3);
@@ -129,6 +138,14 @@ public class Player
         status.currentATB += status.defaultRegenerationATBForce * Time.deltaTime;
         if (status.currentATB > status.CurrentMaxATB)
             status.currentATB = status.CurrentMaxATB;
+        Managers.UI.SceneUI.RedrawUI();
+    }
+
+    public void GetHP(int _getHpValue)
+    {
+        status.currentHP += _getHpValue;
+        if (status.currentHP > status.CurrentMaxHP)
+            status.currentHP = status.CurrentMaxHP;
         Managers.UI.SceneUI.RedrawUI();
     }
 }

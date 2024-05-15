@@ -7,9 +7,10 @@ public abstract class PlayerMove
     public PlayerController controller;
     public int level;
     public bool isCanMove;
+    public bool isMove;
 
     public abstract bool CheckMove();
-    public abstract void Move();
+    public abstract void Move(float _speed);
     public abstract bool CheckStop();
     public abstract bool CheckStopInJump();
     public void Stop()
@@ -27,6 +28,7 @@ namespace PlayerMoves
             controller = _controller;
             level = 1;
             isCanMove = true;
+            isMove = false;
         }
 
         public override bool CheckMove()
@@ -41,12 +43,17 @@ namespace PlayerMoves
             return false;
         }
 
-        public override void Move()
+        public override void Move(float _speed)
         {
-            if (Managers.Input.MoveAxis.x == 0f) return;
-            if (!isCanMove) return;
+            if (Managers.Input.MoveAxis.x == 0f || !isCanMove)
+            {
+                if (isMove) isMove = false;
+                return;
+            }
+            
             controller.ChangeDirection((Define.Direction)(int)Managers.Input.MoveAxis.x);
-            controller.rb.velocity = new Vector2(controller.status.CurrentSpeed * Managers.Input.MoveAxis.x, controller.rb.velocity.y);
+            controller.rb.velocity = new Vector2(_speed * Managers.Input.MoveAxis.x, controller.rb.velocity.y);
+            if (!isMove) isMove = true;
         }
 
         public override bool CheckStop()

@@ -7,8 +7,8 @@ public class Scene_Test : SceneBase
 {
     public override void Init()
     {
-        Managers.UI.ShowSceneUI<UIScene_Main>();
         Managers.Object.SpawnPlayerController(new Vector3(0, 10.5f, 0));
+        Managers.UI.ShowSceneUI<UIScene_Main>();
         Managers.Object.SpawnObstacle(0, new Vector3(-3.94f, -3.1f, 0));
         Managers.Object.SpawnObstacle(1, new Vector3(3.1f, -3.11f, 0));
         Managers.Object.SpawnTrigger(0, new Vector3(-10, -3f, 0));

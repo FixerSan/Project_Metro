@@ -62,13 +62,13 @@ namespace PlayerDashes
         public override void EndDash()
         {
             controller.rb.gravityScale = gravityScale;
-            controller.move.Stop();
+            controller.Move.Stop();
             controller.StartCoroutine(EndDashRoutine());
         }
 
         public override void StartDash()
         {
-            controller.attack.CancleAttackKnockback();
+            controller.Attack.CancleAttackKnockback();
             isCanDash = false;
             gravityScale = controller.rb.gravityScale;
             controller.rb.gravityScale = 0;

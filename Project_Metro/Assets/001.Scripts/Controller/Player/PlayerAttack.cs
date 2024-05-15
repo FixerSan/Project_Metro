@@ -16,8 +16,8 @@ public abstract class PlayerAttack
     public virtual void CancleAttackKnockback()
     {
         controller.StopCoroutine(AttackKnockbackRoutine());
-        controller.move.isCanMove = true;
-        controller.jump.isCanJump = true;
+        controller.Move.isCanMove = true;
+        controller.Jump.isCanJump = true;
     }
 }
 
@@ -80,8 +80,8 @@ namespace PlayerAttacks
                 //TODO :: 맞으면 뒤로 넉백 처리
                 if (_isHit)
                 {
-                    controller.move.isCanMove = false;
-                    controller.jump.isCanJump = false;
+                    controller.Move.isCanMove = false;
+                    controller.Jump.isCanJump = false;
                     controller.ChangeState(Define.PlayerState.Idle);
                     controller.rb.velocity = new Vector2(controller.AttackKnockbackForce, controller.rb.velocity.y);
                     controller.StartCoroutine(AttackKnockbackRoutine());
@@ -102,8 +102,8 @@ namespace PlayerAttacks
                 //TODO :: 맞으면 뒤로 넉백 처리
                 if(_isHit)
                 {
-                    controller.move.isCanMove = false;
-                    controller.jump.isCanJump = false;
+                    controller.Move.isCanMove = false;
+                    controller.Jump.isCanJump = false;
                     controller.ChangeState(Define.PlayerState.Idle);
                     controller.rb.velocity = new Vector2(-controller.AttackKnockbackForce, controller.rb.velocity.y);
                     controller.StartCoroutine(AttackKnockbackRoutine());
@@ -124,8 +124,8 @@ namespace PlayerAttacks
                 //TODO :: 맞으면 뒤로 넉백 처리
                 if (_isHit)
                 {
-                    controller.move.isCanMove = false;
-                    controller.jump.isCanJump = false;
+                    controller.Move.isCanMove = false;
+                    controller.Jump.isCanJump = false;
                     controller.ChangeState(Define.PlayerState.Idle);
                     controller.rb.velocity = new Vector2(controller.rb.velocity.x, -controller.AttackKnockbackForce);
                     controller.StartCoroutine(AttackKnockbackRoutine());
@@ -146,7 +146,7 @@ namespace PlayerAttacks
                 //TODO :: 맞으면 뒤로 넉백 처리
                 if (_isHit)
                 {
-                    controller.jump.isCanJump = false;
+                    controller.Jump.isCanJump = false;
                     controller.ChangeState(Define.PlayerState.Idle);
                     controller.rb.velocity = new Vector2(controller.rb.velocity.x, controller.downAttackKnockbackForce);
                     controller.StartCoroutine(AttackKnockbackRoutine());
@@ -164,9 +164,9 @@ namespace PlayerAttacks
         public override IEnumerator AttackKnockbackRoutine()
         {
             yield return new WaitForSeconds(0.25f);
-            controller.move.Stop();
-            controller.move.isCanMove = true;
-            controller.jump.isCanJump = true;
+            controller.Move.Stop();
+            controller.Move.isCanMove = true;
+            controller.Jump.isCanJump = true;
         }
     }
 

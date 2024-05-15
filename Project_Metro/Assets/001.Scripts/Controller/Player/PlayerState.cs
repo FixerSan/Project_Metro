@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 namespace PlayerState
 {
@@ -9,7 +10,7 @@ namespace PlayerState
     {
         public override void Enter(PlayerController _entity)
         {
-            _entity.move.Stop();
+            _entity.Move.Stop();
         }
 
         public override void Exit(PlayerController _entity)
@@ -24,12 +25,13 @@ namespace PlayerState
 
         public override void Update(PlayerController _entity)
         {
-            if (_entity.dash != null && _entity.dash.CheckDash()) return;
-            if (_entity.defence != null && _entity.defence.CheckDefence()) return;
-            if (_entity.fall.CheckFall()) return;
-            if (_entity.move.CheckMove()) return;
-            if (_entity.jump.CheckJump()) return;
-            _entity.attack.CheckAttack();
+            if (_entity.Dash != null && _entity.Dash.CheckDash()) return;
+            if (_entity.Defence != null && _entity.Defence.CheckDefence()) return;
+            if (_entity.Fall.CheckFall()) return;
+            if (_entity.Jump.CheckJump()) return;
+            if (_entity.heal.CheckHeal()) return;
+            if (_entity.Move.CheckMove()) return;
+            _entity.Attack.CheckAttack();
         }
     }
 
@@ -47,17 +49,18 @@ namespace PlayerState
 
         public override void FixedUpdate(PlayerController _entity)
         {
-            _entity.move.Move();
+            _entity.Move.Move(_entity.status.CurrentSpeed);
         }
 
         public override void Update(PlayerController _entity)
         {
-            if (_entity.dash != null && _entity.dash.CheckDash()) return;
-            if (_entity.defence != null && _entity.defence.CheckDefence()) return;
-            if (_entity.fall.CheckFall()) return;
-            if (_entity.move.CheckStop()) return;
-            if (_entity.jump.CheckJump()) return;
-            _entity.attack.CheckAttack();
+            if (_entity.Dash != null && _entity.Dash.CheckDash()) return;
+            if (_entity.Defence != null && _entity.Defence.CheckDefence()) return;
+            if (_entity.Move.CheckStop()) return;
+            if (_entity.Fall.CheckFall()) return;
+            if (_entity.Jump.CheckJump()) return;
+            if (_entity.heal.CheckHeal()) return;
+            _entity.Attack.CheckAttack();
         }
     }
 
@@ -65,28 +68,28 @@ namespace PlayerState
     {
         public override void Enter(PlayerController _entity)
         {
-            _entity.jump.StartJump();
+            _entity.Jump.StartJump();
             _entity.anim.SetBool("IsJump", true);
         }
 
         public override void Exit(PlayerController _entity)
         {
-            _entity.jump.EndJump();
+            _entity.Jump.EndJump();
             _entity.anim.SetBool("IsJump", false);
         }
 
         public override void FixedUpdate(PlayerController _entity)
         {
-            _entity.move.Move();
-            _entity.jump.Jump();
+            _entity.Move.Move(_entity.status.CurrentSpeed);
+            _entity.Jump.Jump();
         }
 
         public override void Update(PlayerController _entity)
         {
-            if (_entity.dash != null && _entity.dash.CheckDash()) return;
-            _entity.attack.CheckAttack();
-            if (_entity.jump.CheckEndJump()) return;
-            if (_entity.move.CheckStopInJump()) return;
+            if (_entity.Dash != null && _entity.Dash.CheckDash()) return;
+            _entity.Attack.CheckAttack();
+            if (_entity.Jump.CheckEndJump()) return;
+            if (_entity.Move.CheckStopInJump()) return;
         }
     }
 
@@ -101,20 +104,20 @@ namespace PlayerState
         public override void Exit(PlayerController _entity)
         {
             _entity.anim.SetBool("IsFall", false);
-            _entity.move.Stop();
+            _entity.Move.Stop();
 
         }
 
         public override void FixedUpdate(PlayerController _entity)
         {
-            _entity.move.Move();
+            _entity.Move.Move(_entity.status.CurrentSpeed);
         }
 
         public override void Update(PlayerController _entity)
         {
-            if (_entity.dash != null && _entity.dash.CheckDash()) return;
-            if (_entity.fall.CheckEndFall()) return;
-            _entity.attack.CheckAttack();
+            if (_entity.Dash != null && _entity.Dash.CheckDash()) return;
+            if (_entity.Fall.CheckEndFall()) return;
+            _entity.Attack.CheckAttack();
         }
     }
 
@@ -123,13 +126,13 @@ namespace PlayerState
         public override void Enter(PlayerController _entity)
         {
             _entity.anim.SetBool("IsDash", true);
-            _entity.dash.StartDash();
+            _entity.Dash.StartDash();
         }
 
         public override void Exit(PlayerController _entity)
         {
             _entity.anim.SetBool("IsDash", false);
-            _entity.dash.EndDash();
+            _entity.Dash.EndDash();
         }
 
         public override void FixedUpdate(PlayerController _entity)
@@ -139,7 +142,7 @@ namespace PlayerState
 
         public override void Update(PlayerController _entity)
         {
-            _entity.dash.Dash();
+            _entity.Dash.Dash();
         }
     }
 
@@ -148,7 +151,7 @@ namespace PlayerState
         public override void Enter(PlayerController _entity)
         {
             _entity.anim.SetBool("IsDefence", true);
-            _entity.move.Stop();
+            _entity.Move.Stop();
         }
 
         public override void Exit(PlayerController _entity)
@@ -162,7 +165,30 @@ namespace PlayerState
 
         public override void Update(PlayerController _entity)
         {
-            if (_entity.defence.CheckEndDefence()) return;
+            if (_entity.Defence.CheckEndDefence()) return;
+        }
+    }
+
+    public class Heal : State<PlayerController>
+    {
+        public override void Enter(PlayerController _entity)
+        {
+            _entity.heal.StartHeal();
+        }
+
+        public override void Exit(PlayerController _entity)
+        {
+            _entity.heal.CancelHeal();
+        }
+
+        public override void FixedUpdate(PlayerController _entity)
+        {
+            _entity.Move.Move(_entity.status.CurrentSpeed * 0.5f);
+        }
+
+        public override void Update(PlayerController _entity)
+        {
+            _entity.heal.SetAnimation();
         }
     }
 }

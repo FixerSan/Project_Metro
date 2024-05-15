@@ -12,6 +12,7 @@ public class UIScene_Main : UIScene
     {
         if(!base.Init()) return false;
         BindImage(typeof(Images));
+        BindText(typeof(Texts));
         BindSlider(typeof(Sliders));
         Bind<CanvasGroup>(typeof(CanvasGroups));
         slotPlace = Util.FindChild<Transform>(gameObject, "Trans_SlotPlace", true);
@@ -31,12 +32,6 @@ public class UIScene_Main : UIScene
 
     public override void RedrawUI()
     {
-        //HP
-        //for (int i = Managers.Game.player.status.CurrentMaxHP; i > Managers.Game.player.status.currentHP; i--)
-        //{
-        //    slots[i-1].Destroy();
-        //}
-
         //HP ¾÷
         if(Managers.Game.player.status.currentHP > nowHP)
         {
@@ -59,7 +54,6 @@ public class UIScene_Main : UIScene
             nowHP = Managers.Game.player.status.currentHP;
         }
 
-
         //ATB
         if (Managers.Game.player.isBattle)
         {
@@ -80,11 +74,24 @@ public class UIScene_Main : UIScene
                 GetSlider((int)Sliders.Slider_ATB).gameObject.SetActive(false);
             };
         }
+
+        //HealCount
+        GetText((int)Texts.Text_HealCount).text = $"{Managers.Game.player.heal.currentCanHealCount}/{Managers.Game.player.heal.maxHealCount}";
+        if (Managers.Game.player.heal.currentCanHealCount == 0)
+            GetImage((int)Images.Image_HealCountDisablePanel).gameObject.SetActive(true);
+        else if(GetImage((int)Images.Image_HealCountDisablePanel).gameObject.activeSelf)
+            GetImage((int)Images.Image_HealCountDisablePanel).gameObject.SetActive(false);
+
     }
 
     public enum Images
     {
+        Image_HealCountDisablePanel
+    }
 
+    public enum Texts
+    {
+        Text_HealCount
     }
 
     public enum Sliders
