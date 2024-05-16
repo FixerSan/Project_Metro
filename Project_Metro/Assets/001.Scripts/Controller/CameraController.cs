@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
         Managers.Screen.SetCamera(this);
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (target == null) return;
         FollowTarget();
