@@ -24,14 +24,14 @@ public class NormalAttack : MonoBehaviour
         init = true;
     }
 
-    public void Attack(Action<bool> _callback)
+    public void Attack(Action<bool> _attackCallback, Action<bool> _knockbackCallback)
     {
         if (!init) return;
         //TODO :: 애니메이션 실행
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(attackRangeTrans.position, attackRangeTrans.localScale, 0);
-
         IHitable hitter = null;
         bool isHit = false;
+        bool isKnockback = false;
         for (int i = 0; i < collider2Ds.Length; i++) 
         {
             hitter = collider2Ds[i].GetComponent<IHitable>();
@@ -40,12 +40,17 @@ public class NormalAttack : MonoBehaviour
                 if (hitter.Tag == "Player")
                     continue;
 
-                hitter.Hit(controller.status.CurrentDamageForce);
+                hitter.Hit(controller.status.CurrentDamageForce, controller);
                 isHit = true;
+
+                if (isKnockback) continue;
+                if (controller.status.CurrentKnockbackLevel <= hitter.KnockbackLevel)
+                    isKnockback = true;
             }
         }
 
-        _callback?.Invoke(isHit);
+        _attackCallback?.Invoke(isHit);
+        _knockbackCallback?.Invoke(isKnockback);
     }
 
     public IEnumerator EndRoutine()

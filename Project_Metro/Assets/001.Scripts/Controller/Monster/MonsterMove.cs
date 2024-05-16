@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class MonsterMove
 {
     public MonsterController controller;
+    public bool isCanMove = true;
     public abstract bool CheckMove();
     public abstract void Move();
 
@@ -27,6 +28,7 @@ namespace MonsterMovemets
 
         public override bool CheckFollow()
         {
+            if (!isCanMove) return false;
             if (controller.status.attackCooltime > 0) return false;
 
             if (controller.attackTarget != null)
@@ -55,6 +57,7 @@ namespace MonsterMovemets
 
         public override void Follow()
         {
+            if (!isCanMove) return;
             if (controller.attackTarget.transform.position.x - controller.transform.position.x <= 0) controller.ChangeDirection(Define.Direction.Left);
             else if (controller.attackTarget.transform.position.x - controller.transform.position.x > 0) controller.ChangeDirection(Define.Direction.Right);
 

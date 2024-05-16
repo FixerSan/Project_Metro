@@ -191,4 +191,28 @@ namespace PlayerState
             _entity.heal.SetAnimation();
         }
     }
+
+    public class Hit : State<PlayerController>
+    {
+        public override void Enter(PlayerController _entity)
+        {
+            
+        }
+
+        public override void Exit(PlayerController _entity)
+        {
+            _entity.isCanHit = true;
+            _entity.Move.Stop();
+        }
+
+        public override void FixedUpdate(PlayerController _entity)
+        {
+
+        }
+
+        public override void Update(PlayerController _entity)
+        {
+
+        }
+    }
 }

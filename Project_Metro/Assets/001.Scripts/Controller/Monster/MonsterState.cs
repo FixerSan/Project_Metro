@@ -123,5 +123,28 @@ namespace MonsterState
 
             }
         }
+
+        public class Hit : State<MonsterController>
+        {
+            public override void Enter(MonsterController _entity)
+            {
+                _entity.DeathEffect();
+            }
+
+            public override void Exit(MonsterController _entity)
+            {
+
+            }
+
+            public override void FixedUpdate(MonsterController _entity)
+            {
+
+            }
+
+            public override void Update(MonsterController _entity)
+            {
+
+            }
+        }
     }
 }

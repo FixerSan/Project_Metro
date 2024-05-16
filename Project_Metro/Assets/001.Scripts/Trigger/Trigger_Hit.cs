@@ -6,9 +6,14 @@ public class Trigger_Hit : Trigger, IHitable
 {
     public string Tag { get { return gameObject.tag; } }
     public int HP { get { return hp; } set { hp = value; } }
+
+    public int KnockbackLevel { get { return knockbackLevel; } }
+
+    public int knockbackLevel;
+
     public int hp;
 
-    public void Hit(int _damage)
+    public void Hit(int _damage, Actor _attacker)
     {
         HP -= _damage;
         CheckHP();

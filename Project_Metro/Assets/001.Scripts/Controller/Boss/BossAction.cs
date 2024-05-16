@@ -127,6 +127,15 @@ namespace BossActions
                 stateType = _stateType;
                 downAttackTrans = Util.FindChild<Transform>(controller.gameObject, "Trans_DownAttackPosition", true);
             }
+            public override bool CheckAction()
+            {
+                if (!base.CheckAction()) return false;
+
+                if (controller.isRightSide || controller.isLeftSide)
+                    if (!controller.IsGround)
+                        return true;
+                return false;
+            }
 
             public override void StartAction()
             {
@@ -164,15 +173,6 @@ namespace BossActions
             }
 
 
-            public override bool CheckAction()
-            {
-                if (!base.CheckAction()) return false;
-
-                if (controller.isRightSide || controller.isLeftSide)
-                    if (!controller.IsGround)
-                        return true;
-                return false;
-            }
 
             public override void EndAction()
             {

@@ -28,7 +28,9 @@ public abstract class Actor : MonoBehaviour, IHitable
 
     public string Tag { get { return gameObject.tag; } }
 
-    public virtual void Hit(int _damage)
+    public int KnockbackLevel { get { return status.CurrentKnockbackLevel; } }
+
+    public virtual void Hit(int _damage, Actor _attacker)
     {
         if (status.currentHP <= 0) return;
         status.currentHP -= _damage;
@@ -78,57 +80,27 @@ public class ActorStatus
 {
     public int defaultMaxHP;
     public int plusMaxHP;
-    public int CurrentMaxHP 
-    {
-        get
-        {
-            return defaultMaxHP + plusMaxHP;
-        }
-    }
+    public int CurrentMaxHP { get { return defaultMaxHP + plusMaxHP; } }
 
     public int currentHP;
 
     public float defaultSpeed;
     public float plusSpeed;
-    public float CurrentSpeed 
-    {
-        get
-        {
-            return defaultSpeed + plusSpeed;
-        }
-    }
+    public float CurrentSpeed { get { return defaultSpeed + plusSpeed; } }
 
     public float defaultJumpForce;
     public float plusJumpForce;
 
-    public float CurrentJumpForce
-    {
-        get
-        {
-            return defaultJumpForce + plusJumpForce;
-        }
-    }
+    public float CurrentJumpForce { get { return defaultJumpForce + plusJumpForce; } }
 
     public int defaultDamageForce;
     public int plusDamageForce;
 
-    public int CurrentDamageForce
-    {
-        get
-        {
-            return defaultDamageForce + plusDamageForce;
-        }
-    }
+    public int CurrentDamageForce { get { return defaultDamageForce + plusDamageForce; } }
 
     public float defaultAttackSpeed;
     public float plusAttackSpeed;
-    public float CurrentAttackSpeed
-    {
-        get
-        {
-            return defaultAttackSpeed + plusAttackSpeed;
-        }
-    }
+    public float CurrentAttackSpeed { get { return defaultAttackSpeed + plusAttackSpeed; } }
 
     public float attackCooltime;
 
@@ -136,23 +108,16 @@ public class ActorStatus
 
     public float defaultMaxATB;
     public float plusMaxATB;
-    public float CurrentMaxATB
-    {
-        get
-        {
-            return defaultMaxATB + plusMaxATB;
-        }
-    }
+    public float CurrentMaxATB { get { return defaultMaxATB + plusMaxATB; } }
 
     public float defaultRegenerationATBForce;
-    public float plisRegenerationATBForce;
-    public float CurrentRegenerationATBForce
-    {
-        get
-        {
-            return defaultRegenerationATBForce + plisRegenerationATBForce;
-        }
-    }
+    public float plusRegenerationATBForce;
+    public float CurrentRegenerationATBForce { get { return defaultRegenerationATBForce + plusRegenerationATBForce; } }
+
+    public int defaultKnockBackLevel;
+    public int plusKnockBackLevel;
+
+    public int CurrentKnockbackLevel { get{ return defaultKnockBackLevel + plusKnockBackLevel; } }
 
     public ActorStatus()
     {

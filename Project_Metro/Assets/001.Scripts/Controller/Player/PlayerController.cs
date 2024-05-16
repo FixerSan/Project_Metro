@@ -20,6 +20,7 @@ public class PlayerController : Actor
     public PlayerDefence Defence { get { return Player.defence; } }
     public PlayerHeal heal { get { return Player.heal; } }
 
+
     public Dictionary<Define.PlayerState, State<PlayerController>> states;
     public StateMachine<PlayerController> fsm;
 
@@ -31,8 +32,11 @@ public class PlayerController : Actor
     public Transform upAttackTrans;
     public Transform downAttackTrans;
 
-    public float AttackKnockbackForce;
+    public float attackKnockbackForce;
     public float downAttackKnockbackForce;
+
+    public float hitKnockbackForce;
+    public float hitTime;
 
     public bool isCanHit = true;
 
@@ -58,6 +62,7 @@ public class PlayerController : Actor
         states.Add(Define.PlayerState.Dash, new PlayerState.Dash());
         states.Add(Define.PlayerState.Defence, new PlayerState.Defence());
         states.Add(Define.PlayerState.Heal, new PlayerState.Heal()) ;
+        states.Add(Define.PlayerState.Hit, new PlayerState.Hit()) ;
         fsm = new StateMachine<PlayerController>(this, states[Define.PlayerState.Idle]);
         #endregion
 
@@ -106,16 +111,47 @@ public class PlayerController : Actor
         fsm.FixedUpdate();
     }
 
-    public override void Hit(int _damage)
+    public override void Hit(int _damage, Actor _attacker)
     {
         if (!isCanHit) return; 
         if(CurrentState == Define.PlayerState.Defence)
         {
-            base.Hit(_damage - Defence.defenceForce);
+            base.Hit(_damage - Defence.defenceForce, _attacker);
             return;
         }
-        base.Hit(_damage);
+        isCanHit = false;
+        base.Hit(_damage, _attacker);
+        ChangeState(Define.PlayerState.Hit);
+        StartCoroutine(HitRoutine());
+
+
+        Vector2 knockbackDir = Vector2.zero;
+        if(transform.position.x - _attacker.transform.position.x < 0)
+        {
+            ChangeDirection(Define.Direction.Right);
+            knockbackDir.x = -1f * attackKnockbackForce;
+        }    
+        else
+        {
+            ChangeDirection(Define.Direction.Left);
+            knockbackDir.x = 1f * attackKnockbackForce;
+        }
+        knockbackDir.y = 1f;
+        HitKnockback(knockbackDir);
     }
+    private IEnumerator HitRoutine()
+    {
+        yield return new WaitForSeconds(hitTime);
+        ChangeState(Define.PlayerState.Idle);
+    }
+
+    private void HitKnockback(Vector2 _knockbackDirection)
+    {
+        rb.velocity = Vector2.zero;
+        rb.AddForce(_knockbackDirection, ForceMode2D.Impulse);
+        StartCoroutine(HitRoutine());
+    }
+
 
     public override void Death()
     {

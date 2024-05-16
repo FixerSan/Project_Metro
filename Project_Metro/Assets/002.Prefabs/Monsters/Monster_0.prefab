@@ -128,7 +128,9 @@ MonoBehaviour:
     defaultMaxATB: 3
     plusMaxATB: 0
     defaultRegenerationATBForce: 0.1
-    plisRegenerationATBForce: 0
+    plusRegenerationATBForce: 0
+    defaultKnockBackLevel: 0
+    plusKnockBackLevel: 0
   groundCheckTrans: {fileID: 0}
   rb: {fileID: 0}
   anim: {fileID: 0}
@@ -143,6 +145,8 @@ MonoBehaviour:
   attackTarget: {fileID: 0}
   attackTime: 0.5
   deathTime: 1
+  attackKnockbackForce: 5
+  hitTime: 0.2
   isBattle: 0
 --- !u!70 &7152323217704238775
 CapsuleCollider2D:

@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2048098785155762483}
   - component: {fileID: 7025162211053871488}
   - component: {fileID: 2393820619913760238}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trigger_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canWorkAgain: 0
   index: 1
+  knockbackLevel: 0
   hp: 0
 --- !u!58 &7025162211053871488
 CircleCollider2D:

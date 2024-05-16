@@ -83,9 +83,12 @@ namespace PlayerAttacks
                     controller.Move.isCanMove = false;
                     controller.Jump.isCanJump = false;
                     controller.ChangeState(Define.PlayerState.Idle);
-                    controller.rb.velocity = new Vector2(controller.AttackKnockbackForce, controller.rb.velocity.y);
-                    controller.StartCoroutine(AttackKnockbackRoutine());
                 }
+            }, (_isKnockback) =>
+            {
+                if (!_isKnockback) return;
+                controller.rb.velocity = new Vector2(controller.attackKnockbackForce, controller.rb.velocity.y);
+                controller.StartCoroutine(AttackKnockbackRoutine());
             });
             controller.StartCoroutine(AttackRoutine());
         }
@@ -105,9 +108,12 @@ namespace PlayerAttacks
                     controller.Move.isCanMove = false;
                     controller.Jump.isCanJump = false;
                     controller.ChangeState(Define.PlayerState.Idle);
-                    controller.rb.velocity = new Vector2(-controller.AttackKnockbackForce, controller.rb.velocity.y);
-                    controller.StartCoroutine(AttackKnockbackRoutine());
                 }
+            }, (_isKnockback) => 
+            {
+                if (!_isKnockback) return;
+                controller.rb.velocity = new Vector2(-controller.attackKnockbackForce, controller.rb.velocity.y);
+                controller.StartCoroutine(AttackKnockbackRoutine());
             });
             controller.StartCoroutine(AttackRoutine());
         }
@@ -127,10 +133,10 @@ namespace PlayerAttacks
                     controller.Move.isCanMove = false;
                     controller.Jump.isCanJump = false;
                     controller.ChangeState(Define.PlayerState.Idle);
-                    controller.rb.velocity = new Vector2(controller.rb.velocity.x, -controller.AttackKnockbackForce);
+                    controller.rb.velocity = new Vector2(controller.rb.velocity.x, -controller.attackKnockbackForce);
                     controller.StartCoroutine(AttackKnockbackRoutine());
                 }
-            });
+            },null);
             controller.StartCoroutine(AttackRoutine());
         }
 
@@ -151,7 +157,7 @@ namespace PlayerAttacks
                     controller.rb.velocity = new Vector2(controller.rb.velocity.x, controller.downAttackKnockbackForce);
                     controller.StartCoroutine(AttackKnockbackRoutine());
                 }
-            });
+            },null);
             controller.StartCoroutine(AttackRoutine());
         } 
 

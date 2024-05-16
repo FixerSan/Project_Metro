@@ -6,5 +6,6 @@ public interface IHitable
 {
     public int HP { get; set; }
     public string Tag { get; }
-    public abstract void Hit(int _damage);
+    public int KnockbackLevel { get; }
+    public abstract void Hit(int _damage, Actor _attacker);
 }

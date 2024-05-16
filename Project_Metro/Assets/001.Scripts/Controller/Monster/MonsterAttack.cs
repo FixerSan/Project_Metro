@@ -32,7 +32,7 @@ namespace MonsterAttacks
                 player = collider2Ds[i].GetComponent<IHitable>();
                 if (player != null && player.Tag == "Player")
                 {
-                    player.Hit(controller.status.CurrentDamageForce);
+                    player.Hit(controller.status.CurrentDamageForce, controller);
                 }
             }
         }

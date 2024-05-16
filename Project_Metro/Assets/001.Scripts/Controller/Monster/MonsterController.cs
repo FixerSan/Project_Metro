@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,11 +18,14 @@ public abstract class MonsterController : Actor
 
     public Transform detectRangeTrans;
     public Transform attackTrans;
-    public PlayerController attackTarget;
+    public Actor  attackTarget;
     public float attackTime = 0.5f;
     public float deathTime = 1f;
 
     private Coroutine deathCoroutine;
+
+    public float attackKnockbackForce;
+    public float hitTime;
 
     public bool isBattle;
 
@@ -81,6 +85,8 @@ public abstract class MonsterController : Actor
         if (deathCoroutine != null) return;
         isBattle = false;
         anim.SetTrigger("Dead");
+        attackTarget = null;
+        move.isCanMove = false;
         move.Stop();
         StopAllCoroutines();
         deathCoroutine = StartCoroutine(DeathRoutine());
@@ -96,6 +102,45 @@ public abstract class MonsterController : Actor
     {
         isBattle = true;
         Managers.Game.player.StartBattle();
+    }
+    public override void Hit(int _damage, Actor _attacker)
+    {
+        base.Hit(_damage, _attacker);
+        attackTarget = _attacker;
+        if(CurrentState != Define.MonsterState.Death)
+            ChangeState(Define.MonsterState.Follow);
+    
+        if (KnockbackLevel <= _attacker.KnockbackLevel)
+        {
+            Vector2 knockbackDir = Vector2.zero;
+            if (transform.position.x - _attacker.transform.position.x < 0)
+            {
+                ChangeDirection(Define.Direction.Right);
+                knockbackDir.x = -1f * attackKnockbackForce;
+            }
+            else
+            {
+                ChangeDirection(Define.Direction.Left);
+                knockbackDir.x = 1f * attackKnockbackForce;
+            }
+            knockbackDir.y = 1f;
+            HitKnockback(knockbackDir);
+        }
+    }
+
+    public void HitKnockback(Vector2 _knockbackDirection)
+    {
+        move.isCanMove = false;
+        rb.velocity = Vector2.zero;
+        rb.AddForce(_knockbackDirection, ForceMode2D.Impulse);
+        StartCoroutine(HitRoutine());
+    }
+
+    public IEnumerator HitRoutine()
+    {
+        yield return new WaitForSeconds(hitTime);
+        move.isCanMove = true;
+        move.Stop();
     }
 
     private void OnDrawGizmos()
