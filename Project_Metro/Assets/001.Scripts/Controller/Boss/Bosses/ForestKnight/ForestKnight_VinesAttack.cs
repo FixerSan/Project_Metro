@@ -47,7 +47,7 @@ public class ForestKnight_VinesAttack : MonoBehaviour
         if (!isAttack) return;
         if(collision.CompareTag("Player"))
         {
-            collision.GetComponent<IHitable>().Hit(controller.status.CurrentDamageForce);
+            collision.GetComponent<IHitable>().Hit(controller.status.CurrentDamageForce, controller);
             Debug.Log("°ø°Ý µÊ");
         }
     }
