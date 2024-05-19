@@ -25,6 +25,7 @@ public abstract class MonsterController : Actor
     private Coroutine deathCoroutine;
 
     public float attackKnockbackForce;
+    public float hitKnockbackForce;
     public float hitTime;
 
     public bool isBattle;
@@ -116,12 +117,12 @@ public abstract class MonsterController : Actor
             if (transform.position.x - _attacker.transform.position.x < 0)
             {
                 ChangeDirection(Define.Direction.Right);
-                knockbackDir.x = -1f * attackKnockbackForce;
+                knockbackDir.x = -1f * hitKnockbackForce;
             }
             else
             {
                 ChangeDirection(Define.Direction.Left);
-                knockbackDir.x = 1f * attackKnockbackForce;
+                knockbackDir.x = 1f * hitKnockbackForce;
             }
             knockbackDir.y = 1f;
             HitKnockback(knockbackDir);

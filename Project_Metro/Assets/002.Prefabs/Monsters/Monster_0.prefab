@@ -129,7 +129,7 @@ MonoBehaviour:
     plusMaxATB: 0
     defaultRegenerationATBForce: 0.1
     plusRegenerationATBForce: 0
-    defaultKnockBackLevel: 0
+    defaultKnockBackLevel: 5
     plusKnockBackLevel: 0
   groundCheckTrans: {fileID: 0}
   rb: {fileID: 0}
@@ -146,6 +146,7 @@ MonoBehaviour:
   attackTime: 0.5
   deathTime: 1
   attackKnockbackForce: 5
+  hitKnockbackForce: 5
   hitTime: 0.2
   isBattle: 0
 --- !u!70 &7152323217704238775

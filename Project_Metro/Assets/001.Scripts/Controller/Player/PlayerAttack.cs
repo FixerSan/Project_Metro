@@ -87,6 +87,7 @@ namespace PlayerAttacks
             }, (_isKnockback) =>
             {
                 if (!_isKnockback) return;
+                controller.Move.isCanMove = false;
                 controller.rb.velocity = new Vector2(controller.attackKnockbackForce, controller.rb.velocity.y);
                 controller.StartCoroutine(AttackKnockbackRoutine());
             });
@@ -103,15 +104,16 @@ namespace PlayerAttacks
             attack.Attack((_isHit) =>
             {
                 //TODO :: 맞으면 뒤로 넉백 처리
-                if(_isHit)
+                if (_isHit)
                 {
                     controller.Move.isCanMove = false;
                     controller.Jump.isCanJump = false;
                     controller.ChangeState(Define.PlayerState.Idle);
                 }
-            }, (_isKnockback) => 
+            }, (_isKnockback) =>
             {
                 if (!_isKnockback) return;
+                controller.Move.isCanMove = false;
                 controller.rb.velocity = new Vector2(-controller.attackKnockbackForce, controller.rb.velocity.y);
                 controller.StartCoroutine(AttackKnockbackRoutine());
             });

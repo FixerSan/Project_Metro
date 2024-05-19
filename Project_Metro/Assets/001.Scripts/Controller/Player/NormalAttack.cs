@@ -34,6 +34,13 @@ public class NormalAttack : MonoBehaviour
         bool isKnockback = false;
         for (int i = 0; i < collider2Ds.Length; i++) 
         {
+            //º® ÃÆÀ» ¶§ ³Ë¹é
+            if (collider2Ds[i].CompareTag("Wall"))
+            {
+                isKnockback = true;
+                continue;
+            }
+
             hitter = collider2Ds[i].GetComponent<IHitable>();
             if(hitter != null)
             {
