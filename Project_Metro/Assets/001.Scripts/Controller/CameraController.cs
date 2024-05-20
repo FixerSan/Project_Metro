@@ -32,6 +32,11 @@ public class CameraController : MonoBehaviour
         offset = _offset;
     }
 
+    public void SetTarget(Transform _target)
+    {
+        target = _target;
+    }
+
     public void FollowTarget()
     {
         Vector3 followPos;

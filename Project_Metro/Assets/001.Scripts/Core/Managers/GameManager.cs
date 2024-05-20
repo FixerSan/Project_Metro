@@ -27,10 +27,13 @@ public class GameManager : Singleton<GameManager>
             Managers.Data.LoadData(() =>
             {
                 SetPlayer();
-                Managers.Scene.LoadScene(Define.Scene.Scene_Test, _loadCallback:() => 
+                DebugSettings debugSettings = Managers.Resource.Load<GameObject>("DebugSettings").GetComponent<DebugSettings>();
+                if(debugSettings.isPlayerSpawn)
+                    Managers.Object.SpawnPlayerController(debugSettings.playerSpawnPosition);
+                Managers.Screen.CameraController.SetTarget(Managers.Object.SpawnPlayerController(debugSettings.playerSpawnPosition).transform);
+                Managers.Scene.LoadScene(debugSettings.TestScene, _loadCallback:() => 
                 {
                     init = true;
-                    GameObject.Find("@TestController").GetComponent<TestController>().Init();   
                 });
             });
         });

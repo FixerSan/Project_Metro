@@ -120,6 +120,7 @@ public class ResourceManager
         else if (typeof(T) == typeof(AudioClip)) _key = _key + ".AudioClip";
         else if (typeof(T) == typeof(Sprite)) _key = _key + ".sprite";
         else if (typeof(T) == typeof(RuntimeAnimatorController)) _key = _key + ".controller";
+        else if (typeof(T) == typeof(DebugSettings)) _key = _key + ".asset";
 
         return _key;
     }

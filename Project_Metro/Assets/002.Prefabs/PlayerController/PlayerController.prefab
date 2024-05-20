@@ -288,8 +288,8 @@ MonoBehaviour:
     currentHP: 0
     defaultSpeed: 5
     plusSpeed: 0
-    defaultJumpForce: 0
-    plusJumpForce: 12.5
+    defaultJumpForce: 12.5
+    plusJumpForce: 0
     defaultDamageForce: 5
     plusDamageForce: 0
     defaultAttackSpeed: 0

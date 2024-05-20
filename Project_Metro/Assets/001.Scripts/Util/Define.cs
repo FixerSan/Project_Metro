@@ -24,7 +24,7 @@ public class Define
 
     public enum Scene
     {
-        Scene_Test, Scene_TestBoss
+        Scene_Test, Scene_TestBoss, Scene_DarkForest
     }
 
     public enum SoundType
