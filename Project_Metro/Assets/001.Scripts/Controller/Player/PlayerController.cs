@@ -37,6 +37,7 @@ public class PlayerController : Actor
 
     public float hitKnockbackForce;
     public float hitTime;
+    public float hitDuration;
 
     public bool isCanHit = true;
 
@@ -122,34 +123,40 @@ public class PlayerController : Actor
         isCanHit = false;
         base.Hit(_damage, _attacker);
         ChangeState(Define.PlayerState.Hit);
-        StartCoroutine(HitRoutine());
+        HitEffect(_attacker);
+    }
 
+    public void HitEffect(Actor _attacker)
+    {
+        HitKnockback(_attacker);
+        Util.AddTimer(hitTime, () =>
+        {
+            ChangeState(Define.PlayerState.Idle);
+        });
 
+        Util.AddTimer(hitDuration, () => 
+        {
+            isCanHit = true;
+        });
+    }
+
+    private void HitKnockback(Actor _attacker)
+    {
         Vector2 knockbackDir = Vector2.zero;
-        if(transform.position.x - _attacker.transform.position.x < 0)
+        if (transform.position.x - _attacker.transform.position.x < 0)
         {
             ChangeDirection(Define.Direction.Right);
             knockbackDir.x = -1f * hitKnockbackForce;
-        }    
+        }
         else
         {
             ChangeDirection(Define.Direction.Left);
             knockbackDir.x = 1f * hitKnockbackForce;
         }
         knockbackDir.y = 1f;
-        HitKnockback(knockbackDir);
-    }
-    private IEnumerator HitRoutine()
-    {
-        yield return new WaitForSeconds(hitTime);
-        ChangeState(Define.PlayerState.Idle);
-    }
 
-    private void HitKnockback(Vector2 _knockbackDirection)
-    {
         rb.velocity = Vector2.zero;
-        rb.AddForce(_knockbackDirection, ForceMode2D.Impulse);
-        StartCoroutine(HitRoutine());
+        rb.AddForce(knockbackDir, ForceMode2D.Impulse);
     }
 
 

@@ -316,6 +316,7 @@ MonoBehaviour:
   downAttackKnockbackForce: 7.5
   hitKnockbackForce: 5
   hitTime: 0.2
+  hitDuration: 1
   isCanHit: 1
 --- !u!50 &4505400034906255061
 Rigidbody2D:

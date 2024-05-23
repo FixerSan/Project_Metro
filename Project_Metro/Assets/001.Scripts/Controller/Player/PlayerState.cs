@@ -201,7 +201,6 @@ namespace PlayerState
 
         public override void Exit(PlayerController _entity)
         {
-            _entity.isCanHit = true;
             _entity.Move.Stop();
         }
 

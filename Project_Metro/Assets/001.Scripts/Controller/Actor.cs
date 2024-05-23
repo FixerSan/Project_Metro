@@ -34,7 +34,7 @@ public abstract class Actor : MonoBehaviour, IHitable
     {
         if (status.currentHP <= 0) return;
         status.currentHP -= _damage;
-        Managers.UI.SceneUI.RedrawUI();
+        Managers.UI.SceneUI?.RedrawUI();
         if (status.currentHP <= 0)
             Death();
     }
