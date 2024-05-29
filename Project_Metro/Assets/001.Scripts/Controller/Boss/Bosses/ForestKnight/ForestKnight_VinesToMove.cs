@@ -27,6 +27,8 @@ public class ForestKnight_VinesToMove : MonoBehaviour
         line.positionCount = 2;
 
         startPoint = _startPoint;
+        if (_moveDirection.x < 0) endPoint.localEulerAngles = new Vector3(0, 0, 335);
+        if (_moveDirection.x > 0) endPoint.localEulerAngles = new Vector3(0, 0, 207);
         moveDirection = _moveDirection;
         endPoint.position = _startPoint.position;
 
