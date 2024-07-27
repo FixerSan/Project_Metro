@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e36db1c889555844a888b42bf85cdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestScene: 1
+  TestScene: 0
   isPlayerSpawn: 1
   playerSpawnPosition: {x: 0, y: 0}

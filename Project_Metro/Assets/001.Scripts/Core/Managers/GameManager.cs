@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
     public bool init = false;
     public Player player;
     public Transform respawnTrans;
+    public int nowSavePointIndex;
     
     public void Awake()
     {
@@ -46,6 +47,15 @@ public class GameManager : Singleton<GameManager>
         player.level = JsonUtility.FromJson<PlayerLevel>(Managers.Data.playerData.levelJson);
     }
 
+    public void SaveGame(int _savePointIndex)
+    {
+        player.save.Save(() => 
+        {
+            nowSavePointIndex = _savePointIndex; 
+            Managers.Data.SaveData();
+        });
+    }
+
     public void OnApplicationPause(bool pause)
     {
         if(pause)
@@ -72,6 +82,7 @@ public class Player
     public PlayerDash dash;
     public PlayerDefence defence;
     public PlayerHeal heal;
+    public PlayerSave save;
 
     public bool isBattle = false;
 
@@ -81,6 +92,7 @@ public class Player
     public void Update()
     {
         CheckRegenerationATB();
+        Managers.UI.SceneUI.RedrawUI();
     }
 
     public void RespawnPlayer()
@@ -119,7 +131,7 @@ public class Player
     {
         isBattle = false;
         if (battleCoroutine == null) Managers.Routine.StopCoroutine(battleCoroutine);
-        Managers.UI.SceneUI.RedrawUI();
+        Managers.UI.SceneUI?.RedrawUI();
         Managers.Routine.StartCoroutine(EndBattleRoutine());
     }
 
@@ -141,7 +153,7 @@ public class Player
         status.currentATB += status.defaultRegenerationATBForce * Time.deltaTime;
         if (status.currentATB > status.CurrentMaxATB)
             status.currentATB = status.CurrentMaxATB;
-        Managers.UI.SceneUI.RedrawUI();
+        Managers.UI.SceneUI?.RedrawUI();
     }
 
     public void GetHP(int _getHpValue)
@@ -149,10 +161,11 @@ public class Player
         status.currentHP += _getHpValue;
         if (status.currentHP > status.CurrentMaxHP)
             status.currentHP = status.CurrentMaxHP;
-        Managers.UI.SceneUI.RedrawUI();
+        Managers.UI.SceneUI?.RedrawUI();
     }
 }
 
+[System.Serializable]
 [SerializeField]
 public class PlayerLevel
 {
@@ -162,4 +175,16 @@ public class PlayerLevel
     public int attackLevel = 1;
     public int dashLevel = 1;
     public int defenseLevel = 1;
+}
+
+[System.Serializable]
+public class GameData
+{
+    public int savePointIndex = 0;
+    public int savePlayerHP;
+    public GameData(int _savePointIndex, int _savePlayerHP)
+    {
+        savePointIndex = _savePointIndex;
+        savePlayerHP = _savePlayerHP;
+    }
 }

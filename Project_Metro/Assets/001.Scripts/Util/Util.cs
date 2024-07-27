@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -82,6 +83,14 @@ public static class Util
         {
             timers[i].CheckTimer();
         }
+    }
+
+    public static void SaveJson(string _json, string _fileName)
+    {
+        string path = Path.Combine(Application.dataPath, $"006.Datas/{_fileName}");
+
+        File.WriteAllText(path, _json);
+
     }
 }
 

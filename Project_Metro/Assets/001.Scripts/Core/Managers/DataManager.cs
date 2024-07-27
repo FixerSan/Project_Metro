@@ -7,6 +7,7 @@ using UnityEngine;
 public class DataManager 
 {
     public PlayerData playerData;
+    public GameData gameData;
     public Dictionary<int, MonsterData> monsterDatas = new Dictionary<int, MonsterData>();
     public Dictionary<int, BossData> bossDatas = new Dictionary<int, BossData>();
     public Dictionary<int, DialogData> dialogDatas = new Dictionary<int, DialogData>();
@@ -15,6 +16,7 @@ public class DataManager
     #region Save
     public void SaveData()
     {
+        SaveGameData();
         SavePlayerData();
     }
 
@@ -28,10 +30,18 @@ public class DataManager
         data.levelJson = JsonUtility.ToJson(Managers.Game.player.level, true);
 
         string dataJson = JsonUtility.ToJson(data, true);
-        string path = Path.Combine(Application.dataPath, "006.Datas/PlayerData.json");
 
-        File.WriteAllText(path, dataJson);
+        Util.SaveJson(dataJson, "PlayerData.Json");
     }
+
+    public void SaveGameData()
+    {
+        GameData gameData = new GameData(Managers.Game.nowSavePointIndex, Managers.Game.player.status.currentHP);
+        string dataJson = JsonUtility.ToJson(gameData, true);
+
+        Util.SaveJson(dataJson, "GameData.Json");
+    }
+
     #endregion
     #region Load
     public void LoadData(Action _callback)
@@ -62,6 +72,11 @@ public class DataManager
         DialogDatas dialogDataArray = JsonUtility.FromJson<DialogDatas>(dialogDataJson);
         for (int i = 0; i < dialogDataArray.datas.Length; i++)
             dialogDatas.Add(dialogDataArray.datas[i].index, dialogDataArray.datas[i]);
+    }
+
+    public void LoadGameData()
+    {
+
     }
     #endregion
     #region Get

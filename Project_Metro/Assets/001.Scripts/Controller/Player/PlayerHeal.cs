@@ -47,7 +47,7 @@ public class PlayerHeal
     public void StartHeal()
     {
         currentCanHealCount--;
-        Managers.UI.SceneUI.RedrawUI();
+        Managers.UI.SceneUI?.RedrawUI();
         healCoroutine = controller.StartCoroutine(HealRoutine());
     }
 

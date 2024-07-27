@@ -114,6 +114,7 @@ public class ObjectManager
         if (Managers.Game.player.level.defenseLevel == 1) Managers.Game.player.defence = new PlayerDefenses.One(player);
 
         Managers.Game.player.heal = new PlayerHeal(player);
+        Managers.Game.player.save = new PlayerSave(player); 
     }
 
     public NormalAttack SpawnAttack(Actor _attacker, Transform _attackPos, Define.PlayerAttackDirection _attackDirection)

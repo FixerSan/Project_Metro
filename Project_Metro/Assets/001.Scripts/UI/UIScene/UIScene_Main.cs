@@ -82,6 +82,8 @@ public class UIScene_Main : UIScene
         else if(GetImage((int)Images.Image_HealCountDisablePanel).gameObject.activeSelf)
             GetImage((int)Images.Image_HealCountDisablePanel).gameObject.SetActive(false);
 
+        GetText((int)Texts.Text_PlayerState).text = Managers.Object.player.CurrentState.ToString();
+
     }
 
     public enum Images
@@ -91,7 +93,7 @@ public class UIScene_Main : UIScene
 
     public enum Texts
     {
-        Text_HealCount
+        Text_HealCount, Text_PlayerState
     }
 
     public enum Sliders

@@ -19,6 +19,7 @@ public class PlayerController : Actor
     public PlayerDash Dash { get { return Player.dash; } }
     public PlayerDefence Defence { get { return Player.defence; } }
     public PlayerHeal heal { get { return Player.heal; } }
+    public PlayerSave save { get { return Player.save; } }
 
 
     public Dictionary<Define.PlayerState, State<PlayerController>> states;
@@ -64,6 +65,7 @@ public class PlayerController : Actor
         states.Add(Define.PlayerState.Defence, new PlayerState.Defence());
         states.Add(Define.PlayerState.Heal, new PlayerState.Heal()) ;
         states.Add(Define.PlayerState.Hit, new PlayerState.Hit()) ;
+        states.Add(Define.PlayerState.Save, new PlayerState.Save()) ;
         fsm = new StateMachine<PlayerController>(this, states[Define.PlayerState.Idle]);
         #endregion
 
@@ -122,6 +124,10 @@ public class PlayerController : Actor
         }
         isCanHit = false;
         base.Hit(_damage, _attacker);
+
+        //세이브 종료 
+        if(save.saveCoroutine != null)
+            StopCoroutine(save.saveCoroutine);
         ChangeState(Define.PlayerState.Hit);
         HitEffect(_attacker);
     }
@@ -158,7 +164,6 @@ public class PlayerController : Actor
         rb.velocity = Vector2.zero;
         rb.AddForce(knockbackDir, ForceMode2D.Impulse);
     }
-
 
     public override void Death()
     {
