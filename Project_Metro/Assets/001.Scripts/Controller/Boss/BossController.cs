@@ -9,7 +9,7 @@ public abstract class BossController : Actor
     /// 0 :: º® ºÙ±â
     /// </summary>
     public Dictionary<Define.BossAction, BossAction> bossActions;
-
+    
 
     public virtual bool Init()
     {
@@ -21,7 +21,12 @@ public abstract class BossController : Actor
 
     public override void Death()
     {
+        GameObject go = Managers.Resource.Instantiate("Soul");
+        go.transform.position = transform.position;
+        go.transform.SetParent(transform);
         
+        Soul soul = go.GetComponent<Soul>();
+        soul.Init(this);
     }
 
     public void ChangeDirection(Define.Direction _direction)
@@ -34,7 +39,7 @@ public abstract class BossController : Actor
 
     public void LookAtPlayer()
     { 
-        if(Managers.Object.player.transform.position.x - transform.position.x >= 0) ChangeDirection(Define.Direction.Right);
+        if(Managers.Object.playerController.transform.position.x - transform.position.x >= 0) ChangeDirection(Define.Direction.Right);
         else ChangeDirection(Define.Direction.Left);
     }
 

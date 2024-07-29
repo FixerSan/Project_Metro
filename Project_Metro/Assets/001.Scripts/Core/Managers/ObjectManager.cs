@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class ObjectManager
 {
     #region 오브젝트 참조
-    public PlayerController player;
+    public PlayerController playerController;
     public CameraController Camera { get { return Managers.Screen.CameraController; } }
     public HashSet<MonsterController> monsters = new HashSet<MonsterController>();
     public Dictionary<int, Obstacle> obstacles = new Dictionary<int, Obstacle>();
@@ -89,32 +89,34 @@ public class ObjectManager
 
     public PlayerController SpawnPlayerController(Vector2 _position)
     {
-        if (player == null)
-            player = Managers.Resource.Instantiate("PlayerController").GetOrAddComponent<PlayerController>();
+        if (playerController == null)
+            playerController = Managers.Resource.Instantiate("PlayerController").GetOrAddComponent<PlayerController>();
 
-        player.transform.position = _position;
+        playerController.transform.position = _position;
         InitPlayerAction();
-        player.Init();
-        GameObject.DontDestroyOnLoad(player);
-        return player;
+        playerController.Init();
+        GameObject.DontDestroyOnLoad(playerController);
+        return playerController;
     }
 
     public void InitPlayerAction()
     {
-        if (Managers.Game.player.level.moveLevel == 1) Managers.Game.player.move = new PlayerMoves.One(player);
+        if (Managers.Game.player.level.moveLevel == 1) Managers.Game.player.move = new PlayerMoves.One(playerController);
 
-        if (Managers.Game.player.level.jumpLevel == 1) Managers.Game.player.jump = new PlayerJumps.One(player);
+        if (Managers.Game.player.level.jumpLevel == 1) Managers.Game.player.jump = new PlayerJumps.One(playerController);
 
-        if (Managers.Game.player.level.attackLevel == 1) Managers.Game.player.attack = new PlayerAttacks.One(player);
+        if (Managers.Game.player.level.attackLevel == 1) Managers.Game.player.attack = new PlayerAttacks.One(playerController);
 
-        if (Managers.Game.player.level.fallLevel == 1) Managers.Game.player.fall = new PlayerFalls.One(player);
+        if (Managers.Game.player.level.fallLevel == 1) Managers.Game.player.fall = new PlayerFalls.One(playerController);
 
-        if (Managers.Game.player.level.dashLevel == 1) Managers.Game.player.dash = new PlayerDashes.One(player);
+        if (Managers.Game.player.level.dashLevel == 1) Managers.Game.player.dash = new PlayerDashes.One(playerController);
 
-        if (Managers.Game.player.level.defenseLevel == 1) Managers.Game.player.defence = new PlayerDefenses.One(player);
+        if (Managers.Game.player.level.defenseLevel == 1) Managers.Game.player.defence = new PlayerDefenses.One(playerController);
 
-        Managers.Game.player.heal = new PlayerHeal(player);
-        Managers.Game.player.save = new PlayerSave(player); 
+        if (Managers.Game.player.level.vineHeartLevel == 1) Managers.Game.player.vineHeart = new PlayerVineHearts.One(playerController);
+
+        Managers.Game.player.heal = new PlayerHeal(playerController);
+        Managers.Game.player.save = new PlayerSave(playerController); 
     }
 
     public NormalAttack SpawnAttack(Actor _attacker, Transform _attackPos, Define.PlayerAttackDirection _attackDirection)

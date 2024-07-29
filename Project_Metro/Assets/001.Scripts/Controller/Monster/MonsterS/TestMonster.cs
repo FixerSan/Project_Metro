@@ -20,4 +20,9 @@ public class TestMonster : MonsterController
             if (i == -1) ChangeState(Define.MonsterState.Idle);
         }
     }
+
+    public override void GetEatenSoul()
+    {
+
+    }
 }

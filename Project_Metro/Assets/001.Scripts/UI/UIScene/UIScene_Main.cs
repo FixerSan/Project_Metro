@@ -82,7 +82,7 @@ public class UIScene_Main : UIScene
         else if(GetImage((int)Images.Image_HealCountDisablePanel).gameObject.activeSelf)
             GetImage((int)Images.Image_HealCountDisablePanel).gameObject.SetActive(false);
 
-        GetText((int)Texts.Text_PlayerState).text = Managers.Object.player.CurrentState.ToString();
+        GetText((int)Texts.Text_PlayerState).text = Managers.Object.playerController.CurrentState.ToString();
 
     }
 

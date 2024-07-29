@@ -9,6 +9,7 @@ public abstract class Actor : MonoBehaviour, IHitable
     public Transform groundCheckTrans;
     public Rigidbody2D rb;
     public Animator anim;
+    public Define.SoulSkill soulSkill;
 
     public bool IsGround { get { return CheckIsGround(); } }
 
@@ -40,6 +41,7 @@ public abstract class Actor : MonoBehaviour, IHitable
     }
 
     public abstract void Death();
+    public abstract void GetEatenSoul();
 
     private bool CheckIsGround()
     {

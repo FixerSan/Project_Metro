@@ -15,6 +15,8 @@ public class InputManager
     public bool GetDefenceKey { get { return actions.Player.Defence.ReadValue<float>() != 0f; } }
     public bool GetHealKey { get { return actions.Player.Heal.ReadValue<float>() != 0f; } }
 
+    public bool GetInteractionKey { get { return actions.Player.Move.ReadValue<Vector2>().y > 0; } }
+
     public InputManager()
     {
         actions = new PlayerAction();

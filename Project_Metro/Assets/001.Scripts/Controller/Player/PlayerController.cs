@@ -18,8 +18,9 @@ public class PlayerController : Actor
     public PlayerAttack Attack { get { return Player.attack; } }
     public PlayerDash Dash { get { return Player.dash; } }
     public PlayerDefence Defence { get { return Player.defence; } }
-    public PlayerHeal heal { get { return Player.heal; } }
-    public PlayerSave save { get { return Player.save; } }
+    public PlayerHeal Heal { get { return Player.heal; } }
+    public PlayerSave Save { get { return Player.save; } }
+    public PlayerVineHeart VineHeart { get { return Player.vineHeart; } } 
 
 
     public Dictionary<Define.PlayerState, State<PlayerController>> states;
@@ -126,8 +127,8 @@ public class PlayerController : Actor
         base.Hit(_damage, _attacker);
 
         //세이브 종료 
-        if(save.saveCoroutine != null)
-            StopCoroutine(save.saveCoroutine);
+        if(Save.saveCoroutine != null)
+            StopCoroutine(Save.saveCoroutine);
         ChangeState(Define.PlayerState.Hit);
         HitEffect(_attacker);
     }
@@ -174,5 +175,10 @@ public class PlayerController : Actor
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheckTrans.position, groundCheckTrans.localScale.x);
+    }
+
+    public override void GetEatenSoul()
+    {
+        throw new System.NotImplementedException();
     }
 }

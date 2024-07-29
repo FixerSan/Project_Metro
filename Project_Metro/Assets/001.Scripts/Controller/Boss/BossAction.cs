@@ -145,8 +145,8 @@ namespace BossActions
             {
                 //TODO :: 점프 애니메이션 적용
                 controller.LookAtPlayer();
-                controller.transform.DOJump(new Vector3(Managers.Object.player.transform.position.x, controller.transform.position.y, 0), 1, 1,
-                    Mathf.Abs(controller.transform.position.x - Managers.Object.player.transform.position.x) * 0.05f).SetEase(Ease.Linear).OnComplete(() =>
+                controller.transform.DOJump(new Vector3(Managers.Object.playerController.transform.position.x, controller.transform.position.y, 0), 1, 1,
+                    Mathf.Abs(controller.transform.position.x - Managers.Object.playerController.transform.position.x) * 0.05f).SetEase(Ease.Linear).OnComplete(() =>
                     {
                         controller.StartCoroutine(ActionRoutine());
                     });
@@ -220,7 +220,7 @@ namespace BossActions
                 for (int i = 0; i < 3; i++)
                 {
                     attack = Managers.Resource.Instantiate("ForestKnight_VinesAttack", _pooling: true).GetComponent<ForestKnight_VinesAttack>();
-                    spawnPosition = new Vector2(Managers.Object.player.transform.position.x, controller.anim.transform.position.y);
+                    spawnPosition = new Vector2(Managers.Object.playerController.transform.position.x, controller.anim.transform.position.y);
                     attack.transform.position = spawnPosition;
                     attack.Attack(controller);
                     yield return new WaitForSeconds(controller.actionThreeRepeatDelay);
@@ -320,14 +320,14 @@ namespace BossActions
 
             private IEnumerator ActionRoutine()
             {
-                Vector2 spawnPosition = new Vector2(Managers.Object.player.transform.position.x, controller.anim.transform.position.y);
+                Vector2 spawnPosition = new Vector2(Managers.Object.playerController.transform.position.x, controller.anim.transform.position.y);
                 ForestKnight_VinesAttack attack;
 
                 yield return new WaitForSeconds(controller.actionThreeStartDelay);
                 for (int i = 0; i < 3; i++)
                 {
                     attack = Managers.Resource.Instantiate("ForestKnight_VinesAttack", _pooling: true).GetComponent<ForestKnight_VinesAttack>();
-                    spawnPosition = new Vector2(Managers.Object.player.transform.position.x, controller.anim.transform.position.y);
+                    spawnPosition = new Vector2(Managers.Object.playerController.transform.position.x, controller.anim.transform.position.y);
                     attack.transform.position = spawnPosition;
                     attack.Attack(controller);
                     yield return new WaitForSeconds(controller.actionThreeRepeatDelay);

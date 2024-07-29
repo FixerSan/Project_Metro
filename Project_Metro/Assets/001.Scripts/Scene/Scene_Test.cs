@@ -15,7 +15,7 @@ public class Scene_Test : SceneBase
         Managers.Object.SpawnTrigger(1, new Vector3(2.75f, -5.5f, 0));
         Managers.Object.SpawnMonster(0, new Vector3(-9.37f, -3.12f));
         Managers.Object.SpawnMonster(0, new Vector3(6f, -3f));
-        Managers.Object.Camera.target = Managers.Object.player.transform;
+        Managers.Object.Camera.target = Managers.Object.playerController.transform;
     }
 
     public override void Clear()

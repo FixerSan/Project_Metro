@@ -83,6 +83,7 @@ public class Player
     public PlayerDefence defence;
     public PlayerHeal heal;
     public PlayerSave save;
+    public PlayerVineHeart vineHeart;
 
     public bool isBattle = false;
 
@@ -97,7 +98,7 @@ public class Player
 
     public void RespawnPlayer()
     {
-        Managers.Object.player.transform.position = Managers.Game.respawnTrans.position;
+        Managers.Object.playerController.transform.position = Managers.Game.respawnTrans.position;
     }
 
     public void LevelUpPlayer()
@@ -109,6 +110,12 @@ public class Player
     {
         isBattle = true;
         battleCoroutine = Managers.Routine.StartCoroutine(CheckBattleRoutine());
+    }
+
+    public void GetSoulSkill(Define.SoulSkill _soulSkill)
+    {
+        if (_soulSkill == Define.SoulSkill.VineHeart) level.vineHeartLevel = 1;
+        LevelUpPlayer();
     }
 
     private IEnumerator CheckBattleRoutine()
@@ -175,6 +182,7 @@ public class PlayerLevel
     public int attackLevel = 1;
     public int dashLevel = 1;
     public int defenseLevel = 1;
+    public int vineHeartLevel = 0;
 }
 
 [System.Serializable]

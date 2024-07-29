@@ -29,7 +29,7 @@ namespace PlayerState
             if (_entity.Defence != null && _entity.Defence.CheckDefence()) return;
             if (_entity.Fall.CheckFall()) return;
             if (_entity.Jump.CheckJump()) return;
-            if (_entity.heal.CheckHeal()) return;
+            if (_entity.Heal.CheckHeal()) return;
             if (_entity.Move.CheckMove()) return;
             _entity.Attack.CheckAttack();
         }
@@ -59,7 +59,7 @@ namespace PlayerState
             if (_entity.Move.CheckStop()) return;
             if (_entity.Fall.CheckFall()) return;
             if (_entity.Jump.CheckJump()) return;
-            if (_entity.heal.CheckHeal()) return;
+            if (_entity.Heal.CheckHeal()) return;
             _entity.Attack.CheckAttack();
         }
     }
@@ -173,12 +173,12 @@ namespace PlayerState
     {
         public override void Enter(PlayerController _entity)
         {
-            _entity.heal.StartHeal();
+            _entity.Heal.StartHeal();
         }
 
         public override void Exit(PlayerController _entity)
         {
-            _entity.heal.CancelHeal();
+            _entity.Heal.CancelHeal();
         }
 
         public override void FixedUpdate(PlayerController _entity)
@@ -188,7 +188,7 @@ namespace PlayerState
 
         public override void Update(PlayerController _entity)
         {
-            _entity.heal.SetAnimation();
+            _entity.Heal.SetAnimation();
         }
     }
 

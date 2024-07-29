@@ -93,4 +93,9 @@ public class Define
     {
 
     }
+
+    public enum SoulSkill
+    {
+         VineHeart
+    }
 }

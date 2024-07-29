@@ -130,4 +130,8 @@ public class ForestKnight : BossController
         ChangeState(canActions[randomInt].stateType);
     }
 
+    public override void GetEatenSoul()
+    {
+
+    }
 }
