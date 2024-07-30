@@ -126,9 +126,9 @@ public class PlayerController : Actor
         }
         isCanHit = false;
         base.Hit(_damage, _attacker);
-
+        Managers.UI.SceneUI?.RedrawUI();
         //세이브 종료 
-        if(Save.saveCoroutine != null)
+        if (Save.saveCoroutine != null)
             StopCoroutine(Save.saveCoroutine);
         ChangeState(Define.PlayerState.Hit);
         HitEffect(_attacker);
