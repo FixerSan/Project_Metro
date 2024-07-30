@@ -30,5 +30,7 @@ public class MonsterManager
 
         _monster.data = Managers.Data.GetMonsterData(_index);
         _monster.fsm = new StateMachine<MonsterController>(_monster, _monster.states[Define.MonsterState.Idle]);
+
+        _monster.Init();
     }
 }

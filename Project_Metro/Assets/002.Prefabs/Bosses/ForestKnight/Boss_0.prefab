@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status:
-    defaultMaxHP: 0
+    defaultMaxHP: 100
     plusMaxHP: 0
     currentHP: 0
     defaultSpeed: 20
@@ -352,12 +352,16 @@ MonoBehaviour:
     defaultMaxATB: 3
     plusMaxATB: 0
     defaultRegenerationATBForce: 0.1
-    plisRegenerationATBForce: 0
+    plusRegenerationATBForce: 0
+    defaultKnockBackLevel: 0
+    plusKnockBackLevel: 0
   groundCheckTrans: {fileID: 4028608101864515091}
   rb: {fileID: 0}
   anim: {fileID: 0}
+  soulSkill: 0
   currentDirection: -1
   init: 0
+  defaultGravity: 0
   data:
     index: 0
   createTime: 1

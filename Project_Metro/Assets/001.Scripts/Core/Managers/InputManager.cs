@@ -14,8 +14,9 @@ public class InputManager
     public bool GetDashKey { get { return actions.Player.Dash.ReadValue<float>() != 0f; } }
     public bool GetDefenceKey { get { return actions.Player.Defence.ReadValue<float>() != 0f; } }
     public bool GetHealKey { get { return actions.Player.Heal.ReadValue<float>() != 0f; } }
-
     public bool GetInteractionKey { get { return actions.Player.Move.ReadValue<Vector2>().y > 0; } }
+
+    public bool GetUIInteractionKey { get { return actions.UI.Interaction.triggered; } }
 
     public InputManager()
     {
@@ -26,6 +27,7 @@ public class InputManager
         actions.Player.Dash.Enable();
         actions.Player.Defence.Enable();
         actions.Player.Heal.Enable();
+        actions.UI.Interaction.Enable();
     }
 
     public void SetCanControl(bool _isCanControl)

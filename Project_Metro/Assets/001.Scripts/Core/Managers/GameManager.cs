@@ -93,7 +93,7 @@ public class Player
     public void Update()
     {
         CheckRegenerationATB();
-        Managers.UI.SceneUI.RedrawUI();
+        Managers.UI.SceneUI?.   RedrawUI();
     }
 
     public void RespawnPlayer()

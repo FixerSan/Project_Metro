@@ -72,6 +72,21 @@ public class UIPopup_Dialog : UIPopup
         }
     }
 
+    private void Update()
+    {
+        CheckNext();
+    }
+
+    private void CheckNext()
+    {
+        if (!Managers.Input.GetUIInteractionKey) return;
+
+        if (isTyping) OnClick_Skip();
+        else Managers.Dialog.OnClick_NextButton();
+
+
+    }
+
     public void OnDisable()
     {
         GetButton((int)Buttons.Button_Next).gameObject.SetActive(false);

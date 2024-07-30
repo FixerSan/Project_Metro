@@ -35,5 +35,7 @@ public class BossManager
         }
 
         //_boss.data = Managers.Data.GetBossData(_index);
+
+        _boss.Init();
     }
 }

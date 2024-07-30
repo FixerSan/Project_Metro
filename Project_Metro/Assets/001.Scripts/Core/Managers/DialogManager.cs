@@ -10,6 +10,7 @@ public class DialogManager
 
     public void Call(int _index, Action _callback = null)
     {
+        Managers.Input.SetCanControl(false);
         currentData = Managers.Data.GetDialogData(_index);
         Managers.UI.ShowDialogUI(currentData.index);
         callback = _callback;
@@ -27,7 +28,7 @@ public class DialogManager
             _callback.Invoke(false);
     }
 
-    public IEnumerator EventCallRoutine()
+    private IEnumerator EventCallRoutine()
     {
         yield return new WaitForSeconds(1);
         Managers.Event.DialogEvent(currentData.index);
@@ -50,10 +51,18 @@ public class DialogManager
     public void EndDialog()
     {
         Managers.UI.CloseDialogUI();
+        Managers.Routine.StartCoroutine(EndDialogRoutine());
+
         if (callback != null)
         {
             callback.Invoke();
             callback = null;
         }
+    }
+
+    private IEnumerator EndDialogRoutine()
+    {
+        yield return new WaitForSeconds(1);
+        Managers.Input.SetCanControl(true);
     }
 }

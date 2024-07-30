@@ -156,7 +156,6 @@ public class ObjectManager
         go.transform.SetParent(MonsterTrans);
         go.transform.position = _position; 
         MonsterController monster= go.GetComponent<MonsterController>();
-        monster.Init();
         Managers.Monster.InitMonster(_index, monster);
         monsters.Add(monster);
         return monster;
@@ -168,7 +167,6 @@ public class ObjectManager
         go.transform.SetParent(BossTrans);
         go.transform.position = _position;
         boss = go.GetComponent<BossController>();
-        boss.Init();
         Managers.Boss.InitBoss(_index, boss);
         return boss;
     }
