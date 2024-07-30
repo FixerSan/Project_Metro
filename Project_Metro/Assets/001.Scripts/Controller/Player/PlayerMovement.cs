@@ -13,9 +13,14 @@ public abstract class PlayerMove
     public abstract void Move(float _speed);
     public abstract bool CheckStop();
     public abstract bool CheckStopInJump();
-    public void Stop()
+    public void StopX()
     {
         controller.rb.velocity = new Vector2(0, controller.rb.velocity.y);
+    }
+
+    public void Stop()
+    {
+        controller.rb.velocity = Vector2.zero;
     }
 }
 
@@ -61,7 +66,7 @@ namespace PlayerMoves
             if (Managers.Input.MoveAxis.x == 0f)
             {
                 controller.ChangeState(Define.PlayerState.Idle);
-                Stop();
+                StopX();
                 return true;
             }
 

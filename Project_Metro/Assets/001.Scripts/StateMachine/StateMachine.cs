@@ -27,7 +27,7 @@ public class StateMachine<T> where T : class
     {
         if (!isInit) return;
         if (isChange) return;
-        currentState.Update(entity);
+            currentState.Update(entity);
     }
 
     public void FixedUpdate()

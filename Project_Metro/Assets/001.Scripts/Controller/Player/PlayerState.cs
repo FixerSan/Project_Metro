@@ -10,7 +10,7 @@ namespace PlayerState
     {
         public override void Enter(PlayerController _entity)
         {
-            _entity.Move.Stop();
+            _entity.Move.StopX();
         }
 
         public override void Exit(PlayerController _entity)
@@ -88,6 +88,8 @@ namespace PlayerState
         {
             if (_entity.Dash != null && _entity.Dash.CheckDash()) return;
             _entity.Attack.CheckAttack();
+            if (_entity.Climb != null && _entity.Climb.CheckRightClimb()) return;
+            if (_entity.Climb != null && _entity.Climb.CheckLeftClimb()) return;
             if (_entity.Jump.CheckEndJump()) return;
             if (_entity.Move.CheckStopInJump()) return;
         }
@@ -104,7 +106,7 @@ namespace PlayerState
         public override void Exit(PlayerController _entity)
         {
             _entity.anim.SetBool("IsFall", false);
-            _entity.Move.Stop();
+            _entity.Move.StopX();
 
         }
 
@@ -116,6 +118,8 @@ namespace PlayerState
         public override void Update(PlayerController _entity)
         {
             if (_entity.Dash != null && _entity.Dash.CheckDash()) return;
+            if (_entity.Climb != null && _entity.Climb.CheckRightClimb()) return;
+            if (_entity.Climb != null &&_entity.Climb.CheckLeftClimb()) return;
             if (_entity.Fall.CheckEndFall()) return;
             _entity.Attack.CheckAttack();
         }
@@ -143,6 +147,8 @@ namespace PlayerState
         public override void Update(PlayerController _entity)
         {
             _entity.Dash.Dash();
+            if (_entity.Climb.CheckRightClimb()) return;
+            if (_entity.Climb.CheckLeftClimb()) return;
         }
     }
 
@@ -151,7 +157,7 @@ namespace PlayerState
         public override void Enter(PlayerController _entity)
         {
             _entity.anim.SetBool("IsDefence", true);
-            _entity.Move.Stop();
+            _entity.Move.StopX();
         }
 
         public override void Exit(PlayerController _entity)
@@ -201,7 +207,7 @@ namespace PlayerState
 
         public override void Exit(PlayerController _entity)
         {
-            _entity.Move.Stop();
+            _entity.Move.StopX();
         }
 
         public override void FixedUpdate(PlayerController _entity)
@@ -219,7 +225,7 @@ namespace PlayerState
     {
         public override void Enter(PlayerController _entity)
         {
-            _entity.Move.Stop();
+            _entity.Move.StopX();
         }
 
         public override void Exit(PlayerController _entity)
@@ -235,6 +241,30 @@ namespace PlayerState
         public override void Update(PlayerController _entity)
         {
 
+        }
+    }
+
+    public class Climb : State<PlayerController>
+    {
+        public override void Enter(PlayerController _entity)
+        {
+            _entity.Climb.StartClimb();
+        }
+
+        public override void Exit(PlayerController _entity)
+        {
+            _entity.Climb.EndClimb();
+        }
+
+        public override void FixedUpdate(PlayerController _entity)
+        {
+            _entity.Climb.Climb();
+        }
+
+        public override void Update(PlayerController _entity)
+        {
+            if (_entity.Climb.CheckEndClimb()) return;
+            if (_entity.Climb.CheckClimbJump()) return;
         }
     }
 }

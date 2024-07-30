@@ -194,7 +194,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.35, y: 0.65, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.05, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5461612598168740098}
@@ -305,11 +305,13 @@ MonoBehaviour:
   groundCheckTrans: {fileID: 8134530356652815170}
   rb: {fileID: 0}
   anim: {fileID: 0}
+  soulSkill: 0
   currentDirection: -1
   init: 0
+  defaultGravity: 3
   CurrentState: 0
-  leftAttackTrans: {fileID: 0}
-  rightAttackTrans: {fileID: 0}
+  leftAttackTrans: {fileID: 7409039588595301371}
+  rightAttackTrans: {fileID: 4803619303210324291}
   upAttackTrans: {fileID: 0}
   downAttackTrans: {fileID: 0}
   attackKnockbackForce: 5
@@ -406,7 +408,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.35, y: 0.65, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.05, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5461612598168740098}

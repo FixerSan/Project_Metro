@@ -62,7 +62,7 @@ namespace PlayerDashes
         public override void EndDash()
         {
             controller.rb.gravityScale = gravityScale;
-            controller.Move.Stop();
+            controller.Move.StopX();
             controller.StartCoroutine(EndDashRoutine());
         }
 

@@ -20,7 +20,7 @@ public class PlayerController : Actor
     public PlayerDefence Defence { get { return Player.defence; } }
     public PlayerHeal Heal { get { return Player.heal; } }
     public PlayerSave Save { get { return Player.save; } }
-    public PlayerVineHeart VineHeart { get { return Player.vineHeart; } } 
+    public PlayerClimb Climb { get { return Player.climb; } } 
 
 
     public Dictionary<Define.PlayerState, State<PlayerController>> states;
@@ -67,6 +67,7 @@ public class PlayerController : Actor
         states.Add(Define.PlayerState.Heal, new PlayerState.Heal()) ;
         states.Add(Define.PlayerState.Hit, new PlayerState.Hit()) ;
         states.Add(Define.PlayerState.Save, new PlayerState.Save()) ;
+        states.Add(Define.PlayerState.Climb, new PlayerState.Climb());
         fsm = new StateMachine<PlayerController>(this, states[Define.PlayerState.Idle]);
         #endregion
 
@@ -175,6 +176,9 @@ public class PlayerController : Actor
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheckTrans.position, groundCheckTrans.localScale.x);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(leftAttackTrans.position, leftAttackTrans.localScale.x);
+        Gizmos.DrawWireSphere(rightAttackTrans.position, rightAttackTrans.localScale.x);
     }
 
     public override void GetEatenSoul()

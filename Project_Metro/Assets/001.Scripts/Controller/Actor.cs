@@ -15,6 +15,8 @@ public abstract class Actor : MonoBehaviour, IHitable
 
     public Define.Direction currentDirection;
     public bool init = false;
+
+    public float defaultGravity;
     public virtual int HP 
     {
         get
@@ -58,23 +60,23 @@ public abstract class Actor : MonoBehaviour, IHitable
         return false;
     }
 
-    //public new Coroutine StartCoroutine(IEnumerator _enumerator)
-    //{
-    //    if(coroutines.ContainsKey(_enumerator.GetType()))
-    //        StopCoroutine(_enumerator);
+    public void RemoveGravity()
+    {
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = 0;
+    }
 
-    //    coroutines.Add(_enumerator.GetType(), base.StartCoroutine(_enumerator));
-    //    return coroutines[_enumerator.GetType()];
-    //}
+    public void SetGravity(float _gravityScale)
+    {
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = _gravityScale;
+    }
 
-    //public new void StopCoroutine(IEnumerator _enumerator)
-    //{
-    //    if (coroutines.ContainsKey(_enumerator.GetType()))
-    //    {
-    //        base.StopCoroutine(coroutines[_enumerator.GetType()]);
-    //        coroutines.Remove(_enumerator.GetType());
-    //    }
-    //}
+    public void InitGravity()
+    {
+        rb.gravityScale = defaultGravity;
+    }
+
 }
 
 [System.Serializable]

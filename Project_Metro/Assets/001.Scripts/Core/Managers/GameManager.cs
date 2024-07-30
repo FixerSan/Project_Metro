@@ -83,7 +83,7 @@ public class Player
     public PlayerDefence defence;
     public PlayerHeal heal;
     public PlayerSave save;
-    public PlayerVineHeart vineHeart;
+    public PlayerClimb climb;
 
     public bool isBattle = false;
 

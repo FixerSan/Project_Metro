@@ -172,7 +172,7 @@ namespace PlayerAttacks
         public override IEnumerator AttackKnockbackRoutine()
         {
             yield return new WaitForSeconds(0.25f);
-            controller.Move.Stop();
+            controller.Move.StopX();
             controller.Move.isCanMove = true;
             controller.Jump.isCanJump = true;
         }

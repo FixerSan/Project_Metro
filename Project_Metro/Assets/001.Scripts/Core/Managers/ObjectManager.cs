@@ -113,7 +113,7 @@ public class ObjectManager
 
         if (Managers.Game.player.level.defenseLevel == 1) Managers.Game.player.defence = new PlayerDefenses.One(playerController);
 
-        if (Managers.Game.player.level.vineHeartLevel == 1) Managers.Game.player.vineHeart = new PlayerVineHearts.One(playerController);
+        if (Managers.Game.player.level.vineHeartLevel == 1) Managers.Game.player.climb = new PlayerClimbs.One(playerController);
 
         Managers.Game.player.heal = new PlayerHeal(playerController);
         Managers.Game.player.save = new PlayerSave(playerController); 
