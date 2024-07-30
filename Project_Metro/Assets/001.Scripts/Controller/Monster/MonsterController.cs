@@ -35,6 +35,7 @@ public abstract class MonsterController : Actor
         rb = GetComponent<Rigidbody2D>();
         anim = Util.FindChild<Animator>(gameObject, "Sprite", true);
         isBattle = false;
+        status.currentHP = status.defaultMaxHP;
         return true;
     }
 

@@ -15,6 +15,7 @@ public abstract class BossController : Actor
     {
         rb = GetComponent<Rigidbody2D>();
         anim = Util.FindChild<Animator>(gameObject, "Sprite", true); 
+        status.currentHP = status.defaultMaxHP;
         init = true;
         return true;
     }
@@ -43,6 +44,10 @@ public abstract class BossController : Actor
         else ChangeDirection(Define.Direction.Left);
     }
 
+    public override void Hit(int _damage, Actor _attacker)
+    {
+        base.Hit(_damage, _attacker);
+    }
 
     public abstract void CreateEffect();
 
