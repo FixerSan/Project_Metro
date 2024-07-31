@@ -1,6 +1,7 @@
 <linker>
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="CameraController" preserve="all" />
+    <type fullname="DebugSettings" preserve="all" />
     <type fullname="DestroyObstacle" preserve="all" />
     <type fullname="ForestKnight" preserve="all" />
     <type fullname="ForestKnight_DownAttack" preserve="all" />
@@ -9,14 +10,15 @@
     <type fullname="NormalAttack" preserve="all" />
     <type fullname="OpenObstacle" preserve="all" />
     <type fullname="PlayerController" preserve="all" />
+    <type fullname="Soul" preserve="all" />
     <type fullname="TestMonster" preserve="all" />
     <type fullname="Trigger_Hit" preserve="all" />
     <type fullname="UIPopup_Dialog" preserve="all" />
     <type fullname="UIScene_Main" preserve="all" />
+    <type fullname="UISlot_HPCount" preserve="all" />
     <type fullname="ActorStatus" preserve="nothing" serialized="true" />
     <type fullname="BossData" preserve="nothing" serialized="true" />
     <type fullname="MonsterData" preserve="nothing" serialized="true" />
-    <type fullname="PlayerData" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
     <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
@@ -78,6 +80,7 @@
     <type fullname="UnityEngine.Texture2D" preserve="all" />
     <type fullname="UnityEngine.Transform" preserve="all" />
     <type fullname="UnityEngine.Events.PersistentCallGroup" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.RectOffset" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.BoxCollider2D" preserve="all" />
@@ -94,8 +97,10 @@
     <type fullname="UnityEngine.UI.Button" preserve="all" />
     <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
     <type fullname="UnityEngine.UI.GraphicRaycaster" preserve="all" />
+    <type fullname="UnityEngine.UI.HorizontalLayoutGroup" preserve="all" />
     <type fullname="UnityEngine.UI.Image" preserve="all" />
     <type fullname="UnityEngine.UI.Mask" preserve="all" />
+    <type fullname="UnityEngine.UI.Shadow" preserve="all" />
     <type fullname="UnityEngine.UI.Slider" preserve="all" />
     <type fullname="UnityEngine.UI.AnimationTriggers" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.UI.Button/ButtonClickedEvent" preserve="nothing" serialized="true" />
