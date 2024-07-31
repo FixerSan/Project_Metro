@@ -64,6 +64,8 @@ namespace PlayerClimbs
 
         public override void StartClimb()
         {
+            controller.anim.SetBool("IsClimb", true);
+            controller.sr.flipX = !controller.sr.flipX;
             controller.Move.Stop();
         }
 
@@ -86,6 +88,9 @@ namespace PlayerClimbs
         {
             controller.Move.isCanMove = false;
             isCanClimb = false;
+            controller.sr.flipX = !controller.sr.flipX;
+
+            controller.anim.SetBool("IsClimb", false);
             controller.rb.AddForce(Vector2.right * controller.status.CurrentSpeed * (int)controller.currentDirection, ForceMode2D.Impulse);
             endClimbCoroutine = controller.StartCoroutine(EndClimbRoutine());
         }

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerController_Idle
+  m_Name: Attack_Down
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,39 +21,42 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 8996932877558118399, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
-    - time: 0.5833333
-      value: {fileID: 8996932877558118399, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
+      value: {fileID: -2630561136132088923, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
+    - time: 0.08500004
+      value: {fileID: -471015448749669920, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
+    - time: 0.1699996
+      value: {fileID: -724141901476360157, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
+    - time: 0.25499964
+      value: {fileID: 8188014879622421814, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
+    - time: 0.33999968
+      value: {fileID: 4578355157926550576, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
+    - time: 0.4249997
+      value: {fileID: -5430745061826012447, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
+    - time: 0.50999975
+      value: {fileID: 6856060042097868463, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
+    - time: 0.5699997
+      value: {fileID: -6369168197657461295, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
+    - time: 0.6549997
+      value: {fileID: -6369168197657461295, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 12
+  m_SampleRate: 100
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings:
-    - serializedVersion: 2
-      path: 0
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-      isIntCurve: 0
-      isSerializeReferenceCurve: 0
-    pptrCurveMapping:
-    - {fileID: 8996932877558118399, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
-    - {fileID: 8996932877558118399, guid: 2a6d4fd204f816d43a76d63ebb7dfef1, type: 3}
+    genericBindings: []
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6666666
+    m_StopTime: 0.66499966
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -64,7 +67,7 @@ AnimationClip:
     m_LoopBlendPositionY: 0
     m_LoopBlendPositionXZ: 0
     m_KeepOriginalOrientation: 0
-    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionY: 0
     m_KeepOriginalPositionXZ: 0
     m_HeightFromFeet: 0
     m_Mirror: 0

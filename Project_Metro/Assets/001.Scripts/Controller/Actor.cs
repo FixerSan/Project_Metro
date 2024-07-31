@@ -9,6 +9,7 @@ public abstract class Actor : MonoBehaviour, IHitable
     public Transform groundCheckTrans;
     public Rigidbody2D rb;
     public Animator anim;
+    public SpriteRenderer sr;
     public Define.SoulSkill soulSkill;
 
     public bool IsGround { get { return CheckIsGround(); } }

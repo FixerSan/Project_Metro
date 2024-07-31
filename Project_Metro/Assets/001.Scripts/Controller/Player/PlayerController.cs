@@ -36,6 +36,7 @@ public class PlayerController : Actor
 
     public float attackKnockbackForce;
     public float downAttackKnockbackForce;
+    public float attackCountInitTime;
 
     public float hitKnockbackForce;
     public float hitTime;
@@ -47,6 +48,7 @@ public class PlayerController : Actor
     {
         #region 외부 참조
         rb = GetComponent<Rigidbody2D>();
+        sr = Util.FindChild<SpriteRenderer>(gameObject, "Sprite", true);
         anim = Util.FindChild<Animator>(gameObject, "Sprite", true);
         groundCheckTrans = Util.FindChild<Transform>(gameObject, "GroundCheckTrans", true);
         leftAttackTrans = Util.FindChild<Transform>(gameObject, "LeftAttackTrans", true);

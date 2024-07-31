@@ -6,6 +6,10 @@ public abstract class PlayerAttack
 {
     public PlayerController controller;
     public bool isCanAttack = true;
+
+    public int attackCount = 0;
+    public Coroutine initAttackCountCoroutine;
+
     public abstract bool CheckAttack();
     public abstract void LeftAttack();
     public abstract void RightAttack();
@@ -18,6 +22,22 @@ public abstract class PlayerAttack
         controller.StopCoroutine(AttackKnockbackRoutine());
         controller.Move.isCanMove = true;
         controller.Jump.isCanJump = true;
+    }
+
+    public void CheckAttackCount()
+    {
+        //어택 카운트 관련
+        attackCount++;
+        if (attackCount == 4) attackCount = 1;
+        if (initAttackCountCoroutine != null) controller.StopCoroutine(initAttackCountCoroutine);
+        initAttackCountCoroutine = controller.StartCoroutine(InitAttackCountRoutine());
+    }
+
+    public IEnumerator InitAttackCountRoutine()
+    {
+        yield return new WaitForSeconds(controller.attackCountInitTime);
+        attackCount = 0;
+            controller.anim.SetInteger("AttackCount", attackCount);
     }
 }
 
@@ -72,7 +92,10 @@ namespace PlayerAttacks
         {
             isCanAttack = false;
 
+            CheckAttackCount();
+
             controller.anim.SetInteger("AttackDirection", (int)Define.PlayerAttackDirection.Left);
+            controller.anim.SetInteger("AttackCount", attackCount);
             controller.anim.SetTrigger("Attack");
             NormalAttack attack = Managers.Object.SpawnAttack(controller, controller.leftAttackTrans, Define.PlayerAttackDirection.Left);
             attack.Attack((_isHit) => 
@@ -98,7 +121,10 @@ namespace PlayerAttacks
         {
             isCanAttack = false;
 
+            CheckAttackCount(); ;
+
             controller.anim.SetInteger("AttackDirection", (int)Define.PlayerAttackDirection.Right);
+            controller.anim.SetInteger("AttackCount", attackCount);
             controller.anim.SetTrigger("Attack");
             NormalAttack attack = Managers.Object.SpawnAttack(controller, controller.rightAttackTrans, Define.PlayerAttackDirection.Right);
             attack.Attack((_isHit) =>
