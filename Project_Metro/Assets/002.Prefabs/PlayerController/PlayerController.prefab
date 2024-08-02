@@ -305,6 +305,7 @@ MonoBehaviour:
   groundCheckTrans: {fileID: 8134530356652815170}
   rb: {fileID: 0}
   anim: {fileID: 0}
+  sr: {fileID: 0}
   soulSkill: 0
   currentDirection: -1
   init: 0
@@ -320,6 +321,9 @@ MonoBehaviour:
   hitKnockbackForce: 5
   hitTime: 0.2
   hitDuration: 1
+  needLandTime: 1
+  attackShakeIntensity: 1
+  attackShakeTime: 0.25
   isCanHit: 1
 --- !u!50 &4505400034906255061
 Rigidbody2D:

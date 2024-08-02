@@ -88,8 +88,8 @@ namespace PlayerState
         {
             if (_entity.Dash != null && _entity.Dash.CheckDash()) return;
             _entity.Attack.CheckAttack();
-            if (_entity.Climb != null && _entity.Climb.CheckRightClimb()) return;
-            if (_entity.Climb != null && _entity.Climb.CheckLeftClimb()) return;
+            //if (_entity.Climb != null && _entity.Climb.CheckRightClimb()) return;
+            //if (_entity.Climb != null && _entity.Climb.CheckLeftClimb()) return;
             if (_entity.Jump.CheckEndJump()) return;
             if (_entity.Move.CheckStopInJump()) return;
         }

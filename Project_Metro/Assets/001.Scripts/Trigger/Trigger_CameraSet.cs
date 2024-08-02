@@ -10,7 +10,7 @@ public class Trigger_CameraSet : Trigger_PlayerEnter
 
     protected override void TriggerEffect(Collider2D collision)
     {
-        Managers.Screen.CameraController.SetCameraRange(min, max);
-        Managers.Screen.CameraController.SetCameraOffset(offset);
+        //Managers.Screen.CameraController.SetCameraRange(min, max);
+        //Managers.Screen.CameraController.SetCameraOffset(offset);
     }
 }

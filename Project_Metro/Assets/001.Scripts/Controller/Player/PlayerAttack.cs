@@ -97,12 +97,20 @@ namespace PlayerAttacks
             controller.anim.SetInteger("AttackDirection", (int)Define.PlayerAttackDirection.Left);
             controller.anim.SetInteger("AttackCount", attackCount);
             controller.anim.SetTrigger("Attack");
+
+            Managers.Screen.CameraController.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize + 0.5f, 0.25f, () =>
+            {
+                Managers.Screen.CameraController.InitCameraSize();
+            });
+
             NormalAttack attack = Managers.Object.SpawnAttack(controller, controller.leftAttackTrans, Define.PlayerAttackDirection.Left);
             attack.Attack((_isHit) => 
             {
                 //TODO :: 맞으면 뒤로 넉백 처리
                 if (_isHit)
                 {
+                    Managers.Screen.CameraController.ShakeCamera(controller.attackShakeIntensity, controller.attackShakeTime);
+
                     controller.Move.isCanMove = false;
                     controller.Jump.isCanJump = false;
                     controller.ChangeState(Define.PlayerState.Idle);
@@ -126,12 +134,20 @@ namespace PlayerAttacks
             controller.anim.SetInteger("AttackDirection", (int)Define.PlayerAttackDirection.Right);
             controller.anim.SetInteger("AttackCount", attackCount);
             controller.anim.SetTrigger("Attack");
+
+            Managers.Screen.CameraController.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize + 0.5f, 0.25f, () =>
+            {
+                Managers.Screen.CameraController.InitCameraSize();
+            });
+
             NormalAttack attack = Managers.Object.SpawnAttack(controller, controller.rightAttackTrans, Define.PlayerAttackDirection.Right);
             attack.Attack((_isHit) =>
             {
                 //TODO :: 맞으면 뒤로 넉백 처리
                 if (_isHit)
                 {
+                    Managers.Screen.CameraController.ShakeCamera(controller.attackShakeIntensity, controller.attackShakeTime);
+
                     controller.Move.isCanMove = false;
                     controller.Jump.isCanJump = false;
                     controller.ChangeState(Define.PlayerState.Idle);
@@ -152,12 +168,20 @@ namespace PlayerAttacks
 
             controller.anim.SetInteger("AttackDirection", (int)Define.PlayerAttackDirection.Up);
             controller.anim.SetTrigger("Attack");
+
+            Managers.Screen.CameraController.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize + 0.5f, 0.25f, () =>
+            {
+                Managers.Screen.CameraController.InitCameraSize();
+            });
+
             NormalAttack attack = Managers.Object.SpawnAttack(controller, controller.upAttackTrans, Define.PlayerAttackDirection.Up);
             attack.Attack((_isHit) =>
             {
                 //TODO :: 맞으면 뒤로 넉백 처리
                 if (_isHit)
                 {
+                    Managers.Screen.CameraController.ShakeCamera(controller.attackShakeIntensity, controller.attackShakeTime);
+
                     controller.Move.isCanMove = false;
                     controller.Jump.isCanJump = false;
                     controller.ChangeState(Define.PlayerState.Idle);
@@ -174,12 +198,19 @@ namespace PlayerAttacks
 
             controller.anim.SetInteger("AttackDirection", (int)Define.PlayerAttackDirection.Down);
             controller.anim.SetTrigger("Attack");
+
+            Managers.Screen.CameraController.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize + 0.5f, 0.25f, () =>
+            {
+                Managers.Screen.CameraController.InitCameraSize();
+            });
+
             NormalAttack attack = Managers.Object.SpawnAttack(controller, controller.downAttackTrans, Define.PlayerAttackDirection.Down);
             attack.Attack((_isHit) =>
             {
                 //TODO :: 맞으면 뒤로 넉백 처리
                 if (_isHit)
                 {
+                    Managers.Screen.CameraController.ShakeCamera(controller.attackShakeIntensity, controller.attackShakeTime);
                     controller.Jump.isCanJump = false;
                     controller.ChangeState(Define.PlayerState.Idle);
                     controller.rb.velocity = new Vector2(controller.rb.velocity.x, controller.downAttackKnockbackForce);

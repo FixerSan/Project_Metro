@@ -42,6 +42,11 @@ public class PlayerController : Actor
     public float hitTime;
     public float hitDuration;
 
+    public float needLandTime;
+
+    public float attackShakeIntensity;
+    public float attackShakeTime;
+
     public bool isCanHit = true;
 
     public void Init()
