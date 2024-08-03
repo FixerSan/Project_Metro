@@ -61,6 +61,7 @@ namespace PlayerDashes
 
         public override void EndDash()
         {
+            Managers.Screen.CameraController.InitCameraSize(0.25f);
             controller.rb.gravityScale = gravityScale;
             controller.Move.StopX();
             controller.StartCoroutine(EndDashRoutine());
@@ -68,6 +69,7 @@ namespace PlayerDashes
 
         public override void StartDash()
         {
+            Managers.Screen.CameraController.TweeningCameraSize(Managers.Screen.CameraController.cine.m_Lens.OrthographicSize - 0.25f, 0.25f);
             controller.Attack.CancleAttackKnockback();
             isCanDash = false;
             gravityScale = controller.rb.gravityScale;

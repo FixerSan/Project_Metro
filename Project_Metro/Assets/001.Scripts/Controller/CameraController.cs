@@ -100,7 +100,7 @@ public class CameraController : MonoBehaviour
         transform.eulerAngles = Vector3.zero;
     }
 
-    public void TweeningCameraSize(float _changeSize, float _time, TweenCallback _callback )
+    public void TweeningCameraSize(float _changeSize, float _time, TweenCallback _callback = null)
     {
         DOTween.To(()=> cine.m_Lens.OrthographicSize, x => cine.m_Lens.OrthographicSize = x, _changeSize, _time).OnComplete(_callback);
     }
@@ -108,5 +108,10 @@ public class CameraController : MonoBehaviour
     public void InitCameraSize()
     {
         DOTween.To(() => cine.m_Lens.OrthographicSize, x => cine.m_Lens.OrthographicSize = x, defaultCameraSize, 0.5f);
+    }
+
+    public void InitCameraSize(float _time)
+    {
+        DOTween.To(() => cine.m_Lens.OrthographicSize, x => cine.m_Lens.OrthographicSize = x, defaultCameraSize, _time);
     }
 }

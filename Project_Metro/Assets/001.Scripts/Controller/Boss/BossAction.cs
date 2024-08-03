@@ -61,11 +61,14 @@ namespace BossActions
 
             public override void StartAction()
             {
+                //어디로 이동할지 
                 Vector3 moveDirection = new Vector3(FindMoveDirection(), 0.5f).normalized;
 
+                //이동할 방향의 따른 방향 전환
                 if (moveDirection.x >= 0) controller.ChangeDirection(Define.Direction.Right);
                 else controller.ChangeDirection(Define.Direction.Left);
 
+                //이동 덩쿨 소환
                 action = Managers.Resource.Instantiate($"{nameof(ForestKnight_VinesToMove)}", _pooling:true).GetComponent<ForestKnight_VinesToMove>();
                 action.StartMove(startPoint, moveDirection, (_direction) => 
                 {
@@ -81,6 +84,7 @@ namespace BossActions
             {
                 bool isStop = false;
 
+                //덩쿨로 벽에 올랐다면
                 while (!isStop)
                 {
                     yield return null;
@@ -88,10 +92,11 @@ namespace BossActions
                     isStop = controller.CheckSide(controller.currentDirection);
                 }
 
-                //TODO :: 도착한 애니메이션 적용
+                //덩쿨 삭제 및 벽타기 모드
                 controller.rb.velocity = Vector2.zero;
                 Managers.Resource.Destroy(action.gameObject);
 
+                //상태를 아이들로 만들고 쿨타임 체크 시작
                 yield return new WaitForSeconds(0.75f);
                 controller.ChangeState(Define.BossState.Idle);
                 controller.StartCoroutine(CooltimeCheckRoutine(controller.actionOneCooltime));
@@ -163,6 +168,7 @@ namespace BossActions
                }
 
                 Debug.Log("스킬 소환");
+                Managers.Screen.CameraController.ShakeCamera(3, 0.5f);
                 ForestKnight_DownAttack attack = Managers.Resource.Instantiate("ForestKnight_DownAttack", _pooling: true).GetComponent<ForestKnight_DownAttack>();
                 attack.transform.position = downAttackTrans.position;
                 attack.Attack(controller, () => 
