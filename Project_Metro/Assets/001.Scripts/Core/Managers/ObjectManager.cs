@@ -11,6 +11,8 @@ public class ObjectManager
     public PlayerController playerController;
     public CameraController Camera { get { return Managers.Screen.CameraController; } }
     public HashSet<MonsterController> monsters = new HashSet<MonsterController>();
+    public HashSet<Gold> golds = new HashSet<Gold>();
+
     public Dictionary<int, Obstacle> obstacles = new Dictionary<int, Obstacle>();
     public Dictionary<int, Trigger> triggers = new Dictionary<int, Trigger>();
 
@@ -85,6 +87,23 @@ public class ObjectManager
         }
 
     }
+
+    private Transform goldTrans;
+    public Transform GoldTrans
+    {
+        get
+        {
+            if (goldTrans == null)
+            {
+                GameObject go = GameObject.Find("@Gold");
+                if (go == null)
+                    go = new GameObject { name = "@Gold" };
+                goldTrans = go.transform;
+            }
+            return goldTrans;
+        }
+
+    }
     #endregion
 
     public PlayerController SpawnPlayerController(Vector2 _position)
@@ -121,8 +140,7 @@ public class ObjectManager
 
     public NormalAttack SpawnAttack(Actor _attacker, Transform _attackPos, Define.PlayerAttackDirection _attackDirection)
     {
-        GameObject go = Managers.Resource.Instantiate($"{_attackDirection}Attack_{Managers.Game.player.level.attackLevel}", _pooling:true);
-        NormalAttack attack = go.GetOrAddComponent<NormalAttack>();
+        NormalAttack attack = Managers.Resource.Instantiate($"{_attackDirection}Attack_{Managers.Game.player.level.attackLevel}", _pooling:true).GetOrAddComponent<NormalAttack>();
         attack.Init(_attacker, _attackPos);
 
         return attack;
@@ -130,10 +148,8 @@ public class ObjectManager
 
     public Obstacle SpawnObstacle(int _index, Vector2 _position)
     {
-        GameObject go = Managers.Resource.Instantiate($"Obstacle_{_index}");
-        go.transform.SetParent(ObstacleTrans);
-        go.transform.position = _position;
-        Obstacle obstacle = go.GetComponent<Obstacle>();
+        Obstacle obstacle = Managers.Resource.Instantiate($"Obstacle_{_index}").GetComponent<Obstacle>();
+        obstacle.transform.position = _position;
         obstacles.Add(obstacle.index, obstacle);
 
         return obstacle;
@@ -141,10 +157,8 @@ public class ObjectManager
 
     public Trigger SpawnTrigger(int _index, Vector2 _position)
     {
-        GameObject go = Managers.Resource.Instantiate($"Trigger_{_index}");
-        go.transform.SetParent(TriggerTrans);
-        go.transform.position = _position;
-        Trigger trigger = go.GetComponent<Trigger>();
+        Trigger trigger = Managers.Resource.Instantiate($"Trigger_{_index}", TriggerTrans).GetComponent<Trigger>();
+        trigger.transform.position = _position;
         triggers.Add(trigger.index, trigger);
 
         return trigger;
@@ -152,10 +166,8 @@ public class ObjectManager
 
     public MonsterController SpawnMonster(int _index, Vector2 _position)
     {
-        GameObject go = Managers.Resource.Instantiate($"Monster_{_index}", _pooling: true);
-        go.transform.SetParent(MonsterTrans);
-        go.transform.position = _position; 
-        MonsterController monster= go.GetComponent<MonsterController>();
+        MonsterController monster = Managers.Resource.Instantiate($"Monster_{_index}", MonsterTrans, _pooling: true).GetComponent<MonsterController>();
+        monster.transform.position = _position; 
         Managers.Monster.InitMonster(_index, monster);
         monsters.Add(monster);
         return monster;
@@ -163,11 +175,19 @@ public class ObjectManager
 
     public BossController SpawnBoss(int _index, Vector2 _position)
     {
-        GameObject go = Managers.Resource.Instantiate($"Boss_{_index}");
-        go.transform.SetParent(BossTrans);
-        go.transform.position = _position;
-        boss = go.GetComponent<BossController>();
+        boss = Managers.Resource.Instantiate($"Boss_{_index}", BossTrans).GetComponent<BossController>(); ;
+        boss.transform.position = _position;
         Managers.Boss.InitBoss(_index, boss);
         return boss;
+    }
+
+    public Gold SpawnGold(int _goldValue, Vector2 _position)
+    {
+        Gold gold = Managers.Resource.Instantiate("Gold", GoldTrans, true).GetComponent<Gold>();
+        gold.transform.position = _position;
+        golds.Add(gold);
+        gold.Init(_goldValue);
+
+        return gold;
     }
 }

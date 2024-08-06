@@ -25,6 +25,7 @@ public class MonsterManager
                 _monster.states.Add(Define.MonsterState.Death, new MonsterState.TestMonster.Death());
                 _monster.move = new MonsterMovemets.Test(_monster);
                 _monster.attack = new MonsterAttacks.Test(_monster);
+                _monster.die = new MonsterDies.Test(_monster);
                 break;
         }
 

@@ -105,7 +105,7 @@ namespace MonsterState
         {
             public override void Enter(MonsterController _entity)
             {
-                _entity.DeathEffect();
+                _entity.die.DieEffect();
             }
 
             public override void Exit(MonsterController _entity)
@@ -128,7 +128,7 @@ namespace MonsterState
         {
             public override void Enter(MonsterController _entity)
             {
-                _entity.DeathEffect();
+                _entity.die.DieEffect();
             }
 
             public override void Exit(MonsterController _entity)

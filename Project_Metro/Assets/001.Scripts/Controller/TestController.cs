@@ -9,4 +9,9 @@ public class TestController : MonoBehaviour
     {
 
     }
+
+    public void Update()
+    {
+
+    }
 }
