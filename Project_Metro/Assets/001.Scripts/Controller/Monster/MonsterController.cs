@@ -9,6 +9,7 @@ public abstract class MonsterController : Actor
     public MonsterMove move;
     public MonsterAttack attack;
     public MonsterAttack attack2;
+    public MonsterDie die;
 
     public Dictionary<Define.MonsterState, State<MonsterController>> states;
     public StateMachine<MonsterController> fsm;
@@ -21,6 +22,7 @@ public abstract class MonsterController : Actor
     public Actor  attackTarget;
     public float attackTime = 0.5f;
     public float deathTime = 1f;
+    public int dropGoldValue;
 
     private Coroutine deathCoroutine;
 
@@ -80,24 +82,6 @@ public abstract class MonsterController : Actor
     public override void Death()
     {
         ChangeState(Define.MonsterState.Death);
-    }
-
-    public void DeathEffect()
-    {
-        if (deathCoroutine != null) return;
-        isBattle = false;
-        anim.SetTrigger("Dead");
-        attackTarget = null;
-        move.isCanMove = false;
-        move.Stop();
-        StopAllCoroutines();
-        deathCoroutine = StartCoroutine(DeathRoutine());
-    }
-
-    public IEnumerator DeathRoutine()
-    {
-        yield return new WaitForSeconds(deathTime);
-        Managers.Resource.Destroy(gameObject);
     }
 
     public void StartBattle()

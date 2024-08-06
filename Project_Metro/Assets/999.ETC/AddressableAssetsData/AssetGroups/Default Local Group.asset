@@ -173,6 +173,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d556272f1cc2dc746890df449fc1065e
+    m_Address: Gold.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: bf06be692eca4c14fade11dc8ee82bec, type: 2}
   m_SchemaSet:

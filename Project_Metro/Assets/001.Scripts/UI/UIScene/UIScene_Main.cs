@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,19 @@ public class UIScene_Main : UIScene
     private List<UISlot_HPCount> slots = new List<UISlot_HPCount>();
     private Transform slotPlace;
     private int nowHP;
+    private int nowGold;
+
+    public float goldRedrawSpeed = 0.05f;
+    public Vector2 GoldUIWolrdPosition
+    {
+        get
+        {
+            return Camera.main.ScreenToWorldPoint(GetImage((int)Images.Image_GoldIcon).rectTransform.position);
+        }
+    }
+    private WaitForSeconds goldRedrawWaitForSeconds;
+
+    private Coroutine redrawGoldCoroutine;
 
     public override bool Init()
     {
@@ -24,8 +38,9 @@ public class UIScene_Main : UIScene
             slot.Init();
             slots.Add(slot);
         }
-
+        goldRedrawWaitForSeconds = new WaitForSeconds(goldRedrawSpeed);
         nowHP = Managers.Game.player.status.CurrentMaxHP;
+        nowGold = Managers.Game.player.gold;
         RedrawUI();
         return true;
     }
@@ -84,16 +99,23 @@ public class UIScene_Main : UIScene
 
         GetText((int)Texts.Text_PlayerState).text = Managers.Object.playerController.CurrentState.ToString();
 
+        ////Gold
+        DOTween.To(() => nowGold, x => 
+        {
+            nowGold = x;
+            GetText((int)Texts.Text_Gold).text = nowGold.ToString(); 
+        }, Managers.Game.player.gold, 0.5f);
+
     }
 
     public enum Images
     {
-        Image_HealCountDisablePanel
+        Image_HealCountDisablePanel, Image_GoldIcon
     }
 
     public enum Texts
     {
-        Text_HealCount, Text_PlayerState
+        Text_HealCount, Text_PlayerState, Text_Gold
     }
 
     public enum Sliders

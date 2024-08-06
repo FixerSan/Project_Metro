@@ -134,8 +134,11 @@ MonoBehaviour:
   groundCheckTrans: {fileID: 0}
   rb: {fileID: 0}
   anim: {fileID: 0}
+  sr: {fileID: 0}
+  soulSkill: 0
   currentDirection: 0
   init: 0
+  defaultGravity: 1
   data:
     index: 0
     canAttackDistance: 1
@@ -145,6 +148,7 @@ MonoBehaviour:
   attackTarget: {fileID: 0}
   attackTime: 0.5
   deathTime: 1
+  dropGoldValue: 50
   attackKnockbackForce: 5
   hitKnockbackForce: 5
   hitTime: 0.2

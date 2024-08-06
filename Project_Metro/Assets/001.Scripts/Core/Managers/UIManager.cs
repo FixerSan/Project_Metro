@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.Rendering;
 
-public class UIManager 
+public class UIManager
 {
     private int order = 10;                                     // 그려지는 순서 여유 선언
     private int toastOrder = 500;                               // 인스턴트 메세지 그려지는 여유 선언
@@ -240,6 +240,10 @@ public class UIManager
         dialogUI = null;
     }
 
+    public T GetSceneUI<T>() where T : UIScene
+    {
+        return sceneUI as T;
+    } 
 
 
     // 초기화

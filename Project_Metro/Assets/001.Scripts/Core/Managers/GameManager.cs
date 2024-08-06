@@ -90,10 +90,11 @@ public class Player
     private WaitForSeconds battleCheckTime = new WaitForSeconds(3);
     private Coroutine battleCoroutine;
 
+    public int gold;
+
     public void Update()
     {
         CheckRegenerationATB();
-        Managers.UI.SceneUI?.   RedrawUI();
     }
 
     public void RespawnPlayer()
@@ -169,6 +170,18 @@ public class Player
         if (status.currentHP > status.CurrentMaxHP)
             status.currentHP = status.CurrentMaxHP;
         Managers.UI.SceneUI?.RedrawUI();
+    }
+
+    public void GetGold(int _getGoldValue)
+    {
+        gold += _getGoldValue;
+        Managers.UI.SceneUI.RedrawUI();
+    }
+
+    public void UseGold(int _useGoldValue)
+    {
+        gold -= _useGoldValue;
+        Managers.UI.SceneUI.RedrawUI();
     }
 }
 
