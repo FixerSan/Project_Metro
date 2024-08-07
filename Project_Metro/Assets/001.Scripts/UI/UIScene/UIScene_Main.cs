@@ -1,4 +1,6 @@
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -99,13 +101,16 @@ public class UIScene_Main : UIScene
 
         GetText((int)Texts.Text_PlayerState).text = Managers.Object.playerController.CurrentState.ToString();
 
-        ////Gold
-        DOTween.To(() => nowGold, x => 
-        {
-            nowGold = x;
-            GetText((int)Texts.Text_Gold).text = nowGold.ToString(); 
-        }, Managers.Game.player.gold, 0.5f);
+        RedrawGold();
+    }
 
+    public void RedrawGold()
+    {
+        if (nowGold == Managers.Game.player.gold) return;
+        int _nowGold = nowGold;
+        nowGold = Managers.Game.player.gold;
+
+        DOTween.To(() => _nowGold, x => _nowGold = x, Managers.Game.player.gold, 0.5f).SetEase(Ease.Linear).OnUpdate(() => GetText((int)Texts.Text_Gold).text = _nowGold.ToString());
     }
 
     public enum Images
