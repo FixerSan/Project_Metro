@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -30,6 +31,28 @@ public class ScreenManager
     {
         cameraController = _camera; 
     }
+
+
+    public void ShakeCamera(float _intensity, float _time)
+    {
+        CameraController.ShakeCamera(_intensity, _time);
+    }
+
+    public void TweeningCameraSize(float _changeSize, float _time, TweenCallback _callback = null)
+    {
+        CameraController.TweeningCameraSize(_changeSize, _time, _callback);
+    }
+
+    public void InitCameraSize(float _time)
+    {
+        CameraController.InitCameraSize(_time);
+    }
+
+    public void InitCameraSize()
+    {
+        CameraController.InitCameraSize();
+    }
+
 
     #region Fade
 

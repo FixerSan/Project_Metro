@@ -133,6 +133,7 @@ public class PlayerController : Actor
         }
         isCanHit = false;
         base.Hit(_damage, _attacker);
+        Managers.Screen.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize - 0.5f, 0.1f,() => Managers.Screen.InitCameraSize(0.1f));
         Managers.UI.SceneUI?.RedrawUI();
         //세이브 종료 
         if (Save.saveCoroutine != null)

@@ -83,7 +83,7 @@ public class CameraController : MonoBehaviour
         CheckShakeTime();
     }
 
-    public void CheckShakeTime()
+    private void CheckShakeTime()
     {
         if (shakeTimer != 0)
         {
@@ -94,7 +94,7 @@ public class CameraController : MonoBehaviour
 
     }
 
-    public void StopShake()
+    private void StopShake()
     {
         shake.m_AmplitudeGain = 0;
         transform.eulerAngles = Vector3.zero;
