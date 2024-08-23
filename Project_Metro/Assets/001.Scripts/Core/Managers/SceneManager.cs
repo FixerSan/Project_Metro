@@ -20,6 +20,10 @@ public class SceneManager
         }
     }
     private Define.Scene currentScene;
+    public Define.Scene CurrentScene
+    {
+        get { return currentScene; }
+    }
     private bool isLoading = false;
     private Action loadCallback;
 

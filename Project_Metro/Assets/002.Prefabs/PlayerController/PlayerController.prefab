@@ -286,7 +286,7 @@ MonoBehaviour:
     defaultMaxHP: 0
     plusMaxHP: 0
     currentHP: 0
-    defaultSpeed: 5
+    defaultSpeed: 10
     plusSpeed: 0
     defaultJumpForce: 12.5
     plusJumpForce: 0

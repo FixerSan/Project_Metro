@@ -41,8 +41,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 2628166805
+    locked: 0
+  - name: Tile
+    uniqueID: 3114162197
+    locked: 0
   - name: SavePoint
     uniqueID: 3242685575
+    locked: 0
+  - name: Controller
+    uniqueID: 3082491427
     locked: 0
   - name: Default
     uniqueID: 0
