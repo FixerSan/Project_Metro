@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -140,6 +141,17 @@ public class PlayerController : Actor
             StopCoroutine(Save.saveCoroutine);
         ChangeState(Define.PlayerState.Hit);
         HitEffect(_attacker);
+    }
+
+    public void Hit(int _damage)
+    {
+        if (status.currentHP <= 0) return;
+        status.currentHP -= _damage;
+        if (status.currentHP <= 0)
+            Death(); 
+        Managers.Screen.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize - 0.5f, 0.1f, () => Managers.Screen.InitCameraSize(0.1f));
+        Managers.UI.SceneUI?.RedrawUI();
+
     }
 
     public void HitEffect(Actor _attacker)

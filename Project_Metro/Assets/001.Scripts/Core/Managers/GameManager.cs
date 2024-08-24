@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -99,7 +100,12 @@ public class Player
 
     public void RespawnPlayer()
     {
-        Managers.Object.playerController.transform.position = Managers.Game.respawnTrans.position;
+        Managers.Object.playerController.rb.velocity = new Vector2(Managers.Object.playerController.rb.velocity.x, Managers.Game.player.status.CurrentSpeed); ;
+        Managers.Screen.FadeIn(0.35f, () => 
+        {
+            Managers.Object.playerController.transform.position = Managers.Game.respawnTrans.position;
+            Managers.Screen.FadeOut(0.35f);
+        }); 
     }
 
     public void LevelUpPlayer()

@@ -83,6 +83,7 @@ public class CameraController : MonoBehaviour
         CheckShakeTime();
     }
 
+
     private void CheckShakeTime()
     {
         if (shakeTimer != 0)
