@@ -8,7 +8,7 @@ public class GameManager : Singleton<GameManager>
     public bool init = false;
     public Player player;
     public Transform respawnTrans;
-    public int nowSavePointIndex;
+    public Vector3 respawnPos;
     
     public void Awake()
     {
@@ -32,7 +32,6 @@ public class GameManager : Singleton<GameManager>
                 DebugSettings debugSettings = Managers.Resource.Load<GameObject>("DebugSettings").GetComponent<DebugSettings>();
                 if(debugSettings.isPlayerSpawn)
                     Managers.Object.SpawnPlayerController(debugSettings.playerSpawnPosition);
-                Managers.Screen.CameraController.SetTarget(Managers.Object.SpawnPlayerController(debugSettings.playerSpawnPosition).transform);
                 Managers.Scene.LoadScene(debugSettings.TestScene, _loadCallback:() => 
                 {
                     init = true;
@@ -48,14 +47,53 @@ public class GameManager : Singleton<GameManager>
         player.level = JsonUtility.FromJson<PlayerLevel>(Managers.Data.playerData.levelJson);
     }
 
-    public void SaveGame(int _savePointIndex)
+    public void SaveGame(Vector3 _savePointPos)
     {
         player.save.Save(() => 
         {
-            nowSavePointIndex = _savePointIndex; 
+            respawnPos = _savePointPos; 
             Managers.Data.SaveData();
         });
     }
+
+
+    public void PlayerDead()
+    {
+        Managers.Input.SetCanControl(false);
+        Util.AddTimer(0.5f, () =>
+        {
+            Managers.Screen.ShakeCamera(3, 3);
+            Managers.Screen.CameraController.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize - 2, 3, () =>
+            {
+                Managers.Screen.ShakeCamera(3, 0.5f);
+                Managers.Screen.CameraController.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize + 1, 0.5f, () =>
+                {
+                    Managers.Screen.CameraController.InitCameraSize(0.5f);
+                });
+
+                Util.AddTimer(1f, () => 
+                {
+                    Managers.Screen.FadeIn(1f, () =>
+                    {
+                        PlayerRespawn();
+                        Util.AddTimer(1f, () => 
+                        {
+                            Managers.Screen.FadeOut(1f);
+                        });
+                    });                
+                });
+            });
+        });
+    }
+
+    public void PlayerRespawn()
+    {
+        Managers.Input.SetCanControl(true);
+        Managers.Object.DespawnPlayerController();
+        Managers.Object.SpawnPlayerController(respawnPos);
+        Managers.Game.player.status.currentHP = Managers.Game.player.status.CurrentMaxHP;
+    }
+
 
     public void OnApplicationPause(bool pause)
     {
@@ -207,11 +245,13 @@ public class PlayerLevel
 [System.Serializable]
 public class GameData
 {
-    public int savePointIndex = 0;
+    public Vector3 savePointIndex;
+    public Define.Scene scene;
     public int savePlayerHP;
-    public GameData(int _savePointIndex, int _savePlayerHP)
+    public GameData(Define.Scene _scene, Vector3 _respawnPos, int _savePlayerHP)
     {
-        savePointIndex = _savePointIndex;
+        scene = _scene;
+        savePointIndex = _respawnPos;
         savePlayerHP = _savePlayerHP;
     }
 }

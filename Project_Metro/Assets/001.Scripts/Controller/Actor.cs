@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,6 +39,7 @@ public abstract class Actor : MonoBehaviour, IHitable
     {
         if (status.currentHP <= 0) return;
         status.currentHP -= _damage;
+        
         if (status.currentHP <= 0)
             Death();
     }

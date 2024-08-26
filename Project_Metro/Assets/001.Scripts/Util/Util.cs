@@ -79,9 +79,10 @@ public static class Util
 
     public static void CheckTimers()
     {
-        for (int i = 0; i < timers.Count; i++)
+        for (int i = timers.Count-1; i >= 0; i--)
         {
-            timers[i].CheckTimer();
+            if (timers[i].CheckTimer())
+                timers.Remove(timers[i]);
         }
     }
 
@@ -107,16 +108,17 @@ public class Timer
         callback = _callback;
     }
 
-    public void CheckTimer()
+    public bool CheckTimer()
     {
         currentTime += Time.deltaTime;
         if (currentTime >= time)
         {
-            Util.timers.Remove(this);
             callback?.Invoke();
             callback = null;
             currentTime = 0;
             time = 0;
+            return true;
         }
+        return false;
     }
 }

@@ -76,6 +76,7 @@ public class PlayerController : Actor
         states.Add(Define.PlayerState.Hit, new PlayerState.Hit()) ;
         states.Add(Define.PlayerState.Save, new PlayerState.Save()) ;
         states.Add(Define.PlayerState.Climb, new PlayerState.Climb());
+        states.Add(Define.PlayerState.Die, new PlayerState.Die());
         fsm = new StateMachine<PlayerController>(this, states[Define.PlayerState.Idle]);
         #endregion
 
@@ -134,8 +135,9 @@ public class PlayerController : Actor
         }
         isCanHit = false;
         base.Hit(_damage, _attacker);
-        Managers.Screen.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize - 0.5f, 0.1f,() => Managers.Screen.InitCameraSize(0.1f));
         Managers.UI.SceneUI?.RedrawUI();
+        if (CurrentState == Define.PlayerState.Die) return;
+        Managers.Screen.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize - 0.5f, 0.1f,() => Managers.Screen.InitCameraSize(0.1f));
         //세이브 종료 
         if (Save.saveCoroutine != null)
             StopCoroutine(Save.saveCoroutine);
@@ -150,6 +152,7 @@ public class PlayerController : Actor
         if (status.currentHP <= 0)
             Death(); 
         Managers.Screen.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize - 0.5f, 0.1f, () => Managers.Screen.InitCameraSize(0.1f));
+        Managers.Screen.ShakeCamera(3, 0.35f);
         Managers.UI.SceneUI?.RedrawUI();
 
     }
@@ -189,7 +192,13 @@ public class PlayerController : Actor
 
     public override void Death()
     {
+        ChangeState(Define.PlayerState.Die);
+    }
 
+    public void DeathEffect()
+    {
+        SetGravity(0);
+        Managers.Game.PlayerDead();
     }
 
     public void OnDrawGizmos()

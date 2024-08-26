@@ -28,6 +28,7 @@ public class DataManager
         PlayerData data = new PlayerData();
         data.statusJson = JsonUtility.ToJson(Managers.Game.player.status, true);
         data.levelJson = JsonUtility.ToJson(Managers.Game.player.level, true);
+        data.respawnPos = Managers.Game.respawnPos;
 
         string dataJson = JsonUtility.ToJson(data, true);
 
@@ -36,7 +37,7 @@ public class DataManager
 
     public void SaveGameData()
     {
-        GameData gameData = new GameData(Managers.Game.nowSavePointIndex, Managers.Game.player.status.currentHP);
+        GameData gameData = new GameData(Managers.Scene.CurrentScene, Managers.Game.respawnPos, Managers.Game.player.status.currentHP);
         string dataJson = JsonUtility.ToJson(gameData, true);
 
         Util.SaveJson(dataJson, "GameData.Json");
@@ -113,6 +114,7 @@ public class PlayerData
 {
     public string statusJson;
     public string levelJson;
+    public Vector3 respawnPos;
 }
 
 [System.Serializable]

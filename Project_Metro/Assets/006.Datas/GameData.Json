@@ -1,4 +1,9 @@
 {
-    "savePointIndex": 0,
-    "savePlayerHP": 0
+    "savePointIndex": {
+        "x": 34.36440658569336,
+        "y": 6.162558078765869,
+        "z": 0.0
+    },
+    "scene": 2,
+    "savePlayerHP": 3
 }

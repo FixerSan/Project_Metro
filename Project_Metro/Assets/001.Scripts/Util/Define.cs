@@ -43,7 +43,8 @@ public class Define
         Heal = 6,
         Hit = 7,
         Save = 8,
-        Climb = 9
+        Climb = 9,
+        Die = 10
     }
 
     public enum PlayerAttack

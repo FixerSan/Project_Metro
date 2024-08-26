@@ -114,8 +114,15 @@ public class ObjectManager
         playerController.transform.position = _position;
         InitPlayerAction();
         playerController.Init();
+        Managers.Screen.CameraController.SetTarget(playerController.transform);
         GameObject.DontDestroyOnLoad(playerController);
         return playerController;
+    }
+
+    public void DespawnPlayerController()
+    {
+        Managers.Resource.Destroy(playerController.gameObject);
+        playerController = null;
     }
 
     public void InitPlayerAction()

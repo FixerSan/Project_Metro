@@ -8,7 +8,7 @@ public class SavePoint : MonoBehaviour
 
     public void Save()
     {
-        Managers.Game.SaveGame(savePointIndex);
+        Managers.Game.SaveGame(transform.position);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

@@ -267,4 +267,27 @@ namespace PlayerState
             if (_entity.Climb.CheckClimbJump()) return;
         }
     }
+
+    public class Die : State<PlayerController>
+    {
+        public override void Enter(PlayerController _entity)
+        {
+            _entity.DeathEffect();
+        }
+
+        public override void Exit(PlayerController _entity)
+        {
+
+        }
+
+        public override void FixedUpdate(PlayerController _entity)
+        {
+
+        }
+
+        public override void Update(PlayerController _entity)
+        {
+
+        }
+    }
 }

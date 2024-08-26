@@ -1,8 +1,6 @@
 using Cinemachine;
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -13,6 +11,11 @@ public class CameraController : MonoBehaviour
 
     private CinemachineBasicMultiChannelPerlin shake;
     private float shakeTimer;
+
+    private CinemachineConfiner2D movePos;
+
+
+    private Action shakeCallback; 
 
     //public Vector3 offset;
     //public Vector2 maxDistance;
@@ -25,6 +28,7 @@ public class CameraController : MonoBehaviour
         Managers.Screen.SetCamera(this);
         cine = GetComponentInChildren<CinemachineVirtualCamera>();
         shake = cine.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        movePos = cine.GetComponentInChildren<CinemachineConfiner2D>();
         defaultCameraSize = cine.m_Lens.OrthographicSize;
     }
 
@@ -70,9 +74,9 @@ public class CameraController : MonoBehaviour
     //    transform.position = followPos;
     //}
 
-    public void ShakeCamera(float _intensity, float _time)
+    public void ShakeCamera(float _intensity, float _time, System.Action _callback = null)
     {
-        shake = cine.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        shakeCallback = _callback;
 
         shake.m_AmplitudeGain = _intensity;
         shakeTimer = _time;
@@ -99,6 +103,9 @@ public class CameraController : MonoBehaviour
     {
         shake.m_AmplitudeGain = 0;
         transform.eulerAngles = Vector3.zero;
+
+        shakeCallback?.Invoke();
+        shakeCallback = null;
     }
 
     public void TweeningCameraSize(float _changeSize, float _time, TweenCallback _callback = null)
@@ -114,5 +121,10 @@ public class CameraController : MonoBehaviour
     public void InitCameraSize(float _time)
     {
         DOTween.To(() => cine.m_Lens.OrthographicSize, x => cine.m_Lens.OrthographicSize = x, defaultCameraSize, _time);
+    }
+
+    public void ChangeCanMoveOffset(Collider2D _coll)
+    {
+        movePos.m_BoundingShape2D = _coll;
     }
 }

@@ -87,6 +87,10 @@ public class SceneManager
                 bs = SceneTrans.GetComponent<Scene_TestBoss>();
                 break;
 
+            case Define.Scene.Scene_DarkForest:
+                bs = SceneTrans.GetComponent<Scene_DarkForest>();
+                break;
+
             default:
                 _callback?.Invoke();
                 return;
@@ -94,7 +98,7 @@ public class SceneManager
 
         if (bs != null)
         {
-            bs.Clear();
+            bs?.Clear();
             UnityEngine.Object.Destroy(bs);
         }
         _callback?.Invoke();
@@ -119,12 +123,12 @@ public class SceneManager
                 bs = SceneTrans.gameObject.AddComponent<Scene_TestBoss>();
                 break;
 
-            default:
-                _addSceneCallback?.Invoke();
-                return;
+            case Define.Scene.Scene_DarkForest:
+                bs = SceneTrans.gameObject.AddComponent<Scene_DarkForest>();
+                break;
         }
 
-        bs.Init();
+        bs?.Init();
         _addSceneCallback?.Invoke();
     }
 

@@ -33,7 +33,7 @@ public class ScreenManager
     }
 
 
-    public void ShakeCamera(float _intensity, float _time)
+    public void ShakeCamera(float _intensity, float _time, Action _callback = null)
     {
         CameraController.ShakeCamera(_intensity, _time);
     }
