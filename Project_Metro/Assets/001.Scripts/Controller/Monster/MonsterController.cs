@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class MonsterController : Actor
@@ -32,12 +33,18 @@ public abstract class MonsterController : Actor
 
     public bool isBattle;
 
+    private Transform collisionAttackTrans;
+
     public virtual bool Init()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = Util.FindChild<Animator>(gameObject, "Sprite", true);
+        collisionAttackTrans = Util.FindChild<Transform>(gameObject, "CollisionAttackTrans");
+
         isBattle = false;
         status.currentHP = status.defaultMaxHP;
+
+        collisionAttackTrans.AddComponent<MonsterCollisionAttack>().Init(this);
         return true;
     }
 

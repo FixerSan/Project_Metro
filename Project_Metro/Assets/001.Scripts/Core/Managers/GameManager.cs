@@ -66,7 +66,7 @@ public class GameManager : Singleton<GameManager>
             Managers.Screen.CameraController.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize - 2, 3, () =>
             {
                 Managers.Screen.ShakeCamera(3, 0.5f);
-                Managers.Screen.CameraController.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize + 1, 0.5f, () =>
+                Managers.Screen.CameraController.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize + 1, 0.25f, () =>
                 {
                     Managers.Screen.CameraController.InitCameraSize(0.5f);
                 });
