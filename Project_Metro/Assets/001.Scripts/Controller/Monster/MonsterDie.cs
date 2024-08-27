@@ -33,6 +33,7 @@ namespace MonsterDies
             controller.move.isCanMove = false;
             controller.move.Stop();
             controller.StopAllCoroutines();
+            controller.collisionAttack.Disable();
             deathCoroutine = controller.StartCoroutine(DeathRoutine());
             DropGold();
         }

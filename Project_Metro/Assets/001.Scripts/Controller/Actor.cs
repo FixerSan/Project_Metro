@@ -38,10 +38,24 @@ public abstract class Actor : MonoBehaviour, IHitable
     public virtual void Hit(int _damage, Actor _attacker)
     {
         if (status.currentHP <= 0) return;
-        status.currentHP -= _damage;
+        {
+            status.currentHP -= _damage;
+            StartCoroutine(HitEffect());
+        }
         
         if (status.currentHP <= 0)
             Death();
+    }
+
+    public IEnumerator HitEffect()
+    {
+        sr.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = Color.white;
     }
 
     public abstract void Death();

@@ -33,18 +33,17 @@ public abstract class MonsterController : Actor
 
     public bool isBattle;
 
-    private Transform collisionAttackTrans;
+    public MonsterCollisionAttack collisionAttack;
 
     public virtual bool Init()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = Util.FindChild<Animator>(gameObject, "Sprite", true);
-        collisionAttackTrans = Util.FindChild<Transform>(gameObject, "CollisionAttackTrans");
-
+        collisionAttack = Util.FindChild<MonsterCollisionAttack>(gameObject, "CollisionAttackTrans");
+        collisionAttack.Init(this);
+        sr = Util.FindChild<SpriteRenderer>(gameObject, "Sprite", true);
         isBattle = false;
         status.currentHP = status.defaultMaxHP;
-
-        collisionAttackTrans.AddComponent<MonsterCollisionAttack>().Init(this);
         return true;
     }
 
