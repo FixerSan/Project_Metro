@@ -52,10 +52,6 @@ public abstract class Actor : MonoBehaviour, IHitable
         sr.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         sr.color = Color.white;
-        yield return new WaitForSeconds(0.1f);
-        sr.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        sr.color = Color.white;
     }
 
     public abstract void Death();

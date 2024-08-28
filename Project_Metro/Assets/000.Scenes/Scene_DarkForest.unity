@@ -180,7 +180,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66014213}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -217,11 +217,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -6.394945, y: 10.050321}
-      - {x: -6.3842845, y: -0.22665378}
-      - {x: -0.5877852, y: -0.77666223}
-      - {x: 77.59944, y: 0.5045903}
-      - {x: 103.56759, y: 16.108511}
+    - - {x: 157.04053, y: 68.4476}
+      - {x: -10.4262, y: 68.58252}
+      - {x: -10.275118, y: -5.8849316}
+      - {x: 155.77359, y: -6.1015015}
   m_UseDelaunayMesh: 0
 --- !u!4 &66014215
 Transform:

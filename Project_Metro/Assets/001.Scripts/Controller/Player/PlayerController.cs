@@ -104,6 +104,7 @@ public class PlayerController : Actor
         if(_direction == Define.Direction.Left) anim.transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
         else if (_direction == Define.Direction.Right) anim.transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z);
         currentDirection = _direction;
+        Managers.Screen.CameraController.Flip(currentDirection);
     }
 
     private void CheckChangeStateInInspector()
@@ -149,8 +150,9 @@ public class PlayerController : Actor
     {
         if (status.currentHP <= 0) return;
         status.currentHP -= _damage;
+        StartCoroutine(HitEffect());
         if (status.currentHP <= 0)
-            Death(); 
+            Death();
         Managers.Screen.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize - 0.5f, 0.1f, () => Managers.Screen.InitCameraSize(0.1f));
         Managers.Screen.ShakeCamera(3, 0.35f);
         Managers.UI.SceneUI?.RedrawUI();

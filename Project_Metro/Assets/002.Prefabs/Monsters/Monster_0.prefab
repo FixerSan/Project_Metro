@@ -130,7 +130,7 @@ MonoBehaviour:
     plusMaxATB: 0
     defaultRegenerationATBForce: 0.1
     plusRegenerationATBForce: 0
-    defaultKnockBackLevel: 5
+    defaultKnockBackLevel: 1
     plusKnockBackLevel: 0
   groundCheckTrans: {fileID: 0}
   rb: {fileID: 0}
@@ -154,6 +154,7 @@ MonoBehaviour:
   hitKnockbackForce: 5
   hitTime: 0.2
   isBattle: 0
+  collisionAttack: {fileID: 0}
 --- !u!70 &7152323217704238775
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

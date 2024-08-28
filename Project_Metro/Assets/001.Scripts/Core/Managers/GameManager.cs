@@ -63,6 +63,7 @@ public class GameManager : Singleton<GameManager>
         Util.AddTimer(0.5f, () =>
         {
             Managers.Screen.ShakeCamera(3, 3);
+            Managers.Screen.CameraController.SetOffset(Vector3.up, 3);
             Managers.Screen.CameraController.TweeningCameraSize(Managers.Screen.CameraController.defaultCameraSize - 2, 3, () =>
             {
                 Managers.Screen.ShakeCamera(3, 0.5f);
@@ -92,6 +93,7 @@ public class GameManager : Singleton<GameManager>
         Managers.Object.DespawnPlayerController();
         Managers.Object.SpawnPlayerController(respawnPos);
         Managers.Game.player.status.currentHP = Managers.Game.player.status.CurrentMaxHP;
+        Managers.Screen.CameraController.SetOffset(Managers.Screen.CameraController.defaultOffset); 
     }
 
 

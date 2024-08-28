@@ -8,10 +8,12 @@ public class CameraController : MonoBehaviour
     public CinemachineVirtualCamera cine;
     public Transform target;
     public float defaultCameraSize;
+    public Vector3 defaultOffset;
 
     private CinemachineBasicMultiChannelPerlin shake;
     private float shakeTimer;
 
+    private CinemachineFramingTransposer offset;
     private CinemachineConfiner2D movePos;
 
 
@@ -27,6 +29,7 @@ public class CameraController : MonoBehaviour
     {
         Managers.Screen.SetCamera(this);
         cine = GetComponentInChildren<CinemachineVirtualCamera>();
+        offset = cine.GetCinemachineComponent<CinemachineFramingTransposer>();
         shake = cine.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         movePos = cine.GetComponentInChildren<CinemachineConfiner2D>();
         defaultCameraSize = cine.m_Lens.OrthographicSize;
@@ -73,6 +76,22 @@ public class CameraController : MonoBehaviour
 
     //    transform.position = followPos;
     //}
+
+    public void SetOffset(Vector3 _offset)
+    {
+        offset.m_TrackedObjectOffset = _offset;
+    }
+
+    public void SetOffset(Vector3 _offset, float _time, Action _callback = null)
+    {
+        DOTween.To(()=>offset.m_TrackedObjectOffset, x => offset.m_TrackedObjectOffset = x, _offset, _time);
+    }
+
+    public void Flip(Define.Direction _direction)
+    {
+        if (_direction == Define.Direction.Right) SetOffset(new Vector3(defaultOffset.x, defaultOffset.y));
+        if (_direction == Define.Direction.Left) SetOffset(new Vector3(-defaultOffset.x, defaultOffset.y));
+    }
 
     public void ShakeCamera(float _intensity, float _time, System.Action _callback = null)
     {
