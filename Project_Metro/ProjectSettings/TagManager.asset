@@ -44,6 +44,12 @@ TagManager:
   - name: BackGround
     uniqueID: 2628166805
     locked: 0
+  - name: BackGroundObject
+    uniqueID: 3788664209
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
   - name: SavePoint
     uniqueID: 3242685575
     locked: 0
@@ -53,6 +59,6 @@ TagManager:
   - name: Tile
     uniqueID: 3114162197
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: FrontGroundObject
+    uniqueID: 2163920763
     locked: 0
